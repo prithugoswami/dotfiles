@@ -13,6 +13,9 @@ files=".zshrc .vimrc .vim"        # list of files/folders to symlink in homedir
 # Updateing the submodules in the git repo
 git submodule update
 
+# copying the oh-my-zsh repo to the home dir
+cp -r ./oh-my-zsh ~/.oh-my-zsh
+
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir
