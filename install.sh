@@ -34,6 +34,3 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~
 done
-
-source ~/.zshrc
-source ~/.vimrc
