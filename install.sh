@@ -5,9 +5,13 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".bashrc .vimrc .vim"        # list of files/folders to symlink in homedir
+files=".zshrc .vimrc .vim"        # list of files/folders to symlink in homedir
 
 ##########
+
+
+# Updateing the submodules in the git repo
+git submodule update
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -27,5 +31,5 @@ for file in $files; do
     ln -s $dir/$file ~
 done
 
-source ~/.bashrc
+source ~/.zshrc
 source ~/.vimrc
