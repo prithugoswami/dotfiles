@@ -12,6 +12,11 @@ ZSH_THEME="agnoster"
 DEFAULT_USER="prithu"
 
 
+# ls automatically right after cd'ing into a directory
+cd() {
+	builtin cd "$@" && ls --color;
+}
+
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
