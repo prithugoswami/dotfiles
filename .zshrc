@@ -17,6 +17,10 @@ cd() {
 	builtin cd "$@" && ls --color;
 }
 
+# AutoJump
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
