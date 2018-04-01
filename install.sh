@@ -5,7 +5,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files=".zshrc .vimrc .vim"        # list of files/folders to symlink in homedir
+files=".zshrc .vimrc .vim .oh-my-zsh"        # list of files/folders to symlink in homedir
 
 ##########
 
@@ -14,8 +14,6 @@ files=".zshrc .vimrc .vim"        # list of files/folders to symlink in homedir
 git submodule init
 git submodule update
 
-# copying the oh-my-zsh repo to the home dir
-cp -r ./oh-my-zsh ~/.oh-my-zsh
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -34,3 +32,8 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~
 done
+
+# fetching AutoJump and installing it
+git clone https://github.com/wting/autojump.git
+cd autojump
+./install.py
