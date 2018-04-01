@@ -10,10 +10,6 @@ files=".zshrc .vimrc .vim .oh-my-zsh"        # list of files/folders to symlink 
 ##########
 
 
-# Updateing the submodules in the git repo
-git submodule init
-git submodule update
-
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
