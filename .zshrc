@@ -84,6 +84,21 @@ source $ZSH/oh-my-zsh.sh
 # Kill the delay while swtiching modes in vi-mode plugin
 export KEYTIMEOUT=1
 
+# ALIAS
+alias cfi="vim ~/.config/i3/config"
+alias cfz="vim ~/.zshrc"
+alias cfv="vim ~/.vimrc"
+alias sn="shutdown now"
+alias rn="shutdown -r now"
+
+
+# change into the directory right after making it
+mkdir(){
+        /bin/mkdir $1;
+        cd $1
+}
+
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
