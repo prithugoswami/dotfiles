@@ -5,14 +5,17 @@ let vim_markdown_preview_toggle=1
 set tabstop=2 " number of visual spaces per tab
 set softtabstop=2 " number of spaces in the tab when editing
 set expandtab " tabs are shortcut for spaces
+set shiftwidth=2
 syntax enable " enalbe syntax processing
-
+set smartindent
 " when opening a new line, keep the same indentation if no
 " file-specific indenting is enabled
 set autoindent
 
 " load filetype-specific indent files
 filetype indent on
+
+set backspace=indent,eol,start
 
 " visual autocomplete for command menu
 set wildmenu
@@ -22,6 +25,8 @@ set lazyredraw
 
 " highligt matching [{()}]
 set showmatch
+
+hi MatchParen cterm=none ctermbg=none ctermfg=white
 
 set incsearch "search as characters are entered
 set hlsearch " highlight search matches
@@ -65,3 +70,13 @@ let mapleader=","
 " jk is escape
 inoremap jk <esc>
 
+" Use a blinking upright bar cursor in Insert mode, a blinking block in normal
+if &term == 'xterm-256color' || &term == 'screen-256color'
+    let &t_SI = "\<Esc>[5 q"
+    let &t_EI = "\<Esc>[1 q"
+endif
+
+if exists('$TMUX')
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+endif

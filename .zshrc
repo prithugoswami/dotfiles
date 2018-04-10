@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -90,7 +90,7 @@ alias cfz="vim ~/.zshrc"
 alias cfv="vim ~/.vimrc"
 alias sn="shutdown now"
 alias rn="shutdown -r now"
-
+alias :wq="exit"
 
 # change into the directory right after making it
 mkdir(){
