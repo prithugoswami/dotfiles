@@ -125,6 +125,14 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# Dual Monitor
+# sets the monitor to the top
+bindsym $mod+Shift+t exec "xrandr --output HDMI1 --mode 1280x1024 --pos 40x0 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off" ; exec ~/.fehbg
+
+# sets monitor to the right
+bindsym $mod+Shift+y exec "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x768 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off" ; exec ~/.fehbg
+
+
 # Switch to worspace 6 ( which I will never use ) just to work as a way to quickly "show desktop"
 bindsym $mod+q workspace 6
 
@@ -134,6 +142,21 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+# prompt for shutdown and restart system
+# this requires for a script named prompt in the PATH
+# the prompt script takes two arguments and prompts the user
+# using dmenu with a msg '$1' and executes the command '$2'
+#     'prompt script' content
+#          [ $(echo -e "No\nYes" | dmenu -i -p "$1") == "Yes" ] && $2
+
+# ask for shutdown
+bindsym $mod+Shift+x exec "prompt Shutdown? 'shutdown now'"
+# ask for a restart
+bindsym $mod+x exec "prompt Restart? 'shutdown -r now'"
+
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -173,7 +196,13 @@ exec ~/.fehbg &
 
 
 # Decreasing touch aread to avoid palm interaction while typing and enable natural scrolling
-exec synclient AreaLeftEdge=1600 AreaRightEdge=5000 VertScrollDelta=-114
+exec "synclient AreaLeftEdge=1600 AreaRightEdge=5000 VertScrollDelta=-114"
+
+# disabling the touchpad while typing
+exec "syndaemon -i 0.5 -K -d"
+
+# Fixing audio issue for firefox 59
+exec "pulseaudio --start --exit-idle-time=-1"
 
 
 # Pulse Audio controls
