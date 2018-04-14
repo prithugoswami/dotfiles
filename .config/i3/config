@@ -126,11 +126,22 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Dual Monitor
+# the keybindings mod+Shift+t/y change the monitor position and then write to file the same command
+# it used to set the the respective position of the monitor. That command is then executed at startup
+# I am sure most of the flags given to xrandr command are redundant but I am not aware of that atm
+# it just is what the arandr utility spit out
+
+set $monitor_top "xrandr --output HDMI1 --mode 1280x1024 --pos 40x0 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off"
+
+set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x768 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off"
+
 # sets the monitor to the top
-bindsym $mod+Shift+t exec "xrandr --output HDMI1 --mode 1280x1024 --pos 40x0 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off" ; exec ~/.fehbg
+bindsym $mod+Shift+t exec $monitor_top ; exec ~/.fehbg ; exec echo $monitor_top > ~/.screenlayout/last_layout
 
 # sets monitor to the right
-bindsym $mod+Shift+y exec "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x768 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off" ; exec ~/.fehbg
+bindsym $mod+Shift+y exec $monitor_right ; exec ~/.fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
+
+exec ~/.screenlayout/last_layout
 
 
 # Switch to worspace 6 ( which I will never use ) just to work as a way to quickly "show desktop"
