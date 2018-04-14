@@ -135,13 +135,19 @@ set $monitor_top "xrandr --output HDMI1 --mode 1280x1024 --pos 40x0 --rotate nor
 
 set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x768 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off"
 
+set $monitor_none "xrandr --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off"
+
 # sets the monitor to the top
 bindsym $mod+Shift+t exec $monitor_top ; exec ~/.fehbg ; exec echo $monitor_top > ~/.screenlayout/last_layout
 
 # sets monitor to the right
 bindsym $mod+Shift+y exec $monitor_right ; exec ~/.fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
 
+# when there is no external monitor connected bindsym $mod+Shift+g exec $monitor_none ; exec ~/.fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
+
 exec ~/.screenlayout/last_layout
+
+
 
 
 # Switch to worspace 6 ( which I will never use ) just to work as a way to quickly "show desktop"
