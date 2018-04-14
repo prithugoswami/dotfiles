@@ -15,7 +15,7 @@ with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
     command = "vim {}".format(temp.name)
     subprocess.run(shlex.split(command))
     entry = open(temp.name, 'r').read()
-    if entry == None:
+    if entry == '':
         print("Nothing was entered...")
         exit()
         
