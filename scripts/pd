@@ -15,6 +15,10 @@ with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
     command = "vim {}".format(temp.name)
     subprocess.run(shlex.split(command))
     entry = open(temp.name, 'r').read()
+    if entry == None:
+        print("Nothing was entered...")
+        exit()
+        
 with open(file_path, 'a', encoding='utf8') as fp:
     dt = datetime.datetime.now()
     date_string = dt.strftime('%a, %d %b %Y')
