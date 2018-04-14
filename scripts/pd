@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+# This script opens a temp file in a vim buffer and after wrting and quiting from vim, it writes the contents to the file
+# specified by the file_path with a date and timestamp.
+# I use this for my journal.
+
+import os
+import datetime
+import sys
+import tempfile
+import subprocess, shlex
+
+file_path = r'/home/prithu/Dropbox/Tasker/pd.txt'
+entry = None
+with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
+    command = "vim {}".format(temp.name)
+    subprocess.run(shlex.split(command))
+    entry = open(temp.name, 'r').read()
+with open(file_path, 'a', encoding='utf8') as fp:
+    dt = datetime.datetime.now()
+    date_string = dt.strftime('%a, %d %b %Y')
+    time_string = dt.strftime('%I:%M %p')
+    date_and_time = '[' + date_string + ' | ' + time_string + ']'
+
+    fp.write('\n\n\n===============================\n' + date_and_time + '\n')
+    fp.write(entry)
+    print("\nEntry:\n\n{}".format(entry))
