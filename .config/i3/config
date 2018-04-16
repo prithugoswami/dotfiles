@@ -125,6 +125,8 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+#Lock screen
+bindsym $mod+v exec ~/.config/i3/lock.sh
 # Dual Monitor
 # the keybindings mod+Shift+t/y change the monitor position and then write to file the same command
 # it used to set the the respective position of the monitor. That command is then executed at startup
@@ -143,7 +145,8 @@ bindsym $mod+Shift+t exec $monitor_top ; exec ~/.fehbg ; exec echo $monitor_top 
 # sets monitor to the right
 bindsym $mod+Shift+y exec $monitor_right ; exec ~/.fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
 
-# when there is no external monitor connected bindsym $mod+Shift+g exec $monitor_none ; exec ~/.fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
+# when there is no external monitor connected
+bindsym $mod+Shift+g exec $monitor_none ; exec ~/.fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
 
 exec ~/.screenlayout/last_layout
 
