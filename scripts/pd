@@ -27,3 +27,5 @@ with open(file_path, 'a', encoding='utf8') as fp:
 
     fp.write('\n\n\n===============================\n' + date_and_time + '\n')
     fp.write(entry)
+
+subprocess.run(['dropbox', 'start'])
