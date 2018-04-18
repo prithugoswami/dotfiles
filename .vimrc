@@ -1,3 +1,4 @@
+let mapleader = ","
 execute pathogen#infect()
 let vim_markdown_preview_github=1
 let vim_markdown_preview_toggle=1
