@@ -30,7 +30,7 @@ set showmatch
 hi MatchParen cterm=none ctermbg=none ctermfg=white
 
 set incsearch "search as characters are entered
-set hlsearch " highlight search matches
+"set hlsearch " highlight search matches
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>

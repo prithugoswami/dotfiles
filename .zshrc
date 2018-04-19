@@ -93,6 +93,7 @@ alias rx="xrdb ~/.Xresources"
 alias sn="shutdown now"
 alias rn="shutdown -r now"
 alias :wq="exit"
+alias tmux="tmux -u"
 
 # change into the directory right after making it
 mkdir(){
