@@ -1,0 +1,142 @@
+{
+  "settingsVersion": "1.63.3",
+  "exclusionRules": [
+    {
+      "pattern": "https?://hackertyper.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://zty.pe/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://phoboslab.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.typingclub.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://typing.lk/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://thetypingcat.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.typewizz.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.nitrotype.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.openvim.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://webassembly.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://thomasvanglabeke.github.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://geektyper.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://theandroidmaster.github.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.typing.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ayylm.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://airma.sh/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://calendar.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://review.lineageos.org/*",
+      "passKeys": "?"
+    },
+    {
+      "pattern": "https?://www.quillpad.in/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://pudding.cool/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.figma.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.holywowstudios.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://games.djordjeungar.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.crazygames.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://scribble.party/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ncase.me/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.speedcoder.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://typing.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://10fastfingers.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://vim-adventures.com/*",
+      "passKeys": ""
+    }
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "map s scrollDown\nmap w scrollUp\nunmap <C-D-v>\nunmap H\nunmap L\nunmap J\nunmap K\nmap H previousTab\nmap L nextTab\nmap <a-h> goBack\nmap <a-l> goForward",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": false,
+  "scrollStepSize": 60,
+  "smoothScroll": true,
+  "grabBackFocus": false,
+  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\nup: https://packages.ubuntu.com/search?keywords=%s&searchon=names Ubuntu Packages\ng: https://www.google.com/search?q=%s Google\ny: https://www.youtube.com/results?search_query=%s Youtube\ngm: https://www.google.com/maps?q=%s Google maps\nd: https://duckduckgo.com/?q=%s DuckDuckGo",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 12px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+}
