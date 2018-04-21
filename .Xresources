@@ -1,6 +1,6 @@
-urxvt.font: xft:Ubuntu Mono Nerd Font:size=12
+urxvt.font: xft:RobotoMono Nerd Font:size=10
 urxvt.scrollBar: false
-!urxvt.letterSpace: 
+urxvt.letterSpace: 0.5
 
 
 ! COlORS
