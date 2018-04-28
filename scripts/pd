@@ -12,29 +12,6 @@ import subprocess, shlex
 
 file_path = r'/home/prithu/Dropbox/Tasker/pd.txt'
 
-# This script keeps checking for the dropbox status every 10s and
-# runs 'dropbox stop' and exits once dropbox is done with its
-# syncing. this shell script should be in the PATH.
-exitdrop=(
-"""
-#!/bin/bash
-stat=$(dropbox status)
-if [ "$stat" = "Dropbox isn't running!" ]
-then
-  echo $stat
-  exit 0
-fi
-while :
-do
-  if [ "$stat" = "Up to date" ]
-  then
-    dropbox stop
-    exit 0
-  fi
-  stat=$(dropbox status)
-done
-""")
-
 
 entry = None
 with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
@@ -55,9 +32,3 @@ with open(file_path, 'a', encoding='utf8') as fp:
     fp.write(entry)
 
 subprocess.run(['dropbox', 'start'])
-
-with open('/tmp/exitdrop.sh', 'w') as tmp:
-    tmp.write(exitdrop)
-    tmp.close()
-    subprocess.run(['chmod', '+x', '/tmp/exitdrop.sh'])
-    subprocess.run(['sh', '/tmp/exitdrop.sh'])
