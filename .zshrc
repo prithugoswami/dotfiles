@@ -85,15 +85,17 @@ source $ZSH/oh-my-zsh.sh
 export KEYTIMEOUT=1
 
 # ALIAS
-alias cfi="vim ~/.config/i3/config"
+alias cfi="vim ~/.i3/config"
 alias cfz="vim ~/.zshrc"
 alias cfv="vim ~/.vimrc"
 alias cfx="vim ~/.Xresources"
+alias cfr="vim ~/.config/rofi/config.rasi"
 alias rx="xrdb ~/.Xresources"
 alias sn="shutdown now"
 alias rn="shutdown -r now"
 alias :wq="exit"
 alias tmux="tmux -u"
+alias n="nautilus"
 
 # change into the directory right after making it
 mkdir(){
