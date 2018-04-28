@@ -2,10 +2,10 @@ execute pathogen#infect()
 let vim_markdown_preview_github=1
 let vim_markdown_preview_toggle=1
 
-set tabstop=2 " number of visual spaces per tab
-set softtabstop=2 " number of spaces in the tab when editing
+set tabstop=4 " number of visual spaces per tab
+set softtabstop=4 " number of spaces in the tab when editing
 set expandtab " tabs are shortcut for spaces
-set shiftwidth=2
+set shiftwidth=4
 syntax enable " enalbe syntax processing
 set smartindent
 " when opening a new line, keep the same indentation if no
@@ -52,14 +52,6 @@ set showcmd " show command in bottom bar
 " allow to move around visualy by default
 nnoremap j gj
 nnoremap k gk
-
-" Move the begining/end of the line
-nnoremap B ^
-nnoremap E $
-
-" $/^ doesn't do anything
-nnoremap $ <nop>
-nnoremap ^ <nop>
 
 " highlight last inserted text
 nnoremap gV `[v`]
