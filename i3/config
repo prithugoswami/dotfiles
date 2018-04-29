@@ -56,7 +56,7 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec chromium
+bindsym $mod+F2 exec google-chrome-stable
 bindsym $mod+F3 exec urxvt -e "ranger"
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -197,13 +197,13 @@ set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x768 --rota
 set $monitor_none "xrandr --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off"
 
 # sets the monitor to the top
-bindsym $mod+Shift+t exec $monitor_top ; exec $fehbg ; exec echo $monitor_top > ~/.screenlayout/last_layout
+bindsym $mod+Shift+t exec $monitor_top && sleep 1 ; exec $fehbg && echo $monitor_top > ~/.screenlayout/last_layout
 
 # sets monitor to the right
-bindsym $mod+Shift+y exec $monitor_right ; exec $fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
+bindsym $mod+Shift+y exec $monitor_right && sleep 1 ; exec $fehbg && echo $monitor_right > ~/.screenlayout/last_layout
 
 # when there is no external monitor connected
-bindsym $mod+Shift+g exec $monitor_none ; exec $fehbg ; exec echo $monitor_right > ~/.screenlayout/last_layout
+bindsym $mod+Shift+g exec $monitor_none && sleep 1 ; exec $fehbg && echo $monitor_right > ~/.screenlayout/last_layout
 
 
 # Open applications on specific workspaces
