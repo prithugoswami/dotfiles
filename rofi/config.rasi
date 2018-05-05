@@ -44,7 +44,7 @@ configuration {
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
-	scrollbar-width: 2;
+/*	scrollbar-width: 2;*/
 /*	scroll-method: 0;*/
 /*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {i}{c}   {t}";*/
