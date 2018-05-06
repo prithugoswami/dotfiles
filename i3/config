@@ -5,7 +5,7 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 #Wallpaper
-set $fehbg feh --bg-fill ~/Desktop/walls/wall.jpg
+set $fehbg feh --bg-fill ~/Desktop/walls/wall2.jpg
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window 1pixel
@@ -33,7 +33,7 @@ bindsym $mod+Return exec terminal
 bindsym $mod+o kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -modi 'window,run,drun' -show run"
+bindsym $mod+d exec --no-startup-id "rofi -modi 'run,window' -show run"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -62,7 +62,8 @@ bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
+#bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
@@ -280,7 +281,7 @@ mode "$mode_system" {
 }
 
 # Rotate the HDMI monitor
-bindsym $mod+Ctrl+r exec --no-startup-id "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x768 --rotate left --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off"
+bindsym $mod+Ctrl+r exec --no-startup-id "xrandr --output HDMI1 --mode 1280x1024 --pos 1370x768 --rotate left --output DP1 --off --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal --output VIRTUAL1 --off" ; exec $fehbg
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"

@@ -10,7 +10,7 @@ configuration {
 /*  yoffset: 30;*/
 /*	xoffset: 30;*/
 /*	fixed-num-lines: true;*/
-/*	show-icons: true;*/
+	show-icons: true;
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host}";*/
