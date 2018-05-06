@@ -33,7 +33,10 @@ bindsym $mod+Return exec terminal
 bindsym $mod+o kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -modi 'run,window' -show run"
+bindsym $mod+d exec --no-startup-id "rofi -show run"
+
+#i3 window swticher using rofi
+bindsym $mod+v exec --no-startup-id "rofi -show window -width 96"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
