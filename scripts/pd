@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # This script opens a temp file in a vim buffer and after wrting and quiting from vim, it writes the contents to the file
 # specified by the file_path with a date and timestamp.
+# I use 'rclone' to sync the journal to my dropbox
+# the script first fetches any changes done to the pd.txt file
+# and then appends the entry and uploads it.
 # I use this for my journal.
 
 import os
