@@ -5,23 +5,27 @@
 
 import os
 import datetime
-import sys
 import tempfile
-import subprocess, shlex
 
 
-file_path = r'/home/prithu/Dropbox/Tasker/pd.txt'
+file_path = r'/home/prithu/Dropbox/pd/pd.txt'
 
 
 entry = None
 with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
     command = "vim {}".format(temp.name)
-    subprocess.run(shlex.split(command))
+    os.system(command)
     entry = open(temp.name, 'r').read()
     if entry == '':
         print("Nothing was entered...")
         exit()
         
+print("Fetching changes...")
+if not os.system('rclone sync drop:/pd/ ~/Dropbox/pd/'):
+    print("Done")
+else:
+    print("Something went wrong")
+
 with open(file_path, 'a', encoding='utf8') as fp:
     dt = datetime.datetime.now()
     date_string = dt.strftime('%a, %d %b %Y')
@@ -31,4 +35,8 @@ with open(file_path, 'a', encoding='utf8') as fp:
     fp.write('\n\n\n===============================\n' + date_and_time + '\n')
     fp.write(entry)
 
-subprocess.run(['dropbox'])
+print("Pushing changes...")
+if not os.system('rclone sync ~/Dropbox/pd/ drop:/pd/'):
+    print("Done")
+else:
+    print("Something went wrong")
