@@ -96,14 +96,8 @@ alias rn="shutdown -r now"
 alias :wq="exit"
 alias tmux="tmux -u"
 alias n="nautilus"
-alias pdrl="cp ~/Dropbox/pd/pd.txt /tmp/pd.tmp ; vim /tmp/pd.tmp" # Read the local copy of pd
-alias pdrc="rclone cat drop:/pd/pd.txt > /tmp/pd.tmp ; vim /tmp/pd.tmp" # Read pd from the cloud
-
-# change into the directory right after making it
-mkdir(){
-        /bin/mkdir $1;
-        cd $1
-}
+alias pdrl="cp ~/Dropbox/pd/pd.txt /tmp/pd.tmp ; less /tmp/pd.tmp" # Read the local copy of pd
+alias pdrc="rclone cat drop:/pd/pd.txt > /tmp/pd.tmp ; less /tmp/pd.tmp" # Read pd from the cloud
 
 
 # User configuration
