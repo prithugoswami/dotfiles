@@ -5,7 +5,8 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 #Wallpaper
-set $fehbg feh --bg-fill ~/Desktop/walls/wall2.jpg
+#set $fehbg feh --bg-fill ~/Desktop/walls/wall2.jpg
+set $fehbg wal -e -s -i ~/Desktop/walls/wall.jpg
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window 1pixel
@@ -366,6 +367,24 @@ set_from_resource $term_color12    color12
 set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
+
+
+############################################
+############ PyWal Color Scheme ############
+############################################
+# set_from_resource $fg i3wm.color8 #f0f0f0
+# set_from_resource $bg i3wm.color0 #f0f0f0
+# set_from_resource $c2 i3wm.color2 #f0f0f0
+# set_from_resource $c7 i3wm.color7 #f0f0f0
+#
+# # class                 border  backgr. text indicator child_border
+# client.focused          $bg     $bg     $fg  $c7       $c2
+# client.focused_inactive $bg     $bg     $fg  $c7       $c2
+# client.unfocused        $bg     $bg     $fg  $c7       $c2
+# client.urgent           $bg     $bg     $fg  $c7       $bg
+# client.placeholder      $bg     $bg     $fg  $c7       $bg
+#
+# client.background       $bg
 
 # Slightly modified arc colors
 set $arc_blue #5294E2

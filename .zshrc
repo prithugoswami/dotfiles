@@ -11,6 +11,8 @@ ZSH_THEME="agnoster"
 
 DEFAULT_USER="prithu"
 
+# pywal colorscheme
+#(cat ~/.cache/wal/sequences &)
 
 # ls automatically right after cd'ing into a directory
 cd() {

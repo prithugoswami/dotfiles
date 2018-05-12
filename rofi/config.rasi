@@ -5,7 +5,7 @@ configuration {
 /*	columns: 2;*/
 /*	font: "mono 12";*/
 /*	bw: 1;*/
-	location: 0;
+/*	location: 0;*/
 	padding: 50; 
 /*  yoffset: 30;*/
 /*	xoffset: 30;*/
@@ -50,7 +50,7 @@ configuration {
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 	show-match: false;
-/*	theme: ;*/
+	theme: "~/.cache/wal/colors-rofi-dark.rasi" ;
 	color-normal: "#2f343f, #f3f4f5, #2f343f, #5294e2, #f3f4f5";
 	color-urgent: "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3";
 	color-active: "#2f343f, #268bd2, #eee8d5, #268bd2, #fdf6e3";
