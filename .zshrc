@@ -100,6 +100,18 @@ alias n="nautilus"
 alias pdrl="cp ~/Dropbox/pd/pd.txt /tmp/pd.tmp ; less /tmp/pd.tmp" # Read the local copy of pd
 alias pdrc="rclone cat drop:/pd/pd.txt > /tmp/pd.tmp ; less /tmp/pd.tmp" # Read pd from the cloud
 
+# Task warrior Alias
+
+in(){
+    if [ "$#" = "0" ]; then
+        task next +in
+    else
+        task add +in "$@"
+    fi
+}
+
+alias t="task"
+
 
 # User configuration
 
@@ -120,5 +132,3 @@ alias pdrc="rclone cat drop:/pd/pd.txt > /tmp/pd.tmp ; less /tmp/pd.tmp" # Read 
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-source alias.sh
