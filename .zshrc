@@ -76,7 +76,6 @@ autoload -U compinit && compinit -u
 plugins=(
   git
   vi-mode
-  emoji
   adb
 )
 
@@ -121,3 +120,5 @@ alias pdrc="rclone cat drop:/pd/pd.txt > /tmp/pd.tmp ; less /tmp/pd.tmp" # Read 
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+source alias.sh
