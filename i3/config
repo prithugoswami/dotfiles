@@ -202,15 +202,15 @@ bindsym $mod+Shift+q move container to workspace $wsq; workspace $wsq
 # I am sure most of the flags given to xrandr command are redundant but I am not aware of that atm
 # It's just is what the arandr utility spit out
 
-set $monitor_top "xrandr --output HDMI-1 --mode 1280x1024 --pos 46x0 --rotate normal --output eDP-1 --mode 1366x768 --pos 0x1024 --rotate normal"
+set $monitor_top "xrandr --output HDMI1 --mode 1280x1024 --pos 46x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x1024 --rotate normal"
 
-set $monitor_right "xrandr --output HDMI-1 --mode 1280x1024 --pos 1366x0 --rotate normal --output eDP-1 --mode 1366x768 --pos 0x0 --rotate normal"
+set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
 
-set $monitor_none "xrandr --output HDMI-1 --off --output eDP-1 --mode 1366x768 --pos 0x0 --rotate normal"
+set $monitor_none "xrandr --output HDMI1 --off --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
 
-set $monitor_duplicate "xrandr --output eDP-1 --primary --mode 1366x768 --scale 1x1 --output HDMI-1 --same-as eDP1 --mode 1280x1024 --scale 0.75x0.75"
+set $monitor_duplicate "xrandr --output eDP1 --primary --mode 1366x768 --scale 1x1 --output HDMI1 --same-as eDP1 --mode 1280x1024 --scale 0.75x0.75"
 
-set $monitor_right_r_left "xrandr --output HDMI-1 --mode 1280x1024 --pos 1370x768 --rotate left --output eDP-1 --primary --mode 1366x768 --pos 0x1024 --rotate normal"
+set $monitor_right_r_left "xrandr --output HDMI1 --mode 1280x1024 --pos 1370x768 --rotate left --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal"
 
 # sets the monitor to the top
 bindsym $mod+Shift+t exec $monitor_top , exec $fehbg , exec echo $monitor_top > ~/.screenlayout/last_layout
