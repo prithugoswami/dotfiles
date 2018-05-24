@@ -35,8 +35,19 @@
 # 'rclone_dir' ; The direrctory of the pd file on the 'remote'
 #                in this case the 'remote' is 'drop:'
 #
+# NOTE :
 # Make sure there already exists a symmetrically encrypted AES file
 # in 'pd_path' and also in 'rclone_dir'
+# 
+# To symmetrically encrypt an empty file run:
+# `touch empty ; gpg2 --passphrase <secret> --batch -o pd -c empty`
+# this should create an symmetrically encrypted AES file named 'pd' with
+# the passphrase <secret>
+# This is not the most secure thing in the world I don't even intend it
+# to be. So anyways, the <secret> has to be saved as .pdkey in your home
+# directory or elsewhere ( if you're saving it elsewhere, then change
+# the 'key_path' variable accordingly
+
 
 import os
 import datetime
