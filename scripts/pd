@@ -1,21 +1,80 @@
 #!/usr/bin/env python3
-# This script opens a temp file in a vim buffer and after wrting and quiting from vim, it writes the contents to the file
-# specified by the file_path with a date and timestamp.
+#
+# -------------------------------------------------------------
+# Journal Keeping Script [aka Personal Diary (pd)]
+# Author : Prithu Goswami <prithugoswami524@gmail.com>
+# -------------------------------------------------------------
+# Prerequisites : make sure these programs are available on the
+#                 machine:
+#                 'rclone'
+#                 'vim'
+#                 'gpg' (v2.X)
+#
+# This is a very messy script and is just a quick hack and is not
+# a very super secure way of keeping a journal but I hope to improve on
+# it with time.
+#
+# This script opens a temp file in a vim buffer and after wrting
+# and quiting from vim, it appends the contents to the file
+# 'pd_path' that is in the 'pd_dir' in the $HOME dir of the machine,
+# with a date and timestamp.
+#
+# NOTE : 'rclone' should be configured
+#        with a remote first. run 'rlone config'.
+#        The remote should have directory with the encrypted 'pd' file
+#        Path to remote directory should be stored in 'rclone_dir'
+#
 # I use 'rclone' to sync the journal to my dropbox
-# the script first fetches any changes done to the pd.txt file
-# and then appends the entry and uploads it.
-# I use this for my journal.
+# the script first fetches any changes done to the pd file,
+# decryptis it using 'gpg' using the passhprase-file as '$HOME/.pdkey'
+# and then appends the entry, encrypts it and uploads it.
+# 
+# VARIABLES
+#
+# 'key_path' : passphrase for AES encrypted file
+#              default alogrithm used by gpg v2.2 is AES-128 according
+#              to the man page
+# 'pd_dir' : The directory where the pd file is stored
+# 'pd_path' : The path to the pd file
+# 'rclone_dir' ; The direrctory of the pd file on the 'remote'
+#                in this case the 'remote' is 'drop:'
+#
+# NOTE :
+# Make sure there already exists a symmetrically encrypted AES file
+# in 'pd_path' and also in 'rclone_dir'
+# 
+# To symmetrically encrypt an empty file run:
+# `touch empty ; gpg2 --passphrase <secret> --batch -o pd -c empty`
+# this should create a symmetrically encrypted AES file named 'pd' with
+# the passphrase <secret>
+# This is not the most secure thing in the world I don't even intend it
+# to be. So anyways, the <secret> has to be saved as .pdkey in your home
+# directory or elsewhere ( if you're saving it elsewhere, then change
+# the 'key_path' variable accordingly
+
 
 import os
 import datetime
 import tempfile
+import subprocess
+import shlex
 
 
-file_path = r'/home/prithu/Dropbox/pd/pd.txt'
+env_home = os.environ['HOME']
+tmp_pd_path = '/tmp/pd'
+key_path = env_home + '/.pdkey'
+pd_dir = env_home + '/Dropbox/pd'
+pd_path = pd_dir + '/pd'
+rclone_dir = 'drop:/pd'
 
+if not os.path.exists(key_path):
+    print("Exiting..No .pdkey found in home dir")
+    exit()
+if os.path.exists(tmp_pd_path):
+    os.remove(tmp_pd_path)
 
 entry = None
-with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
+with tempfile.NamedTemporaryFile(suffix='.pdentry') as temp:
     command = "vim {}".format(temp.name)
     os.system(command)
     entry = open(temp.name, 'r').read()
@@ -24,12 +83,21 @@ with tempfile.NamedTemporaryFile(suffix='.pdtemp') as temp:
         exit()
         
 print("Fetching changes...")
-if not os.system('rclone sync drop:/pd/ ~/Dropbox/pd/'):
+if not os.system('rclone sync {}/ {}/'.format(rclone_dir, pd_dir)):
     print("Done")
+    decrypt_cmd = ('gpg --passphrase-file {} --batch -o {} -d {}'
+                  .format(key_path, tmp_pd_path, pd_path))
+    args = shlex.split(decrypt_cmd)
+    p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         universal_newlines=True)
+    out, err = p.communicate()
+    if p.returncode: # if gpg exits with a non-zero return code
+        print("Error while decrypting :\n" + err)
+        exit()
 else:
     print("Something went wrong")
 
-with open(file_path, 'a', encoding='utf8') as fp:
+with open(tmp_pd_path, 'a', encoding='utf8') as fp:
     dt = datetime.datetime.now()
     date_string = dt.strftime('%a, %d %b %Y')
     time_string = dt.strftime('%I:%M %p')
@@ -38,8 +106,22 @@ with open(file_path, 'a', encoding='utf8') as fp:
     fp.write('\n\n\n===============================\n' + date_and_time + '\n')
     fp.write(entry)
 
+
+if os.path.exists(pd_path):
+    os.remove(pd_path)
+encrypt_cmd = ('gpg --passphrase-file {} --batch -o {} -c {}'
+              .format(key_path, pd_path, tmp_pd_path))
+args = shlex.split(encrypt_cmd)
+p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                     universal_newlines=True)
+out, err = p.communicate()
+if p.returncode:
+    print("Error while encrypting :\n" + err)
+    exit()
+
+os.remove(tmp_pd_path)
 print("Pushing changes...")
-if not os.system('rclone sync ~/Dropbox/pd/ drop:/pd/'):
+if not os.system('rclone sync {}/ {}/'.format(pd_dir, rclone_dir)):
     print("Done")
 else:
     print("Something went wrong")
