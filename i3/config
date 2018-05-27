@@ -16,9 +16,9 @@ new_float normal
 hide_edge_borders none
 
 # change borders
-#bindsym $mod+u border none
-#bindsym $mod+y border pixel 1
-#bindsym $mod+n border normal
+bindsym $mod+u border none
+bindsym $mod+Shift+u border pixel 1
+# bindsym $mod+Shift+u border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -69,6 +69,7 @@ bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+b exec --no-startup-id urxvt -e "ranger"
+bindsym $mod+i exec qutebrowser
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 #bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 
