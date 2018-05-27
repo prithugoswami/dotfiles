@@ -1,5 +1,9 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 #
+# Prithu's Modified agnoster theme for task warrior
+#       I have modified and added two custom sections
+#       that show a particular report's count.
+#
 # agnoster's Theme - https://gist.github.com/3712874
 # A Powerline-inspired theme for ZSH
 #
