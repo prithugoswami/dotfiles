@@ -42,7 +42,7 @@
 ## when a key is bound (via `bindings.default` or `bindings.commands`),
 ## the mapping is ignored.
 ## Type: Dict
-c.bindings.key_mappings = {'<Ctrl-[': '<Escape>', '<Ctrl-6>': '<Ctrl-^>', '<Ctrl-M>': '<Return>', '<Ctrl-J>': '<Return>', '<Shift-Return>': '<Return>', '<Enter>': '<Return>', '<Shift-Enter>': '<Return>', '<Ctrl-Enter>': '<Ctrl-Return>'}
+# c.bindings.key_mappings = {'<Ctrl-[>': '<Escape>', '<Ctrl-6>': '<Ctrl-^>', '<Ctrl-M>': '<Return>', '<Ctrl-J>': '<Return>', '<Shift-Return>': '<Return>', '<Enter>': '<Return>', '<Shift-Enter>': '<Return>', '<Ctrl-Enter>': '<Ctrl-Return>'}
 
 ## Background color of the completion widget category headers.
 ## Type: QssColor
@@ -763,7 +763,7 @@ c.bindings.key_mappings = {'<Ctrl-[': '<Escape>', '<Ctrl-6>': '<Ctrl-^>', '<Ctrl
 
 ## Font used for the hints.
 ## Type: Font
-# c.fonts.hints = 'bold 10pt monospace'
+c.fonts.hints = 'bold 10pt RobotoMono Nerd Font Mono'
 
 ## Font used in the keyhint widget.
 ## Type: Font
@@ -784,7 +784,7 @@ c.bindings.key_mappings = {'<Ctrl-[': '<Escape>', '<Ctrl-6>': '<Ctrl-^>', '<Ctrl
 ## Default monospace fonts. Whenever "monospace" is used in a font
 ## setting, it's replaced with the fonts listed here.
 ## Type: Font
-# c.fonts.monospace = '"xos4 Terminus", Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+c.fonts.monospace = '"Hack Nerd Font Mono","xos4 Terminus", Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
 
 ## Font used for prompts.
 ## Type: Font
