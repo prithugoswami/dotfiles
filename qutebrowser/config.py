@@ -1387,6 +1387,9 @@ c.url.start_pages = ['www.google.com']
 # c.zoom.text_only = False
 
 ## Bindings for normal mode
+config.bind(',s', 'config-cycle statusbar.hide')
+config.bind(',t', 'config-cycle tabs.show always switching')
+config.bind(',h', 'config-cycle statusbar.hide ;; config-cycle tabs.show switching always')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
 # config.bind('-', 'zoom-out')
