@@ -4,3 +4,6 @@
 
 # qutebrowser autoconfig file #
 qutebrowser/autoconfig.yml
+
+# vim view files
+.vim/view/*
