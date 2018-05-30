@@ -43,9 +43,6 @@ set foldmethod=indent " fold based on indent
 " <Space> is foldToggle (za) in normal mode
 nnoremap <silent> <Tab> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
-" Preserve folds
-autocmd BufWinLeave * mkview
-autocmd BufWinEnter * silent loadview 
 
 
 set number " number line
