@@ -763,7 +763,7 @@
 
 ## Font used for the hints.
 ## Type: Font
-c.fonts.hints = 'bold 10pt RobotoMono Nerd Font Mono'
+c.fonts.hints = 'bold 10pt monospace'
 
 ## Font used in the keyhint widget.
 ## Type: Font
