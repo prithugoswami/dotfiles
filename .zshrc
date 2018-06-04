@@ -100,11 +100,14 @@ alias n="nautilus"
 # Read the local copy of pd
 alias pdrl="cp ~/Dropbox/pd/pd /tmp/pd \
             ; gpg --passphrase-file ~/.pdkey --batch -o /tmp/pd.tmp -d /tmp/pd \
-            ; less /tmp/pd.tmp ; rm /tmp/pd.tmp"
+            ; less /tmp/pd.tmp ; rm /tmp/pd.tmp \
+            ; rm /tmp/pd"
 # Read pd from the cloud
 alias pdrc="rclone cat drop:/pd/pd > /tmp/pd \
             ; gpg --passphrase-file ~/.pdkey --batch -o /tmp/pd.tmp -d /tmp/pd \
-            ; less /tmp/pd.tmp ; rm /tmp/pd.tmp"
+            ; less /tmp/pd.tmp ; rm /tmp/pd.tmp \
+            ; rm /tmp/pd"
+
 
 # Task warrior Alias
 
