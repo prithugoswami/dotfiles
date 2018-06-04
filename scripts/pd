@@ -80,6 +80,10 @@ if os.path.exists(tmp_pd_path):
 
 
 def fetch_and_decrypt():
+    """
+    Fetches the cloud copy first (sync) and then decrypts 
+    it to tmp_pd_path
+    """
     print("Fetching changes...")
     if not os.system('rclone sync {}/ {}/'.format(rclone_dir, pd_dir)):
         print("Done")
@@ -97,6 +101,10 @@ def fetch_and_decrypt():
 
 
 def encrypt_and_push():
+    """
+    Encrypts the file at tmp_pd_path and then syncs to the cloud.
+    i.e replace the copy in the cloud with the local one.
+    """
     if os.path.exists(pd_path):
         os.remove(pd_path)
     encrypt_cmd = ('gpg --passphrase-file {} --batch -o {} -c {}'
