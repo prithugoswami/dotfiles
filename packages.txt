@@ -1,3 +1,4 @@
+arc-gtk-theme
 rofi
 rclone
 feh
