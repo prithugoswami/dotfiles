@@ -6,7 +6,7 @@
 
 #set $wall_set feh --bg-fill ~/Desktop/walls/wall2.jpg
 
-set $wall_set wal -e -s -i ~/Desktop/walls/wall.jpg
+set $wall_set wal -e -s -i ~/Desktop/walls/wall2.jpg
 # pywal will set the wallpaper and change the colors only for
 # rofi and some other things
 
@@ -133,6 +133,7 @@ bindsym $mod+i exec --no-startup-id "qutebrowser"
 bindsym $mod+p exec st -e "pd"
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
+bindsym $mod+Shift+u exec mpv "$(xsel -b)"
 
 #}}}
 
@@ -147,6 +148,7 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
+
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
@@ -160,8 +162,8 @@ bindsym $mod+Shift+l move right
 bindsym $mod+r mode "resize"
 mode "resize" {
         bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
         bindsym l resize grow width 5 px or 5 ppt
 
         bindsym Shift+h resize shrink width 10 px or 10 ppt
@@ -241,7 +243,6 @@ bindsym $mod+n split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -258,11 +259,11 @@ bindsym $mod+Shift+s sticky toggle
 # bindsym $mod+a focus parent
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+semicolon move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+bindsym $mod+semicolon scratchpad show
 
 #}}}
 ## Custom Window Classes ##{{{
@@ -301,6 +302,44 @@ for_window [class="Xfburn"] floating enable
 
 ### Dual Monitor Settings ###{{{
 
+## Mode - Monitor Positions ##{{{
+
+set $monitor_top "xrandr --output HDMI1 --mode 1280x1024 --pos 46x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x1024 --rotate normal"
+
+set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
+
+set $monitor_none "xrandr --output HDMI1 --off --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
+
+set $monitor_duplicate "xrandr --output eDP1 --primary --mode 1366x768 --scale 1x1 --output HDMI1 --same-as eDP1 --mode 1280x1024 --scale 0.75x0.75"
+
+set $monitor_right_r_left "xrandr --output HDMI1 --mode 1280x1024 --pos 1370x768 --rotate left --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal"
+
+set $mode_monitor_position (T)-Monitor Top , (Y)-Monitor right , (G)-Monitor None , (F)-Monitor Mirror , (<C-y>)-Monitor Right Rotate Left
+bindsym $mod+y mode "$mode_monitor_position"
+
+mode "$mode_monitor_position" {
+    # these keybindings change the monitor position and then write to file the same command
+    # is used to set the the respective position of the monitor. That command is then executed at startup
+
+    # sets the monitor to the top
+    bindsym t exec $monitor_top , exec $wall_set && sleep 0.1 , exec echo $monitor_top > ~/.screenlayout/last_layout , mode "default"
+
+    # sets monitor to the right
+    bindsym y exec $monitor_right , exec $wall_set && sleep 0.1 ,  exec echo $monitor_right > ~/.screenlayout/last_layout , mode "default"
+
+    # when there is no external monitor connected
+    bindsym g exec $monitor_none , exec $wall_set && sleep 0.1 , exec echo $monitor_right > ~/.screenlayout/last_layout , mode "default"
+
+    # duplicate the laptop screen to an external monitor
+    bindsym f exec $monitor_duplicate , exec $wall_set && sleep 0.1 , exec echo $monitor_duplicate > ~/.screenlayout/last_layout , mode "default"
+
+    # sets monitor to the left and rotates it to left
+    bindsym Ctrl+y exec --no-startup-id $monitor_right_r_left , exec $wall_set && sleep 0.1 , exec echo $monitor_right_r_left > ~/.screenlayout/last_layout , mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+##}}}
 ## Mode - Move to Monitor ##{{{
 set $mode_monitor_move Use h,j,k,l keys to move the workspace to another monitor
 bindsym $mod+a mode "$mode_monitor_move"
@@ -318,37 +357,6 @@ mode "$mode_monitor_move"{
     bindsym Return mode "default"
 }
 #}}}
-## Monitor Positon Key Bindings ##{{{
-# the keybindings mod+Shift+t/y change the monitor position and then write to file the same command
-# it used to set the the respective position of the monitor. That command is then executed at startup
-# I am sure most of the flags given to xrandr command are redundant but I am not aware of that atm
-# It's just is what the arandr utility spit out
-
-set $monitor_top "xrandr --output HDMI1 --mode 1280x1024 --pos 46x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x1024 --rotate normal"
-
-set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
-
-set $monitor_none "xrandr --output HDMI1 --off --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
-
-set $monitor_duplicate "xrandr --output eDP1 --primary --mode 1366x768 --scale 1x1 --output HDMI1 --same-as eDP1 --mode 1280x1024 --scale 0.75x0.75"
-
-set $monitor_right_r_left "xrandr --output HDMI1 --mode 1280x1024 --pos 1370x768 --rotate left --output eDP1 --primary --mode 1366x768 --pos 0x1024 --rotate normal"
-
-# sets the monitor to the top
-bindsym $mod+Shift+t exec $monitor_top , exec $fehbg , exec echo $monitor_top > ~/.screenlayout/last_layout
-
-# sets monitor to the right
-bindsym $mod+Shift+y exec $monitor_right , exec $fehbg ,  exec echo $monitor_right > ~/.screenlayout/last_layout
-
-# when there is no external monitor connected
-bindsym $mod+Shift+g exec $monitor_none , exec $fehbg , exec echo $monitor_right > ~/.screenlayout/last_layout
-
-# duplicate the laptop screen to an external monitor
-bindsym $mod+Shift+f exec $monitor_duplicate , exec $fehbg , exec echo $monitor_duplicate > ~/.screenlayout/last_layout
-
-# sets monitor to the left and rotates it to left
-bindsym $mod+Ctrl+y exec --no-startup-id $monitor_right_r_left , exec $fehbg , exec echo $monitor_right_r_left > ~/.screenlayout/last_layout
-#}}}
 
 #}}}
 
@@ -364,7 +372,7 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
 exec --no-startup-id ~/.screenlayout/last_layout
-exec --no-startup-id $wall_set
+exec_always --no-startup-id $wall_set
 exec "xinput --disable 14"
 
 #}}}
