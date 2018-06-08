@@ -1393,6 +1393,7 @@ c.url.start_pages = ['www.google.com']
 config.bind(',s', 'config-cycle statusbar.hide')
 config.bind(',t', 'config-cycle tabs.show always switching')
 config.bind(',h', 'config-cycle statusbar.hide ;; config-cycle tabs.show switching always')
+config.unbind('d', mode='normal')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
 # config.bind('-', 'zoom-out')
