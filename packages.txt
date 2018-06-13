@@ -1,4 +1,5 @@
 arc-gtk-theme
+papirus-icon-theme
 rofi
 rclone
 feh
@@ -12,6 +13,8 @@ firefox
 evince
 task
 nautilus
+python-pywal
+syncthing
 
 ---------------------
 AUR
@@ -19,4 +22,4 @@ AUR
 
 dropbox
 tixati
-python-pywal
+flashfocus-git
