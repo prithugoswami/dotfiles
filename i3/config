@@ -376,7 +376,7 @@ exec_always --no-startup-id fix_xcursor
 exec --no-startup-id ~/.screenlayout/last_layout
 exec_always --no-startup-id $wall_set
 # disable the trackpad
-exec "xinput --disable 14"
+exec toggle_touchpad
 exec syncthing -no-browser
 
 #}}}
