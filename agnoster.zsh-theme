@@ -205,7 +205,7 @@ prompt_task_in() {
 prompt_task_todo() {
   local todocount=$(task +PENDING -in count)
   if [ "$todocount" != "0" ]; then 
-    prompt_segment black blue "$todocount"
+    prompt_segment red black "$todocount"
   fi
 }
 
@@ -237,8 +237,8 @@ build_prompt() {
   prompt_status
   prompt_virtualenv
   prompt_context
-  prompt_task_todo
   prompt_task_in
+  prompt_task_todo
   prompt_dir
   prompt_git
   prompt_bzr
