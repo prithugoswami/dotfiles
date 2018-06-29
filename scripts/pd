@@ -12,7 +12,7 @@
 #
 # This is a very messy script and is just a quick hack and is not
 # a very super secure way of keeping a journal but I hope to improve on
-# it with time. It uses unsymmetric AES-128 encryption.
+# it with time. It uses symmetric AES-128 encryption.
 #
 # This script opens a temp file in a vim buffer and after wrting
 # and quiting from vim, it appends the contents to the file
@@ -36,7 +36,7 @@
 #              default alogrithm used by gpg v2.2 is AES-128 according
 #              to the man page
 # 'pd_dir' : The directory where the pd file is stored
-# 'pd_path' : The path to the pd file
+# 'pd_path' : The path to the pd file. This is just "pd_dir+'pd'"
 # 'rclone_dir' ; The direrctory of the pd file on the 'remote'
 #                in this case the 'remote' is 'drop:'
 #
@@ -48,6 +48,8 @@
 # `touch empty ; gpg2 --passphrase <secret> --batch -o pd -c empty`
 # this should create a symmetrically encrypted AES file named 'pd' with
 # the passphrase <secret>
+# Now, save this file ('pd') in the 'pd_dir' and also upload it to the
+# remote dir using rclone.
 # This is not the most secure thing in the world I don't even intend it
 # to be. So anyways, the <secret> has to be saved as .pdkey in your home
 # directory or elsewhere ( if you're saving it elsewhere, then change
