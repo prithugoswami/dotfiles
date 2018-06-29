@@ -12,7 +12,7 @@
 #
 # This is a very messy script and is just a quick hack and is not
 # a very super secure way of keeping a journal but I hope to improve on
-# it with time.
+# it with time. It uses unsymmetric AES-128 encryption.
 #
 # This script opens a temp file in a vim buffer and after wrting
 # and quiting from vim, it appends the contents to the file
