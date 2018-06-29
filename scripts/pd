@@ -17,7 +17,8 @@
 # This script opens a temp file in a vim buffer and after wrting
 # and quiting from vim, it appends the contents to the file
 # 'pd_path' that is in the 'pd_dir' in the $HOME dir of the machine,
-# with a date and timestamp.
+# with a date and timestamp. It then encrypts the file using gpg
+# and uploads it to the cloud storage.
 #
 # NOTE : 'rclone' should be configured
 #        with a remote first. run 'rlone config'.
