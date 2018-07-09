@@ -96,6 +96,10 @@ alias sn="shutdown now"
 alias rn="shutdown -r now"
 alias :wq="exit"
 alias tmux="tmux -u"
+#alias cfzf="cd $(fzf)"
+#<cmd> | pastebin will upload the stdout of <cmd> and put the link
+#in the clipboard
+alias pastebin="curl -# -F c=@- https://ptpb.pw\?u=1 | xclip -selection c"
 alias n="nautilus"
 # Read the local copy of pd
 alias pdrl="cp ~/Dropbox/pd/pd /tmp/pd \
@@ -120,6 +124,8 @@ in(){
 }
 
 alias t="task"
+alias todo="task modify -in"
+
 
 
 # User configuration
