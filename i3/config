@@ -123,11 +123,12 @@ set $arc_red #cc575d
 ### Application Launcher Key Bindings ###{{{
 
 bindsym $mod+Return exec --no-startup-id urxvt
-bindsym $mod+b exec st -e "ranger"
+bindsym $mod+b exec urxvt -e "ranger"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
 # Desktop application launcher
-bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
+#bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
+bindsym $mod+Shift+d exec --no-startup-id "dmenu_extended_run"
 bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
 bindsym $mod+p exec st -e "pd"
@@ -135,6 +136,7 @@ bindsym $mod+p exec st -e "pd"
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
 #bindsym $mod+Shift+u exec mpv "$(xsel -b)"
 bindsym $mod+Shift+u exec db
+bindsym $mod+slash exec --no-startup-id urxvt -e zsh -c 'rifle "$(fzf)"'
 
 #}}}
 
@@ -271,6 +273,7 @@ bindsym $mod+semicolon scratchpad show
 
 # Open specific applications in floating mode
 for_window [title="Screen Layout Editor"] floating enable
+for_window [title="Application Finder"] floating enable, resize set 500 700, move position center
 for_window [title="Telegram"] floating enable border pixel 1
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
@@ -374,7 +377,7 @@ exec --no-startup-id compton -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id clipit
-exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id xautolock -corner '00--' -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
