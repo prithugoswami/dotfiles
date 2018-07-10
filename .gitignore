@@ -8,3 +8,6 @@ qutebrowser/qsettings/
 
 # vim view files
 .vim/view/*
+
+# pycache 
+__pycache__
