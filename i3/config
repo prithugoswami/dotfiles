@@ -6,7 +6,7 @@
 
 #set $wall_set feh --bg-fill ~/Desktop/walls/wall2.jpg
 
-set $wall_set wal -e -s -i ~/Desktop/walls/wall2.jpg
+set $wall_set wal -e -s -i ~/Desktop/walls/wall.jpg
 # pywal will set the wallpaper and change the colors only for
 # rofi and some other things
 
@@ -274,7 +274,7 @@ bindsym $mod+semicolon scratchpad show
 # Open specific applications in floating mode
 for_window [title="Screen Layout Editor"] floating enable
 for_window [title="Application Finder"] floating enable, resize set 500 700, move position center
-for_window [title="Telegram"] floating enable border pixel 1
+for_window [class="TelegramDesktop"] floating enable border pixel 1
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
@@ -377,7 +377,7 @@ exec --no-startup-id compton -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id clipit
-exec --no-startup-id xautolock -corner '00--' -time 10 -locker blurlock
+exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
@@ -385,7 +385,7 @@ exec --no-startup-id ~/.screenlayout/last_layout
 exec_always --no-startup-id $wall_set
 # disable the trackpad
 exec toggle_touchpad
-exec syncthing -no-browser
+#exec --no-startup-d syncthing -no-browser
 
 #}}}
 
@@ -480,6 +480,3 @@ bar {
 bindsym $mod+Shift+m bar mode toggle
 
 #}}}
-
-
-

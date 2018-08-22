@@ -13,7 +13,11 @@ set smartindent
 set autoindent
 
 " load filetype-specific indent files
-filetype indent on
+filetype plugin indent on
+
+" compiling for different file types
+autocmd FileType markdown nnoremap cp :w<Enter>:!pandoc -f gfm -V geometry=margin=1in -V links-as-notes -o %.pdf %<Enter><Enter>
+autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 
 set backspace=indent,eol,start
 

@@ -17,6 +17,8 @@ python-pywal
 syncthing
 fzf
 youtube-dl
+pandoc
+texlive-core
 
 ---------------------
 AUR

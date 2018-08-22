@@ -63,7 +63,7 @@ if [ "$preview_images" = "True" ]; then
         ###    ffmpegthumbnailer -i "$path" -o "$cached" -s 0 && exit 6 || exit 1;;
     application/pdf)
         evince-thumbnailer -s 700 "$path" "$cached" && exit 6;;
-    video/mp4)
+    video/*)
         ffmpeg -i "$path" -map 0:"$stnum" "$cached" && exit 6;;
     esac
 fi
