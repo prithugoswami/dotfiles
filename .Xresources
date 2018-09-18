@@ -65,7 +65,7 @@ URxvt*color21:                        #f5f4f1
 
 URxvt.depth:                      32
 URxvt*foreground:                 #F8F8F2
-URxvt.background:                 [85]#101216
+URxvt.background:                 [85]#101716
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true
