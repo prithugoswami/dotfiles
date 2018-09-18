@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+
+# ===================================================
+# Spotify playlist syncer using spotify-downloader
+# ===================================================
+# 
+# Author: Prithu Goswami
+# Email: prithugoswami524@gmail.com
+# Date: 17 Sep 2018
+#
+# Description:
+# This script syncs playlist from spotify using the spotify-downloader
+# module written by ritiek [https://github.com/ritiek/spotify-downloader]
+# Conifg file : ~/.config/playlist-syncer/config.json
+# The config file is in json and is read to get a list of playlists to sync
+#
+# Example config file:
+#
+#
+# {
+#     "playlists": [
+#         {
+#             "name": "Today's Top Hits",
+#             "id": "37i9dQZF1DXcBWIGoYBM5M",
+#             "owner_id": "spotify",
+#             "location": "/home/user/music/todays-top-hits/",
+#             "snapshot_id": "<user does not need to bother with this",
+#             "last_updated": "never"
+#         },
+#         {
+#             "name": "Feel Good",
+#             "id": "2BARfqxeupzZy3TWMnAaSw",
+#             "owner_id": "Deby",
+#             "location": "/home/user/music/feel-good/",
+#             "snapshot_id": "<user does not need to bother with this",
+#             "last_updated": "never"
+#         },
+#     ]
+# }
+#
+# A new playlist entry is created by giving the `-a` option to the script
+# followed by the id and a local path where the music will be downloaded
+#
+# Example:
+# $ playlist-sync -a <playlist-id> <path-to-directory>
+
+
+import json
+import os 
+import shlex
+import subprocess
+import sys
+
+import spotipy
+from slugify import slugify
+from spotipy.oauth2 import SpotifyClientCredentials
+from time import strftime
+
+
+ok='{}[]()-_'
+HOME=os.environ['HOME']
+client_id='5a78b4a9902c4ae1b8cba38dade6acc8'
+client_secret='884b0b01626b4e67888dada40ce49852'
+config_path=HOME+'/.config/playlist-sync/config.json'
+log_dir_path=HOME+'/.log/playlist-sync'
+
+client_credentials_manager = SpotifyClientCredentials(client_id=client_id,
+        client_secret=client_secret)
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+config={}
+
+if os.path.exists(config_path):
+    with open(config_path, 'r') as jsonfile:
+        config = json.load(jsonfile)
+else:
+    ans=input('Config file does not exist. Create it? [y/n] >')
+    if ans == y:
+        print("created")
+    else:
+        print("could not")
+
+
+playlists=config['playlists']
+
+
+def add_playlist(plid, path):
+        try:
+            pl=sp.user_playlist(' ', plid)
+        except spotipy.client.SpotifyException:
+            print('Err:Invalid Playlist Id')
+            exit(1)
+
+        playlist= {
+            "name": pl['name'],
+            "id": pl['id'],
+            "owner_id": ' ',
+            "location": path,
+            "snapshot_id": ' ',
+            "last_updated": 'never'
+        }
+        config['playlists'].append(playlist)
+        with open(config_path, 'w') as jsonfile:
+            json.dump(config, jsonfile, indent=4)
+
+        print('Added playlist: {} \n'
+              'Sync path: {}'.format(pl['name'], path))
+        print('updated config')
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+def requires_update(playlist_data, playlist):
+    return playlist_data['snapshot_id'] != playlist['snapshot_id']
+
+def get_local_tracknames(playlist):
+    tracks=set()
+    for f in os.listdir(playlist['location']):
+        if f.endswith("mp3"):
+            tracks.add(f[:-4])
+    return tracks
+
+def get_need_to_download(playlist_data, playlist):
+    """
+    Return a set of urls to be downloaded that are not present in the current
+    local playlist collection
+    """
+    sp_tracknames=set()
+    loc_tracknames = get_local_tracknames(playlist)
+    sp_tracks=[]
+    for t in playlist_data['tracks']['items']:
+        tr={
+            'title':slugify(t['track']['name'], lower=False, spaces=True, ok=ok),
+            'artist':slugify(t['track']['artists'][0]['name'], spaces=True, lower=False, ok=ok)
+        }
+        sp_track={
+            'string':tr['artist']+' - '+tr['title'],
+            'url':t['track']['external_urls']['spotify']
+        }
+        sp_tracks.append(sp_track)
+        sp_tracknames.add(sp_track['string'])
+    need_to_download = sp_tracknames-loc_tracknames
+    for t in need_to_download:
+        for track in sp_tracks:
+            if t==track['string']:
+                need_to_download.add(track['url'])
+                #FIXME: If there are duplicates in the playlist remove them before proceeding
+                need_to_download.remove(t)
+
+    return need_to_download
+
+
+def write_log(data):
+    logname=strftime('%c').replace(' ','-')+'sc.log'
+    with open(log_dir_path+'/'+logname, 'w') as l:
+        l.write(data)
+
+def update_m3u(playlist_data, playlist):
+    m3uloc=playlist['location']+slugify(playlist_data['name'], ok=ok)+'.m3u8'
+    with open(m3uloc, 'w') as m3ufile:
+        for t in playlist_data['tracks']['items']:
+            tr={
+                'title':slugify(t['track']['name'], lower=False, spaces=True, ok=ok),
+                'artist':slugify(t['track']['artists'][0]['name'], spaces=True, lower=False, ok=ok)
+            }
+            track_string=tr['artist']+' - '+tr['title']+'.mp3\n'
+            m3ufile.write(track_string)
+
+
+def update_playlist(playlist_data, playlist):
+    track_urls=get_need_to_download(playlist_data, playlist)
+    with open("/tmp/spotdllist.txt", 'w') as f:
+        for a in track_urls:
+            f.write(a+'\n')
+    print('written files to /tmp/spotdllist.txt:\n')
+    print('Track links to downalod:')
+    for m in track_urls:
+        print(m)
+    command=('spotdl --list /tmp/spotdllist.txt -f {} --trim-silence --overwrite skip'
+             .format(playlist['location']))
+    args=shlex.split(command)
+    print('calling spotdl')
+    p = subprocess.Popen(args, universal_newlines=True)
+    p_out, p_err = p.communicate()
+    if p.returncode!=0:
+        d = "-----STDOUT------\n"+p_out+'\n'*3+"-----STDERR------\n"+p_err
+        write_log(d)
+        print('Error occured, log written')
+        return
+    else:
+        update_m3u(playlist_data, playlist)
+        print('Updated the m3u playlist')
+        i=0
+        for pl in config['playlists']:
+            if pl['id']==playlist['id']:
+                config['playlists'][i]['snapshot_id']=playlist_data['snapshot_id']
+                config['playlists'][i]['last_updated']=strftime('%c')
+            i+=1
+
+        with open(config_path, 'w') as jsonfile:
+            json.dump(config, jsonfile, indent=4)
+        print('updated config')
+        return
+
+if len(sys.argv)>1:
+    if sys.argv[1]=='-a':
+        add_id=sys.argv[2]
+        add_id_path=sys.argv[3]
+        add_playlist(add_id, add_id_path)
+        exit(0)
+
+for playlist in playlists:
+    playlist_data=sp.user_playlist(playlist['owner_id'], playlist_id=playlist['id'])
+    if requires_update(playlist_data, playlist):
+        update_playlist(playlist_data, playlist)
