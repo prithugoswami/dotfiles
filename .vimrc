@@ -47,6 +47,9 @@ set foldmethod=indent " fold based on indent
 " <Space> is foldToggle (za) in normal mode
 nnoremap <silent> <Tab> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
+" <C-c> in visual mode copies to clipboard
+vnoremap <C-c> "+y
+
 
 
 set number " number line
@@ -78,3 +81,10 @@ if exists('$TMUX')
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 endif
+
+" js-beautify plugin
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
