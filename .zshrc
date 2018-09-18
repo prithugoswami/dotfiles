@@ -96,6 +96,8 @@ alias sn="shutdown now"
 alias rn="shutdown -r now"
 alias :wq="exit"
 alias tmux="tmux -u"
+alias ch="ping 8.8.8.8"
+
 #alias cfzf="cd $(fzf)"
 #<cmd> | pastebin will upload the stdout of <cmd> and put the link
 #in the clipboard
@@ -122,6 +124,12 @@ in(){
         task add +in "$@"
     fi
 }
+
+#history search using fzf
+h(){
+    $(cat ~/.zsh_history | awk -F ';' '{ $1="" ; print }' | fzf --tac )
+}
+
 
 alias t="task"
 alias todo="task modify -in"
