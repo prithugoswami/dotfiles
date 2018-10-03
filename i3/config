@@ -133,7 +133,7 @@ bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
 # Desktop application launcher
 #bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
-bindsym $mod+Shift+d exec --no-startup-id "dmenu_extended_run"
+bindsym $mod+Shift+d exec --no-startup-id "runa -a"
 bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
 bindsym $mod+p exec st -e "pd"
@@ -377,6 +377,7 @@ mode "$mode_monitor_move"{
 
 ### Autostart Applications/Scripts ###{{{
 
+exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id compton -b
 exec --no-startup-id nm-applet

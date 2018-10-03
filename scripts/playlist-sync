@@ -6,7 +6,7 @@
 # 
 # Author: Prithu Goswami
 # Email: prithugoswami524@gmail.com
-# Date: 17 Sep 2018
+# Date: 21 Sep 2018
 #
 # Description:
 # This script syncs playlist from spotify using the spotify-downloader
@@ -42,7 +42,7 @@
 # followed by the id and a local path where the music will be downloaded
 #
 # Example:
-# $ playlist-sync -a <playlist-id> <path-to-directory>
+# $ playlist-sync -a <playlist-id> <absolute-path-to-directory>
 
 
 import json
@@ -69,18 +69,24 @@ client_credentials_manager = SpotifyClientCredentials(client_id=client_id,
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 config={}
 
-if os.path.exists(config_path):
-    with open(config_path, 'r') as jsonfile:
-        config = json.load(jsonfile)
-else:
-    ans=input('Config file does not exist. Create it? [y/n] >')
-    if ans == y:
-        print("created")
+def create_config():
+    ans = input("Config file does not exist. Create it? [y/n] ")
+    if ans in "yY":
+        with open(config_path, 'w') as jsonfile:
+            config_data={'playlists':[]}
+            json.dump(config_data, jsonfile, indent=4)
+        ans = input("\nWould you also like to add a playlist? [y/n] ")
+        if ans in "yY":
+            pl_id=input('\nPlaylist Id > ')
+            pl_path=input('Playlist local path (absolute path) > ')
+            add_playlist(pl_id, pl_path)
+        else:
+            print('\nYou can add a playlist by passing the `-a` option to the'
+                    'script\n\nsyntax: $ playlist-sync -a <playlist-id> '
+                    '<absolute-path-to-directory>')
+            exit(0)
     else:
-        print("could not")
-
-
-playlists=config['playlists']
+        exit(0)
 
 
 def add_playlist(plid, path):
@@ -93,7 +99,6 @@ def add_playlist(plid, path):
         playlist= {
             "name": pl['name'],
             "id": pl['id'],
-            "owner_id": ' ',
             "location": path,
             "snapshot_id": ' ',
             "last_updated": 'never'
@@ -104,9 +109,10 @@ def add_playlist(plid, path):
 
         print('Added playlist: {} \n'
               'Sync path: {}'.format(pl['name'], path))
-        print('updated config')
+        print('\nUpdated config file')
         if not os.path.exists(path):
             os.mkdir(path)
+            print('Created directory: {}'.format(path))
 
 def requires_update(playlist_data, playlist):
     return playlist_data['snapshot_id'] != playlist['snapshot_id']
@@ -166,18 +172,23 @@ def update_m3u(playlist_data, playlist):
 
 
 def update_playlist(playlist_data, playlist):
+    print("Updating Playlist: " + playlist['name'] + "\n")
+
     track_urls=get_need_to_download(playlist_data, playlist)
+
     with open("/tmp/spotdllist.txt", 'w') as f:
         for a in track_urls:
             f.write(a+'\n')
-    print('written files to /tmp/spotdllist.txt:\n')
+    print('Written files to /tmp/spotdllist.txt')
+
     print('Track links to downalod:')
     for m in track_urls:
         print(m)
+
     command=('spotdl --list /tmp/spotdllist.txt -f {} --trim-silence --overwrite skip'
              .format(playlist['location']))
     args=shlex.split(command)
-    print('calling spotdl')
+    print('\nCalling spotdl')
     p = subprocess.Popen(args, universal_newlines=True)
     p_out, p_err = p.communicate()
     if p.returncode!=0:
@@ -200,6 +211,21 @@ def update_playlist(playlist_data, playlist):
         print('updated config')
         return
 
+
+if not os.path.exists(config_path):
+    create_config()
+else:
+    with open(config_path, 'r') as jsonfile:
+        config = json.load(jsonfile)
+
+playlists=config['playlists']
+if not playlists:
+    print('There are no playlists to process')
+    print('Add playlist by passing the `-a` option.\n\nsyntax: '
+          '$ playlist-sync -a <playlist-id> <absolute-path-to-directory>')
+    exit(0)
+
+
 if len(sys.argv)>1:
     if sys.argv[1]=='-a':
         add_id=sys.argv[2]
@@ -208,6 +234,6 @@ if len(sys.argv)>1:
         exit(0)
 
 for playlist in playlists:
-    playlist_data=sp.user_playlist(playlist['owner_id'], playlist_id=playlist['id'])
+    playlist_data=sp.user_playlist(' ', playlist_id=playlist['id'])
     if requires_update(playlist_data, playlist):
         update_playlist(playlist_data, playlist)

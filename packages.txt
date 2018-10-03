@@ -20,6 +20,7 @@ youtube-dl
 pandoc
 texlive-core
 cmus
+nethogs
 
 ---------------------
 AUR
