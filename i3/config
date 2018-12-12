@@ -4,9 +4,9 @@
 
 ## Wallpaper ## {{{
 
-#set $wall_set feh --bg-fill ~/Desktop/walls/wall3.png
+set $wall_set feh --bg-fill ~/Desktop/walls/303030.png
 
-set $wall_set wal -e -s -i ~/Desktop/walls/green2.jpg
+#set $wall_set wal -e -s -i ~/Desktop/walls/canvas.jpg
 # pywal will set the wallpaper and change the colors only for
 # rofi and some other things
 
@@ -92,6 +92,11 @@ set $mist_green #4a6a38
 set $mist_dark_blue #040f18
 set $mist_darker_blue #01060a
 
+#Brown colors
+set $brown_dark #1e0106
+set $brown_darker #0f0000
+set $brown_gold #d17f27
+
 #}}}
 ## Window Decorations ##{{{
 
@@ -128,6 +133,7 @@ set $mist_darker_blue #01060a
 ### Application Launcher Key Bindings ###{{{
 
 bindsym $mod+Return exec --no-startup-id urxvt
+bindsym $mod+Shift+Return exec --no-startup-id st
 bindsym $mod+b exec urxvt -e "ranger"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
@@ -136,7 +142,7 @@ bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
 bindsym $mod+Shift+d exec --no-startup-id "runa -a"
 bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
-bindsym $mod+p exec st -e "pd"
+bindsym $mod+p exec urxvt -e "pd" && i3-msg fullscreen
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
 #bindsym $mod+Shift+u exec mpv "$(xsel -b)"
@@ -377,6 +383,9 @@ mode "$mode_monitor_move"{
 
 ### Autostart Applications/Scripts ###{{{
 
+# Typematic delay and rate (Autorepeating key in X server)
+exec --no-startup-id xset r rate 320 30
+# chaning keyboard layout using Alt+Caps from US to IN
 exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id compton -b
@@ -418,7 +427,7 @@ bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 
-exec --no-startup-id volumeicon
+#exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 
 # Screen brightness controls
@@ -469,14 +478,14 @@ bar {
 	strip_workspace_numbers yes
 
     colors {
-        background $mist_dark_blue
+        background $brown_darker
         statusline #F9FAF9
         separator  #454947
 
 #                          border,            backgr,           text
-        focused_workspace  $mist_green        $mist_green       $arc_white
+        focused_workspace  $brown_gold      $brown_gold     $arc_white
         active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace $mist_dark_blue     $mist_dark_blue    $arc_white
+        inactive_workspace $brown_darker      $brown_darker    $arc_white
         binding_mode       $arc_blue          $arc_dark_blue    $arc_white
         urgent_workspace   $arc_red           $arc_red          $arc_white 
     }

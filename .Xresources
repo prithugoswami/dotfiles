@@ -26,8 +26,8 @@ XTerm*faceSize: 11
 XTerm*faceName:                   Terminus:size=11:antialias=true
 XTerm*selectToClipboard:          true
 
-#define fonts  xft:Hack Nerd Font Mono:size=9:antialias=true,\
-               xft:TerminessTTF Nerd Font Mono:size=12:antialias=true
+#define fonts xft:RobotoMono Nerd Font Mono:size=9:antialias=true,\
+              xft:TerminessTTF Nerd Font Mono:size=12:antialias=true
 URxvt.font: fonts 
 URxvt.letterSpace: 0
 
@@ -65,7 +65,7 @@ URxvt*color21:                        #f5f4f1
 
 URxvt.depth:                      32
 URxvt*foreground:                 #F8F8F2
-URxvt.background:                 [85]#101716
+URxvt.background:                 [85]#1d1f21
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true

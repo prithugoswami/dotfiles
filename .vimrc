@@ -17,8 +17,16 @@ filetype plugin indent on
 
 " compiling for different file types
 autocmd FileType markdown nnoremap cp :w<Enter>:!pandoc -f gfm -V geometry=margin=1in -V links-as-notes -o %.pdf %<Enter><Enter>
-autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+" autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
+autocmd BufRead *.pdentry :Goyo
 
+" QuickFix Navigation
+nnoremap cn :cn<CR>
+nnoremap cN :cN<CR>
+
+colorscheme hybrid_reverse
+set background=dark
 set backspace=indent,eol,start
 
 " visual autocomplete for command menu
@@ -50,6 +58,7 @@ nnoremap <silent> <Tab> @=(foldlevel('.')?'za':"\<Space>")<CR>
 " <C-c> in visual mode copies to clipboard
 vnoremap <C-c> "+y
 
+map <C-n> :NERDTreeToggle<CR>
 
 
 set number " number line
@@ -64,6 +73,12 @@ nnoremap k gk
 
 " highlight last inserted text
 nnoremap gV `[v`]
+
+" Window splits control
+nnoremap <C-j> <C-W><C-J>
+nnoremap <C-k> <C-W><C-K>
+nnoremap <C-h> <C-W><C-H>
+nnoremap <C-l> <C-W><C-L>
 
 " leader is comma
 let mapleader=","
