@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/papercolor-theme"]
 	path = .vim/bundle/papercolor-theme
 	url = https://github.com/nlknguyen/papercolor-theme
+[submodule ".vim/bundle/vim-hybrid-material"]
+	path = .vim/bundle/vim-hybrid-material
+	url = https://github.com/kristijanhusak/vim-hybrid-material
