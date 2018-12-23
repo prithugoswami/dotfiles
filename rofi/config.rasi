@@ -35,13 +35,13 @@ configuration {
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
-	line-margin: 5;
-	line-padding: 5;
+	line-margin: 2;
+	line-padding: 2;
 /*	filter: ;*/
 	separator-style: "none";
 	hide-scrollbar: true;
 /*	fullscreen: false;*/
-/*	fake-transparency: false;*/
+	fake-transparency: true;
 /*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 2;*/
@@ -50,11 +50,11 @@ configuration {
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 	show-match: false;
-	theme: "~/.cache/wal/colors-rofi-dark.rasi" ;
-	color-normal: "#2f343f, #f3f4f5, #2f343f, #5294e2, #f3f4f5";
-	color-urgent: "#fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3";
-	color-active: "#2f343f, #268bd2, #eee8d5, #268bd2, #fdf6e3";
-	color-window: "#2f343f, #002b36, #002b36";
+/* theme: "~/.cache/wal/colors-rofi-dark.rasi" ; */
+color-normal:" #151718, #ffffff, #151718, #ffffff, #151718";
+color-urgent:" #151718, #Cd3f45, #151718, #Cd3f45, #151718";
+color-active:" #151718, #55b5db, #151718, #55b5db, #151718";
+color-window:" #151718, #00000000";
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
