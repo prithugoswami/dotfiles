@@ -131,7 +131,7 @@ def encrypt_and_push():
 
 # PD edit argument
 # with the 'edit' argument passed to the script it will fetch the latest pd
-# version from the clound and let you edit and then push it back
+# version from the cloud and let you edit and then push it back
 
 if len(sys.argv) > 1:
     if sys.argv[1] == 'edit':
