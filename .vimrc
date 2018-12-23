@@ -57,6 +57,7 @@ nnoremap <silent> <Tab> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " <C-c> in visual mode copies to clipboard
 vnoremap <C-c> "+y
+nnoremap <C-S-p> "+P
 
 map <C-n> :NERDTreeToggle<CR>
 
