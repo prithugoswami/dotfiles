@@ -1,5 +1,5 @@
-percent=$(acpi | awk '{print $4}')
-state=$(acpi | awk '{print $3}' | tr -d ',')
+percent=$(acpi | cut -d ' ' -f4 | tr -d ',')
+state=$(acpi | cut -d ' ' -f3 | tr -d ',')
 
 case $state in
     Charging)
