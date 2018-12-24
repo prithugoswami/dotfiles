@@ -165,7 +165,7 @@ bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
 # Desktop application launcher
 #bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
 bindsym $mod+Shift+d exec --no-startup-id "runa -a"
-bindsym $mod+i exec --no-startup-id "qutebrowser"
+# bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
 bindsym $mod+p exec urxvt -e "pd" && i3-msg fullscreen
 # window swticher using rofi
@@ -408,8 +408,9 @@ mode "$mode_monitor_move"{
 
 ### Autostart Applications/Scripts ###{{{
 
+exec --no-startup-id newsboat-cron
 # Typematic delay and rate (Autorepeating key in X server)
-exec --no-startup-id xset r rate 300 40
+exec --no-startup-id xset r rate 250 40
 # chaning keyboard layout using Alt+Caps from US to IN
 exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -503,7 +504,7 @@ bar {
     tray_output primary
 
      colors {
-         separator #333333
+         separator #666666
          background #000000a0
          # background $base00
          statusline $base05
