@@ -171,7 +171,6 @@ bindsym $mod+p exec urxvt -e "pd" && i3-msg fullscreen
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
 #bindsym $mod+Shift+u exec mpv "$(xsel -b)"
-bindsym $mod+Shift+u exec db
 bindsym $mod+slash exec --no-startup-id urxvt -e zsh -c 'rifle "$(fzf)"'
 
 #}}}

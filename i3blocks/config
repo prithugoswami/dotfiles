@@ -15,17 +15,17 @@ markup=pango
 
 [newsboat]
 markup=pango
-command=~/.config/i3blocks/newsboat.sh
+command=~/.config/i3blocks/newsboat
 interval=once
 signal=10
 
 [cpu_load]
-command=~/.config/i3blocks/cpu_load.sh
+command=~/.config/i3blocks/cpu_load
 interval=5
 
 [battery]
 markup=pango
-command=~/.config/i3blocks/battery.sh
+command=~/.config/i3blocks/battery
 interval=10
 
 [time]
