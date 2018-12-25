@@ -1,0 +1,17 @@
+#!/bin/sh
+
+ping -q -c 1 8.8.8.8 >/dev/null || exit
+count=0
+echo -e '\uf2f1' > $HOME/.newsboat/unread && pkill -SIGRTMIN+10 i3blocks 
+count=$(newsboat -x "reload" && newsboat -x "print-unread" | cut -d ' ' -f1)
+
+if [ $count -gt 0 ]
+then
+    echo $count > $HOME/.newsboat/unread
+    pkill -SIGRTMIN+10 i3blocks
+    notify-send "$count unread RSS feeds"
+elif [ $count -eq 0 ]
+then
+    echo $count > $HOME/.newsboat/unread
+    pkill -SIGRTMIN+10 i3blocks
+fi
