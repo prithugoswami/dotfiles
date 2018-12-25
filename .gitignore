@@ -11,3 +11,6 @@ qutebrowser/qsettings/
 
 # pycache 
 __pycache__
+
+#tmp binary files
+bin/tmp/*
