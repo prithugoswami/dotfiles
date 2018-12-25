@@ -1,0 +1,5 @@
+#!/bin/sh
+# this script extracts any jpeg imgae file from a media file like mp4,mkv,etc
+# the first argument given to the script should be the name of the media file.
+std=$(ffprobe -loglevel error -show_entries stream=index,codec_name -of csv "$1" | awk -F ',' '/jpeg/ {print $2}')
+ffmpeg -loglevel quiet -i "$1" -map 0:"$std" "$1".jpeg
