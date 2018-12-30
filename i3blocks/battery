@@ -1,3 +1,4 @@
+#!/bin/sh
 percent=$(acpi | cut -d ' ' -f4 | tr -d ',')
 state=$(acpi | cut -d ' ' -f3 | tr -d ',')
 

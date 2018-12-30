@@ -230,6 +230,8 @@ if len(sys.argv)>1:
     if sys.argv[1]=='-a':
         add_id=sys.argv[2]
         add_id_path=sys.argv[3]
+        if add_id_path[-1] != '/':
+            add_id_path+='/'
         add_playlist(add_id, add_id_path)
         exit(0)
 
