@@ -1,0 +1,17 @@
+color background          white   black
+color listnormal          white   black
+color listfocus           black  white   bold
+color listnormal_unread   white black
+color listfocus_unread    white black  bold
+color info                black  white   bold
+color article white black
+
+external-url-viewer "urlscan -dc -r 'linkhandler {}"
+
+
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+
+browser linkhandler %u
