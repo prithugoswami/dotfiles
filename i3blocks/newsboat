@@ -1,6 +1,6 @@
 #!/bin/sh
 icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf09e</span>")
-count=$(cat $HOME/.newsboat/unread)
+count=$(cat $HOME/.config/newsboat/unread)
 
 case $BLOCK_BUTTON in
     1) setsid st -e newsboat &&
