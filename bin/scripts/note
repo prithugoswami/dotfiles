@@ -1,0 +1,19 @@
+#!/bin/sh
+
+remind_path=$HOME/.config/note
+dmenu_cmd="dmenu -l 20 -h 23"
+
+if [ $# -eq 0 ]; then
+    output=$(cat $remind_path | $dmenu_cmd)
+    [ $? -ne 0 ] && exit;
+fi
+
+case $output in
+    +) echo -n "" | dmenu -h 23 -p note >> $remind_path;;
+    *) ans=$(echo -e "no\nyes" | dmenu -h 23 -p "Delete?")
+       if [ $ans = "yes" ]; then
+           sed -i "/$output/d" $remind_path
+       else
+           exit 0
+       fi;;
+esac

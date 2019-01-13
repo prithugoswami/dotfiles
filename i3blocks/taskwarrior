@@ -1,8 +1,8 @@
 #!/bin/sh
 incount=$(task +PENDING +in count)
 todocount=$(task +PENDING -in count)
-inbox_icon=$(echo -en "<b><span font='Font Awesome 5 Free'>\uf01c</span></b>")
-todo_icon=$(echo -en "<b><span font='Font Awesome 5 Free'>\uf071</span></b>")
+inbox_icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf01c</span>")
+todo_icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf071</span>")
 
 if [ $incount -gt 0 ]
 then

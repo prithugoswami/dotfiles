@@ -1,3 +1,8 @@
+[reminder]
+command=~/.config/i3blocks/note
+interval=1
+markup=pango
+
 [taskwarrior]
 command=~/.config/i3blocks/taskwarrior
 interval=1

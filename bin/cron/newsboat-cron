@@ -1,6 +1,7 @@
 #!/bin/sh
 
-ping -q -c 1 8.8.8.8 >/dev/null || exit
+ping -q -c 1 google.com >/dev/null || exit
+pgrep -x newsboat >/dev/null && xdotool key --window "$(xdotool search --name newsboat)" R && exit
 count=0
 echo -e '\uf2f1' > $HOME/.config/newsboat/unread && pkill -SIGRTMIN+10 i3blocks 
 count=$(newsboat -x "reload" && newsboat -x "print-unread" | cut -d ' ' -f1)

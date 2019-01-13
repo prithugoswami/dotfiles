@@ -1,0 +1,8 @@
+#!/bin/sh
+note_file="$HOME/.config/note"
+note_count=$(wc -l $note_file | cut -d ' ' -f1)
+note_icon=$(echo -en "<span font='Font Awesome 5 Free '>\uf249</span>")
+
+if [ $note_count -gt 0 ]; then
+    echo -en "<span color='#ffff00'> $note_icon $note_count </span>"
+fi

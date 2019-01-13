@@ -97,6 +97,7 @@ alias rn="shutdown -r now"
 alias :wq="exit"
 alias tmux="tmux -u"
 alias ch="ping 8.8.8.8"
+alias yv="youtube-viewer"
 
 #alias cfzf="cd $(fzf)"
 #<cmd> | pastebin will upload the stdout of <cmd> and put the link
