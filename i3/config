@@ -159,7 +159,7 @@ client.urgent $base02 $base08 $base07 $base08
 
 bindsym $mod+Return exec --no-startup-id st
 bindsym $mod+Shift+Return exec --no-startup-id urxvt
-bindsym $mod+b exec urxvt -e "ranger"
+bindsym $mod+b exec st -e "nnn"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
 bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu -h 23`
@@ -504,7 +504,7 @@ bar {
     tray_output primary
 
      colors {
-         separator #666666
+         separator #222222
          background #000000a0
          # background $base00
          statusline $base05

@@ -8,10 +8,10 @@ command=~/.config/i3blocks/taskwarrior
 interval=1
 markup=pango
 
-#[disk]
-#command=~/.config/i3blocks/disk
-#interval=30
-#markup=pango
+[disk]
+command=~/.config/i3blocks/disk
+interval=30
+markup=pango
 
 #[bandwidth]
 #command=~/.config/i3blocks/bandwidth2 
