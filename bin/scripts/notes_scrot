@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+# Wrote this to be able to take a selective-area screenshot for my note-taking
+# workflow
+# Screenshots are saved in the respective img/ directory of each 
+# subject/course/book directory under ~/Documents/notes/
+# This is so that I can use those images in markdown while writing notes
+# and compile them using pandoc. Useful to take screenshots of diagrams
+# from book that I am reading.
+
+#nip - Notes images paths for notes in ~/Documents/notes
+paths=$(cat /home/prithu/.config/nip)
+
+path=$(echo $paths | dmenu -l 15)
+[[ -z $path ]] && exit 0
+img_name=$(echo -n '' | dmenu -p "image name")
+[[ -z $img_name ]] && exit 0
+scrot -s "$path/$img_name.png" && notify-send "saved $path/$img_name.png"
