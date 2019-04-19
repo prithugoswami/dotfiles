@@ -4,7 +4,7 @@
 
 ## Wallpaper ## {{{
 
-set $wall_set feh --bg-fill ~/Desktop/walls/gist.jpg
+set $wall_set feh --bg-fill ~/Desktop/walls/0f1111.png
 
 #set $wall_set wal -e -s -i ~/Desktop/walls/canvas.jpg
 # pywal will set the wallpaper and change the colors only for
@@ -162,7 +162,7 @@ bindsym $mod+Shift+Return exec --no-startup-id urxvt
 bindsym $mod+b exec st -e "nnn"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
-bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu -h 23`
+bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu -nb "#000" -sb "#FFF" -sf "#000" -h 23`
 # Desktop application launcher
 #bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
 bindsym $mod+Shift+d exec --no-startup-id "runa -a"
@@ -374,7 +374,7 @@ mode "$mode_monitor_position" {
     bindsym y exec $monitor_right , exec $wall_set && sleep 0.01 ,  exec echo $monitor_right > ~/.screenlayout/last_layout , mode "default"
 
     # when there is no external monitor connected
-    bindsym g exec $monitor_none , exec $wall_set && sleep 0.01 , exec echo $monitor_right > ~/.screenlayout/last_layout , mode "default"
+    bindsym g exec $monitor_none , exec $wall_set && sleep 0.01 , exec echo $monitor_none > ~/.screenlayout/last_layout , mode "default"
 
     # duplicate the laptop screen to an external monitor
     bindsym f exec $monitor_duplicate , exec $wall_set && sleep 0.01 , exec echo $monitor_duplicate > ~/.screenlayout/last_layout , mode "default"
@@ -410,7 +410,7 @@ mode "$mode_monitor_move"{
 
 exec --no-startup-id newsboat-cron
 # Typematic delay and rate (Autorepeating key in X server)
-exec --no-startup-id xset r rate 250 40
+exec --no-startup-id xset r rate 250 50
 # chaning keyboard layout using Alt+Caps from US to IN
 exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -437,7 +437,7 @@ set $mod Mod4
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-exec_always --no-startup-id "killall flashfocus ; flashfocus"
+# exec_always --no-startup-id "killall flashfocus ; flashfocus"
 
 bindsym $mod+F2 exec --no-startup-id toggle_touchpad
 # Font for window titles. Will also be used by the bar unless a different font
@@ -452,6 +452,9 @@ bindsym $mod+Ctrl+o --release exec --no-startup-id xkill
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+
+# Screenshots for notes
+bindsym $mod+g exec --no-startup-id notes_scrot
 
 #exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
@@ -508,9 +511,9 @@ bar {
          background #000000a0
          # background $base00
          statusline $base05
-         focused_workspace $base0C $base0D $base00
+         focused_workspace #CCCCCC #CCCCCC #222222
          active_workspace $base02 $base02 $base07
-         inactive_workspace $base03 $base03 $base06
+         inactive_workspace #444444 #444444 $base06
          urgent_workspace $base08 $base08 $base07
      }
      # colors {

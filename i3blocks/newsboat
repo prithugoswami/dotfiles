@@ -2,6 +2,8 @@
 icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf09e</span>")
 count=$(cat $HOME/.config/newsboat/unread)
 
+[ $count = $(echo -e '\uf2f1') ] || count=$(newsboat -x 'print-unread' | cut -d ' ' -f1)
+
 case $BLOCK_BUTTON in
     1) setsid st -e newsboat &&
         count=$(newsboat -x 'print-unread' | cut -d ' ' -f1) ;;
