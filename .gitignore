@@ -14,3 +14,6 @@ __pycache__
 
 #tmp binary files
 bin/tmp/*
+
+#newsboat unread count file
+newsboat/unread
