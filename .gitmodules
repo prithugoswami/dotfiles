@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/Colorizer"]
 	path = .vim/bundle/Colorizer
 	url = https://github.com/chrisbra/Colorizer
+[submodule ".vim/bundle/dracula-theme"]
+	path = .vim/bundle/dracula-theme
+	url = git@github.com:dracula/vim.git
