@@ -8,10 +8,9 @@
 # from book that I am reading.
 
 #nip - Notes images paths for notes in ~/Documents/notes
-paths=$(cat /home/prithu/.config/nip)
-
-path=$(echo $paths | dmenu -l 15)
-[[ -z $path ]] && exit 0
+[[ -e $HOME/.config/nip ]] || exit 0
+n_path=$(cat $HOME/.config/nip | dmenu -l 15)
+[[ -z $n_path ]] && exit 0
 img_name=$(echo -n '' | dmenu -p "image name")
 [[ -z $img_name ]] && exit 0
-scrot -s "$path/$img_name.png" && notify-send "saved $path/$img_name.png"
+scrot -s "$n_path/$img_name.png" && notify-send "saved $n_path/$img_name.png"

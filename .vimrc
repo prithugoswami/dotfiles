@@ -18,6 +18,7 @@ filetype plugin indent on
 " compiling for different file types
 " autocmd FileType markdown nnoremap cp :w<Enter>:!pandoc -f gfm -V geometry=margin=0.75in --resource-path="expand('%:p:h')/img" -V links-as-notes -o %.pdf %<Enter><Enter>
 autocmd FileType markdown nnoremap cp :w<Enter>:!pandoc -f markdown -V geometry=margin=0.75in -V papersize=A4 -o pdf/%.pdf %<Enter><Enter>
+autocmd FileType tex nnoremap cp :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
@@ -26,7 +27,7 @@ autocmd BufRead *.pdentry :Goyo
 nnoremap cn :cn<CR>
 nnoremap cN :cN<CR>
 
-colorscheme hybrid_reverse
+" colorscheme hybrid_reverse
 set background=dark
 set backspace=indent,eol,start
 
