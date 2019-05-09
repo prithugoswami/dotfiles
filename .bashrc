@@ -25,6 +25,16 @@ sman(){
         cut -d ' ' -f1`
 }
 
+# 's'earch 'e'dit
+se(){
+    vim `fzf`
+}
+
+# search - simply cd's into the dir
+s(){
+    cd "$(dirname "$(fzf)")"
+}
+
 alias t="task"
 alias todo="task modify -in"
 

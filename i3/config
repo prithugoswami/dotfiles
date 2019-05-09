@@ -117,16 +117,16 @@ set $base0D #55b5db
 set $base0E #a074c4
 set $base0F #8a553f
 
-client.focused $base0D $base0D $base00 $base01
-client.focused_inactive $base02 $base02 $base03 $base01
-client.unfocused $base01 $base01 $base03 $base01
-client.urgent $base02 $base08 $base07 $base08
+# client.focused $base0D $base0D $base00 $base01
+# client.focused_inactive $base02 $base02 $base03 $base01
+# client.unfocused $base01 $base01 $base03 $base01
+# client.urgent $base02 $base08 $base07 $base08
 
 #}}}
 ## Window Decorations ##{{{
 
 # class                   border             backgr.            text         indic.   child_border
-  client.focused          $arc_dark_blue     $arc_dark_blue     $arc_white
+  client.focused          #ffffff     #ffffff     $arc_white
   client.focused_inactive $arc_darker_blue   $arc_darker_blue   $arc_white
   client.unfocused        $arc_darker_blue   $arc_darker_blue   $arc_grey
   client.urgent           $arc_red           $arc_red           $arc_white
@@ -158,7 +158,7 @@ client.urgent $base02 $base08 $base07 $base08
 ### Application Launcher Key Bindings ###{{{
 
 bindsym $mod+Return exec --no-startup-id st
-bindsym $mod+Shift+Return exec --no-startup-id urxvt
+bindsym $mod+Shift+Return exec --no-startup-id samedir
 bindsym $mod+b exec st -e "nnn"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
@@ -508,7 +508,7 @@ bar {
 
      colors {
          separator #222222
-         background #000000a0
+         background #000000 
          # background $base00
          statusline $base05
 #                            border,      backgr,      text
