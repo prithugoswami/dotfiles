@@ -35,6 +35,11 @@ s(){
     cd "$(dirname "$(fzf)")"
 }
 
+# cheat.sh
+cheat(){
+    curl -s cheat.sh/$1
+}
+
 alias t="task"
 alias todo="task modify -in"
 

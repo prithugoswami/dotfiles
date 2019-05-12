@@ -126,7 +126,7 @@ set $base0F #8a553f
 ## Window Decorations ##{{{
 
 # class                   border             backgr.            text         indic.   child_border
-  client.focused          #ffffff     #ffffff     $arc_white
+  client.focused          $arc_dark_blue   $arc_dark_blue     $arc_white
   client.focused_inactive $arc_darker_blue   $arc_darker_blue   $arc_white
   client.unfocused        $arc_darker_blue   $arc_darker_blue   $arc_grey
   client.urgent           $arc_red           $arc_red           $arc_white
@@ -157,12 +157,16 @@ set $base0F #8a553f
 
 ### Application Launcher Key Bindings ###{{{
 
+set $dmenu_args -nb "#000" -sb "#FFF" -sf "#000" -h 20
+
 bindsym $mod+Return exec --no-startup-id st
 bindsym $mod+Shift+Return exec --no-startup-id samedir
 bindsym $mod+b exec st -e "nnn"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
-bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu -nb "#000" -sb "#FFF" -sf "#000" -h 23`
+# bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu -nb "#000" -sb "#FFF" -sf "#000" -h 20`
+bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu $dmenu_args`
+bindsym $mod+i exec --no-startup-id clipmenu $dmenu_args -l 15
 # Desktop application launcher
 #bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
 bindsym $mod+Shift+d exec --no-startup-id "runa -a"
@@ -497,8 +501,9 @@ bar {
     i3bar_command i3bar
     status_command i3blocks
     position top
-    font pango:Roboto 10
-    separator_symbol " ╱ "
+    font pango:Hack 9
+    # separator_symbol " ╱ "
+    separator_symbol "|"
 
     bindsym button 4 workspace prev
     bindsym button 5 workspace next

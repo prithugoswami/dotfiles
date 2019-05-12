@@ -1,3 +1,8 @@
+vim
+i3
+arandr
+xrandr
+aspell
 arc-gtk-theme
 papirus-icon-theme
 rofi
@@ -5,6 +10,7 @@ rclone
 feh
 mpv
 mediainfo
+bless
 neofetch
 zathura
 zathura-pdf-poppler
@@ -21,6 +27,12 @@ pandoc
 texlive-core
 cmus
 nethogs
+dmenu
+dmenu_run
+clipmenu
+clipnotify
+runa
+llpp
 
 ---------------------
 AUR

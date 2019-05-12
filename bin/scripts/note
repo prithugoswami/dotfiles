@@ -9,7 +9,8 @@ if [ $# -eq 0 ]; then
 fi
 
 case $output in
-    +) echo -n "" | dmenu -h 23 -p note >> $remind_path;;
+    +) echo -n "" | dmenu -nb "#000" -sb "#FFF"\
+        -sf "#000" -h 23 -p note >> $remind_path;;
     *) ans=$(echo -e "no\nyes" | dmenu -h 23 -p "Delete?")
        if [ $ans = "yes" ]; then
            sed -i "/$output/d" $remind_path
