@@ -7,7 +7,7 @@ case $state in
         symbol="<span font='Font Awesome 5 Free 9'>\uf0e7</span>"
         ;;
     *)
-        symbol="<span font='Icons 11'>\uf213 </span>"
+        symbol="<span font='Icons 11'>\uf213</span>"
         ;;
 esac
 

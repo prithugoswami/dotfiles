@@ -1,4 +1,5 @@
 #!/bin/sh
+#TODO: add color levels to the todo counter: >5 task - orange, >7 red, etc
 incount=$(task +PENDING +in count)
 todocount=$(task +PENDING -in count)
 inbox_icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf01c</span>")
@@ -6,15 +7,15 @@ todo_icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf071</span>")
 
 if [ $incount -gt 0 ]
 then
-    inbox_out=$(echo -en "$inbox_icon  <b>$incount</b>")
+    inbox_out=$(echo -en "$inbox_icon <b>$incount</b>")
 fi
 
 if [ $todocount -gt 0 ]
 then
-    todo_out=$(echo -en "<span color='#d8c61e'>$todo_icon  <b>$todocount</b></span>")
+    todo_out=$(echo -en "<span color='#d8c61e'>$todo_icon <b>$todocount</b></span>")
 fi
 
-[ "$todo_out" ] && [ "$inbox_out" ] && separator=$(echo "<span color='#666666'>  ╱  </span>")
+[ "$todo_out" ] && [ "$inbox_out" ] && separator=$(echo "<span color='#666666'>╱</span>")
 
 if [ "$todo_out" ] || [ "$inbox_out" ]
 then

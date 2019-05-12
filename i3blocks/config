@@ -1,7 +1,7 @@
 #[match]
 #command=match_score
 #interval=15
-
+#
 [reminder]
 command=~/.config/i3blocks/note
 interval=1
@@ -17,16 +17,16 @@ command=~/.config/i3blocks/disk
 interval=30
 markup=pango
 
-#[bandwidth]
-#command=~/.config/i3blocks/bandwidth2 
-#interval=persist
-#markup=pango
-
 [newsboat]
 markup=pango
 command=~/.config/i3blocks/newsboat
 interval=once
 signal=10
+
+# [bandwidth]
+# command=~/.config/i3blocks/bandwidth2 
+# interval=persist
+# markup=pango
 
 [cpu_load]
 command=~/.config/i3blocks/cpu_load
@@ -40,4 +40,5 @@ interval=10
 [time]
 markup=pango
 interval=1
-command=date +"%a, %d %b %Y<span foreground='#666666'> ╱ </span><b>%I:%M %P</b>"
+# command=date +"%a,%d %b %Y<span foreground='#666666'>╱</span><b>%I:%M %P</b>"
+command=date +"%a,%d %b <b>%I:%M %P</b>"
