@@ -75,11 +75,19 @@ pd_path = pd_dir + '/pd'
 rclone_dir = 'drop:/pd'
 
 
-if not os.path.exists(key_path):
-    print("Exiting..No .pdkey found in home dir")
-    exit()
 if os.path.exists(tmp_pd_path):
     os.remove(tmp_pd_path)
+
+
+ping_cmd = "ping -c 1 8.8.8.8"
+ping_args = shlex.split(ping_cmd)
+p = subprocess.Popen(ping_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+out, err = p.communicate()
+if p.returncode:
+    print("Network Unreachable...exiting now\nWrite a better script that can "
+           "cache the entry locally you lazy ass")
+    exit(p.returncode)
+
 
 
 def fetch_and_decrypt():
@@ -90,8 +98,7 @@ def fetch_and_decrypt():
     print("Fetching changes...")
     if not os.system('rclone sync {}/ {}/'.format(rclone_dir, pd_dir)):
         print("Done")
-        decrypt_cmd = ('gpg --passphrase-file {} --batch -o {} -d {}'
-                      .format(key_path, tmp_pd_path, pd_path))
+        decrypt_cmd = ('gpg -o {} -d {}'.format(tmp_pd_path, pd_path))
         args = shlex.split(decrypt_cmd)
         p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                              universal_newlines=True)
@@ -110,8 +117,7 @@ def encrypt_and_push():
     """
     if os.path.exists(pd_path):
         os.remove(pd_path)
-    encrypt_cmd = ('gpg --passphrase-file {} --batch -o {} -c {}'
-                  .format(key_path, pd_path, tmp_pd_path))
+    encrypt_cmd = ('gpg -o {} -c {}'.format( pd_path, tmp_pd_path))
     args = shlex.split(encrypt_cmd)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                          universal_newlines=True)
