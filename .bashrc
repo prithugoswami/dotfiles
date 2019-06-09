@@ -57,17 +57,19 @@ alias ch="ping 8.8.8.8"
 alias n="nautilus"
 alias yv="youtube-viewer"
 
-alias pdrl="cp ~/Dropbox/pd/pd /tmp/pd \
-            && gpg --passphrase-file ~/.pdkey --batch -o /tmp/pd.tmp -d /tmp/pd \
-            && less /tmp/pd.tmp && rm /tmp/pd.tmp \
-            && rm /tmp/pd"
 # Read pd from the cloud
-alias pdrc="ping -c 1 8.8.8.8 > /dev/null && rclone cat drop:/pd/pd > /tmp/pd \
-            && gpg --passphrase-file ~/.pdkey --batch -o /tmp/pd.tmp -d /tmp/pd \
-            && less /tmp/pd.tmp && rm /tmp/pd.tmp \
-            && rm /tmp/pd"
 
+pdrc(){
+    ping -c 1 8.8.8.8 > /dev/null || return
+    rclone cat drop:/pd/pd > /tmp/pd && gpg -o /tmp/pd.tmp -d /tmp/pd &&\
+        less /tmp/pd.tmp && rm /tmp/pd.tmp && rm /tmp/pd
+}
 
+pdrl(){
+    cp ~/Dropbox/pd/pd /tmp/pd || return
+    gpg -o /tmp/pd.tmp -d /tmp/pd || (rm /tmp/pd && return)
+    less /tmp/pd.tmp && rm /tmp/pd.tmp && rm /tmp/pd
+}
 
 alias t="task"
 alias todo="task modify -in"
@@ -143,7 +145,9 @@ if ${use_color} ; then
 	if [[ ${EUID} == 0 ]] ; then
 		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+		# PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+		# PS1='\[\033[01;32m\][\[\033[01;37m\]\W\[\033[01;32m\]]\$\[\033[00m\] '
+		PS1='\[\033[01;32m\]ॐ [\[\033[37m\]\W\[\033[32m\]]\[\033[00m\]> '
 	fi
 
 	alias ls='ls --color=auto'
