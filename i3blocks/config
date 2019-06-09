@@ -41,4 +41,4 @@ interval=10
 markup=pango
 interval=1
 # command=date +"%a,%d %b %Y<span foreground='#666666'>╱</span><b>%I:%M %P</b>"
-command=date +"%a,%d %b <b>%I:%M %P</b>"
+command=date +"%a, %d %b <b>%I:%M %P</b>"

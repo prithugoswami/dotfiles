@@ -1,10 +1,8 @@
 http://lukesmith.xyz/rss.xml
-https://www.nayuki.io/rss20.xml
 http://shallowsky.com/blog/index.rss   
-https://jvns.ca/atom.xml
 https://utcc.utoronto.ca/~cks/space/blog/?atom
 https://nullprogram.com/feed/
-
+https://n-o-d-e.net/rss/rss.xml
 " "
 "======================================="
 "YouTube"
@@ -17,6 +15,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCimiUgDLbi6P17BdaCZpVbg you
 https://www.youtube.com/feeds/videos.xml?channel_id=UCbiGcwDWZjz05njNPrJU7jA youtube # ExplainingComputers
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA youtube # Computerphile
 https://www.youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w youtube # LiveOverflow
+https://www.youtube.com/feeds/videos.xml?channel_id=UCW6xlqxSY3gGur4PkGPEUeA youtube # Seytonic
 https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q youtube # Kurzgesagt - In a Nutshell
 https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A youtube # Tom Scott
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtgGOdTlM-NdJ9rPKIYN8UQ youtube # Slayy Point
