@@ -16,6 +16,4 @@ elif [ $count = $(echo -e '\uf2f1') ]
 then
     count=$(echo -en "<span font='Font Awesome 5 Free 8'>\uf2f1</span>")
     echo "<span color='#666666'>$icon $count</span>"
-else
-    echo -e "<span color='#666666'>$icon $count</span>"
 fi
