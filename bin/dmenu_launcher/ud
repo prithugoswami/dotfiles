@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+echo -n | dmenu $DMENU_ARGS -p "UD" | tr ' ' '+' | xargs printf\
+    'https://www.urbandictionary.com/define.php?term=%b'  | setsid -f\
+    xargs xdg-open
