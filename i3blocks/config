@@ -1,7 +1,7 @@
 #[match]
 #command=match_score
-#interval=15
-#
+#interval=10
+
 [reminder]
 command=~/.config/i3blocks/note
 interval=1

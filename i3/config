@@ -126,13 +126,21 @@ set $base0F #8a553f
 ## Window Decorations ##{{{
 
 # class                   border             backgr.            text         indic.   child_border
-  client.focused          $arc_dark_blue   $arc_dark_blue     $arc_white
-  client.focused_inactive $arc_darker_blue   $arc_darker_blue   $arc_white
-  client.unfocused        $arc_darker_blue   $arc_darker_blue   $arc_grey
+  client.focused          #252626   #252626  #dddddd
+  client.focused_inactive #000000   #000000  #dddddd
+  client.unfocused        #000000   #000000  #777777
   client.urgent           $arc_red           $arc_red           $arc_white
   client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
   client.background       #2B2C2B
+
+  # client.focused          $arc_dark_blue   $arc_dark_blue     $arc_white
+  # client.focused_inactive $arc_darker_blue   $arc_darker_blue   $arc_white
+  # client.unfocused        $arc_darker_blue   $arc_darker_blue   $arc_grey
+  # client.urgent           $arc_red           $arc_red           $arc_white
+  # client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+  # client.background       #2B2C2B
 
 #}}}
 ## Pywal Color Scheme ##{{{
@@ -160,6 +168,7 @@ set $base0F #8a553f
 set $dmenu_args -nb "#000" -sb "#FFF" -sf "#000" -h 20
 
 bindsym $mod+Return exec --no-startup-id st
+bindsym $mod+Ctrl+Return exec --no-startup-id st -e tmux
 bindsym $mod+Shift+Return exec --no-startup-id samedir
 bindsym $mod+b exec st -e "nnn"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
@@ -168,7 +177,7 @@ bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu $dmenu_args`
 bindsym $mod+i exec --no-startup-id clipmenu $dmenu_args -l 15
 # Desktop application launcher
-#bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
+# bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
 bindsym $mod+Shift+d exec --no-startup-id "runa -a"
 # bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
@@ -448,7 +457,7 @@ floating_modifier $mod
 bindsym $mod+F2 exec --no-startup-id toggle_touchpad
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Roboto 8
+font pango:Hack 8
 
 # kill focused window
 bindsym $mod+o kill

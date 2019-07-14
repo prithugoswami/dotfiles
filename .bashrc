@@ -25,14 +25,19 @@ sman(){
         cut -d ' ' -f1`
 }
 
-# 's'earch 'e'dit
-se(){
+# 'f'ind 'e'dit
+fe(){
     vim `fzf`
 }
 
-# search - simply cd's into the dir
-s(){
-    cd "$(dirname "$(fzf)")"
+# f - simply cd's into the dir beneath the current
+f(){
+    cd "$(dirname "$(fzf -i --reverse)")"
+}
+
+# find from home
+fh(){
+    cd "$(dirname "$(find ~/* -type f | fzf -i --reverse)")"
 }
 
 # cheat.sh
@@ -45,17 +50,17 @@ alias todo="task modify -in"
 
 alias cfi="vim ~/.i3/config"
 alias cfz="vim ~/.zshrc"
+alias cfb="vim ~/.bashrc"
 alias cfv="vim ~/.vimrc"
 alias cfx="vim ~/.Xresources"
-alias cfr="vim ~/.config/rofi/config.rasi"
+alias cfr="vim ~/.config/ranger/rifle.conf"
 alias rx="xrdb ~/.Xresources"
-alias sn="shutdown now"
-alias rn="shutdown -r now"
 alias :wq="exit"
 alias tmux="tmux -u"
 alias ch="ping 8.8.8.8"
 alias n="nautilus"
 alias yv="youtube-viewer"
+alias mkddir="mkdir `date +%d-%m-%Y`"
 
 # Read pd from the cloud
 
@@ -147,7 +152,7 @@ if ${use_color} ; then
 	else
 		# PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 		# PS1='\[\033[01;32m\][\[\033[01;37m\]\W\[\033[01;32m\]]\$\[\033[00m\] '
-		PS1='\[\033[01;32m\]ॐ [\[\033[37m\]\W\[\033[32m\]]\[\033[00m\]> '
+		PS1='\[\033[01;32m\]ॐ [\[\033[37m\]\W\[\033[32m\]]\[\033[00m\] '
 	fi
 
 	alias ls='ls --color=auto'
