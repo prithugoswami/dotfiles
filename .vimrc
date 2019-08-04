@@ -1,6 +1,19 @@
-execute pathogen#infect()
-let vim_markdown_preview_github=1
-let vim_markdown_preview_toggle=1
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-surround'
+Plugin 'junegunn/goyo.vim'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 
 set tabstop=4 " number of visual spaces per tab
 set softtabstop=4 " number of spaces in the tab when editing
@@ -11,13 +24,17 @@ set smartindent
 " when opening a new line, keep the same indentation if no
 " file-specific indenting is enabled
 set autoindent
+set viminfo='10,<100,:100,%,n~/.vim/.viminfo
+set undofile
+
 
 " load filetype-specific indent files
 filetype plugin indent on
 
 " compiling for different file types
 " autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f gfm -V geometry=margin=0.75in --resource-path="expand('%:p:h')/img" -V links-as-notes -o %.pdf %<Enter><Enter>
-autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown -V geometry=margin=0.75in -V papersize=A4 -o pdf/%.pdf %<Enter><Enter>
+"autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex -V geometry=margin=0.75in -V papersize=A4 -o pdf/%.pdf %<Enter><Enter>
+autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ./header -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
 autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
@@ -32,7 +49,6 @@ nnoremap cN :cN<CR>
 
 
 " colorscheme hybrid_reverse
-set background=dark
 set backspace=indent,eol,start
 
 " visual autocomplete for command menu
@@ -67,10 +83,8 @@ nnoremap <C-S-p> "+P
 
 map <C-n> :NERDTreeToggle<CR>
 
-
 set number " number line
 set showcmd " show command in bottom bar
-
 
 " MOVEMENT " 
 
