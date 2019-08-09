@@ -18,9 +18,21 @@ case "$1" in
 	*mkv|*webm|*mp4|*gif)
 		setsid mpv -quiet "$1" >/dev/null 2>&1 & ;;
 	*youtube.com*|*youtu.be*)
-        notify-send "Playing youtube video" 
+		cq=""
+		q=$(echo -en "1080p\n720p\n480p\n360p\n240p" | dmenu $DMENU_ARGS\
+		-p 'Quality ')
+		case $q in
+			"1080p") cq="-1" ;;
+			"720p")  cq="-7" ;;
+			"480p")  cq="-4" ;;
+			"360p")  cq="-3" ;;
+			"240p")  cq="-2" ;;
+			"") q="default";;
+		esac
+
+		notify-send -i youtube "Playing youtube video in $q quality" 
 		# setsid mpv --ytdl-format=$ytdlfmt --quiet "$1" >/dev/null 2>&1 & ;;
-		setsid youtube-viewer "$1" >/dev/null 2>&1 & ;;
+		setsid youtube-viewer $cq "$1" >/dev/null 2>&1 & ;;
 	*png|*jpg|*jpe|*jpeg)
 		setsid feh "$1" >/dev/null 2>&1 & ;;
 	*mp3|*flac|*opus|*mp3?source)

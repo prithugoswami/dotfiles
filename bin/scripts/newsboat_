@@ -3,4 +3,4 @@
 # I made this so that I can call open newsboat in a new terminal window and
 # also signaling i3block at the same time. Use this with the dmenu launcher
 # I use with i3 with mod+d 
-st -e zsh -c newsboat && pkill -SIGRTMIN+10 i3blocks
+st -e bash -c newsboat && pkill -SIGRTMIN+10 i3blocks

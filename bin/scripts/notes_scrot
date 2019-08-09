@@ -2,12 +2,12 @@
 # Wrote this to be able to take a selective-area screenshot for my note-taking
 # workflow
 # Screenshots are saved in the respective img/ directory of each 
-# subject/course/book directory under ~/Documents/notes/
+# subject/course/book directory under ~/docs/notes/
 # This is so that I can use those images in markdown while writing notes
 # and compile them using pandoc. Useful to take screenshots of diagrams
 # from book that I am reading.
 
-#nip - Notes images paths for notes in ~/Documents/notes
+#nip - Notes images paths for notes in ~/docs/notes
 [[ -e $HOME/.config/nip ]] || exit 0
 n_path=$(cat $HOME/.config/nip | dmenu -l 15)
 [[ -z $n_path ]] && exit 0

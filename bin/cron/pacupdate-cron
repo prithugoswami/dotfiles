@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+ ping -q -c 1 google.com >/dev/null || exit
+[ "$1" = "-u" ] && sudo pacman -Sy
+count=$(pacman -Qu | wc -l)
+
+[ $count -gt 0 ] && notify-send \
+	"$count package updates available"
+
+pkill -SIGRTMIN+8 i3blocks 

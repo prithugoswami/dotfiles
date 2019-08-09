@@ -1,7 +1,9 @@
 #!/bin/sh
 
 remind_path=$HOME/.config/note
-dmenu_cmd="dmenu -l 20 -h 23"
+dmenu_cmd="dmenu $DMENU_ARGS -l 20 -h 20"
+#dmenu_cmd="dmenu $DMENU_ARGS -l 20"
+[ -e $remind_path ] || touch $remind_path
 
 if [ $# -eq 0 ]; then
     output=$(cat $remind_path | $dmenu_cmd)
@@ -9,9 +11,8 @@ if [ $# -eq 0 ]; then
 fi
 
 case $output in
-    +) echo -n "" | dmenu -nb "#000" -sb "#FFF"\
-        -sf "#000" -h 23 -p note >> $remind_path;;
-    *) ans=$(echo -e "no\nyes" | dmenu -h 23 -p "Delete?")
+    +) echo -n "" | $dmenu_cmd -p note >> $remind_path;;
+    *) ans=$(echo -e "no\nyes" | $dmenu_cmd -p "Delete?")
        if [ $ans = "yes" ]; then
            sed -i "/$output/d" $remind_path
        else

@@ -70,7 +70,7 @@ import hashlib
 env_home = os.environ['HOME']
 tmp_pd_path = '/tmp/pd'
 key_path = env_home + '/.pdkey'
-pd_dir = env_home + '/Dropbox/pd'
+pd_dir = env_home + '/dropbox/pd'
 pd_path = pd_dir + '/pd'
 rclone_dir = 'drop:/pd'
 
