@@ -1,14 +1,15 @@
 #!/bin/sh
-percent=$(acpi | cut -d ' ' -f4 | tr -d ',')
-state=$(acpi | cut -d ' ' -f3 | tr -d ',')
+percent=$(acpi | cut -d ' ' -f4 | tail -1 |  tr -d ',')
+state=$(acpi | cut -d ' ' -f3 | tail -1 | tr -d ',')
 
 case $state in
     Charging)
-        symbol="<span font='Font Awesome 5 Free 9'>\uf0e7</span>"
+        symbol="<span font='Font Awesome 5 Free 9'>\uf0e7 </span>"
         ;;
     *)
-        symbol="<span font='Icons 11'>\uf213</span>"
+        #symbol="<span font='Icons 11'>\uf213</span>"
+        #symbol="<span font='Material Design Icons'>\uf079</span>"
         ;;
 esac
 
-echo -e "$symbol $percent"
+echo -e "$symbol$percent"

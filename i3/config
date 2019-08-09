@@ -4,9 +4,9 @@
 
 ## Wallpaper ## {{{
 
-set $wall_set feh --bg-fill ~/Desktop/walls/0f1111.png
+set $wall_set feh --bg-fill ~/desktop/walls/0f1111.png
 
-#set $wall_set wal -e -s -i ~/Desktop/walls/canvas.jpg
+#set $wall_set wal -e -s -i ~/desktop/walls/canvas.jpg
 # pywal will set the wallpaper and change the colors only for
 # rofi and some other things
 
@@ -178,14 +178,15 @@ bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu $dmenu_args`
 bindsym $mod+i exec --no-startup-id clipmenu $dmenu_args -l 15
 # Desktop application launcher
 # bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
-bindsym $mod+Shift+d exec --no-startup-id "runa -a"
+bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu $dmenu_args -l 20 -i'
 # bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
-bindsym $mod+p exec --no-startup-id dmenu_run $dmenu_args -l 20
+bindsym $mod+p exec --no-startup-id dmenu_run $dmenu_args -l 20 -i -F
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
 #bindsym $mod+Shift+u exec mpv "$(xsel -b)"
-bindsym $mod+slash exec --no-startup-id st -e zsh -c 'rifle "$(fzf --reverse)"'
+bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(fzf --reverse)"'
+#bindsym $mod+slash exec --no-startup-id rifle `find ~/* -type f | dmenu $DMENU_ARGS -i -F -l 25`
 
 #}}}
 
@@ -213,14 +214,14 @@ bindsym $mod+Shift+l move right
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize shrink height 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize shrink height 1 px or 1 ppt
+        bindsym k resize grow height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
 
         bindsym Shift+h resize shrink width 10 px or 10 ppt
-        bindsym Shift+j resize grow height 10 px or 10 ppt
-        bindsym Shift+k resize shrink height 10 px or 10 ppt
+        bindsym Shift+j resize shrink height 10 px or 10 ppt
+        bindsym Shift+k resize grow height 10 px or 10 ppt
         bindsym Shift+l resize grow width 10 px or 10 ppt
 
         # exit resize mode: Enter or Escape
@@ -364,15 +365,15 @@ for_window [window_role="GtkFileChooserDialog"] resize set 840 580, move positio
 
 ## Mode - Monitor Positions ##{{{
 
-set $monitor_top "xrandr --output HDMI1 --mode 1280x1024 --pos 46x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x1024 --rotate normal"
+set $monitor_top "xrandr --output HDMI-1 --mode 1280x1024 --pos 46x0 --rotate normal --output eDPI-1 --mode 1366x768 --pos 0x1024 --rotate normal"
 
-set $monitor_right "xrandr --output HDMI1 --mode 1280x1024 --pos 1366x0 --rotate normal --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
+set $monitor_right "xrandr --output HDMI-1 --mode 1280x1024 --pos 1366x0 --rotate normal --output eDPI-1 --mode 1366x768 --pos 0x0 --rotate normal"
 
-set $monitor_none "xrandr --output HDMI1 --off --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal"
+set $monitor_none "xrandr --output HDMI-1 --off --output eDPI-1 --mode 1366x768 --pos 0x0 --rotate normal"
 
-set $monitor_duplicate "xrandr --output eDP1 --primary --mode 1366x768 --scale 1x1 --output HDMI1 --same-as eDP1 --mode 1280x1024 --scale 0.75x0.75"
+set $monitor_duplicate "xrandr --output eDPI-1 --primary --mode 1366x768 --scale 1x1 --output HDMI-1 --same-as eDPI-1 --mode 1280x1024 --scale 0.75x0.75"
 
-set $monitor_right_r_left "xrandr --output HDMI1 --mode 1280x1024 --pos 1370x0 --rotate left --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal"
+set $monitor_right_r_left "xrandr --output HDMI-1 --mode 1280x1024 --pos 1370x0 --rotate left --output eDPI-1 --primary --mode 1366x768 --pos 0x0 --rotate normal"
 
 set $mode_monitor_position (T)-Monitor Top , (Y)-Monitor right , (G)-Monitor None , (F)-Monitor Mirror , (<C-y>)-Monitor Right Rotate Left
 bindsym $mod+y mode "$mode_monitor_position"
@@ -424,24 +425,24 @@ mode "$mode_monitor_move"{
 
 
 exec --no-startup-id newsboat-cron
-exec --no-startup-id clipmenud
+#exec --no-startup-id pacupdate-cron
 # Typematic delay and rate (Autorepeating key in X server)
 exec --no-startup-id xset r rate 250 50
 # chaning keyboard layout using Alt+Caps from US to IN
 exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id compton -b
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id xautolock -time 10 -locker blurlock
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id compton -b
+#exec --no-startup-id nm-applet
+#exec --no-startup-id xfce4-power-manager
+#exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
-exec --no-startup-id ~/.screenlayout/last_layout
-exec_always --no-startup-id $wall_set
+#exec --no-startup-id ~/.screenlayout/last_layout
+#exec_always --no-startup-id $wall_set
 # disable the trackpad
-exec --no-startup-id toggle_touchpad
-exec --no-startup-id syncthing -no-browser
+#exec --no-startup-id toggle_touchpad
+#exec --no-startup-id syncthing -no-browser
 
 #}}}
 
@@ -472,7 +473,7 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+g exec --no-startup-id notes_scrot
 
 #exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+bindsym $mod+Ctrl+m exec st -e 'alsamixer'
 
 # Screen brightness controls
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
@@ -492,13 +493,12 @@ bindsym $mod+Shift+r restart
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym l exec --no-startup-id i3lock -c 000000, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym r exec --no-startup-id shutdown -r now, mode "default"
+    bindsym Shift+s exec --no-startup-id shutdown now, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"

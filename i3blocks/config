@@ -1,16 +1,27 @@
+#[iface]
+#color=#49A2D1
+#interval=10
+#command=~/.config/i3blocks/iface
+
 #[match]
 #command=match_score
 #interval=10
+
+[package_updates]
+markup=pango
+command=~/.config/i3blocks/pacupdate
+interval=once
+signal=8
 
 [reminder]
 command=~/.config/i3blocks/note
 interval=1
 markup=pango
 
-[taskwarrior]
-command=~/.config/i3blocks/taskwarrior
-interval=1
-markup=pango
+#[taskwarrior]
+#command=~/.config/i3blocks/taskwarrior
+#interval=1
+#markup=pango
 
 [disk]
 command=~/.config/i3blocks/disk

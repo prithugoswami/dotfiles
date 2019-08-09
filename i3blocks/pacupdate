@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+count=$(pacman -Qu | wc -l)
+icon=$(echo -en "<span font='Font Awesome 5 Free'>\uf466</span>")
+
+[ $count -gt 0 ] && echo "<span color='#49a2d1'>$icon $count</span>" ||\
+    echo ""
