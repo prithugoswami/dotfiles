@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# usage $./define word
+# usage $ ./define word
 # will return the meaning of the word in a json format
 
 URL="https://googledictionaryapi.eu-gb.mybluemix.net/?define="$1"&lang=en"

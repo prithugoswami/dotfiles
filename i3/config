@@ -322,7 +322,7 @@ bindsym $mod+semicolon scratchpad show
 ## Window Criteria ##{{{
 
 # Open specific applications in floating mode
-for_window [title="JavaTest"] floating enable, position center
+for_window [title="TMDb Desktop Client"] floating enable, position center
 for_window [title="Screen Layout Editor"] floating enable
 for_window [title="Application Finder"] floating enable, resize set 500 700, move position center
 for_window [class="TelegramDesktop"] floating enable border pixel 1
@@ -383,19 +383,19 @@ mode "$mode_monitor_position" {
     # is used to set the the respective position of the monitor. That command is then executed at startup
 
     # sets the monitor to the top
-    bindsym t exec $monitor_top , exec $wall_set && sleep 0.01 , exec echo $monitor_top > ~/.screenlayout/last_layout , mode "default"
+    bindsym t exec $monitor_top , exec $wall_set && sleep 0.01 , exec echo $monitor_top > ~/.config/last_layout , mode "default"
 
     # sets monitor to the right
-    bindsym y exec $monitor_right , exec $wall_set && sleep 0.01 ,  exec echo $monitor_right > ~/.screenlayout/last_layout , mode "default"
+    bindsym y exec $monitor_right , exec $wall_set && sleep 0.01 ,  exec echo $monitor_right > ~/.config/last_layout , mode "default"
 
     # when there is no external monitor connected
-    bindsym g exec $monitor_none , exec $wall_set && sleep 0.01 , exec echo $monitor_none > ~/.screenlayout/last_layout , mode "default"
+    bindsym g exec $monitor_none , exec $wall_set && sleep 0.01 , exec echo $monitor_none > ~/.config/last_layout , mode "default"
 
     # duplicate the laptop screen to an external monitor
-    bindsym f exec $monitor_duplicate , exec $wall_set && sleep 0.01 , exec echo $monitor_duplicate > ~/.screenlayout/last_layout , mode "default"
+    bindsym f exec $monitor_duplicate , exec $wall_set && sleep 0.01 , exec echo $monitor_duplicate > ~/.config/last_layout , mode "default"
 
     # sets monitor to the left and rotates it to left
-    bindsym Ctrl+y exec --no-startup-id $monitor_right_r_left , exec $wall_set && sleep 0.01 , exec echo $monitor_right_r_left > ~/.screenlayout/last_layout , mode "default"
+    bindsym Ctrl+y exec --no-startup-id $monitor_right_r_left , exec $wall_set && sleep 0.01 , exec echo $monitor_right_r_left > ~/.config/last_layout , mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -438,7 +438,7 @@ exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
-#exec --no-startup-id ~/.screenlayout/last_layout
+exec --no-startup-id ~/.config/last_layout
 #exec_always --no-startup-id $wall_set
 # disable the trackpad
 #exec --no-startup-id toggle_touchpad

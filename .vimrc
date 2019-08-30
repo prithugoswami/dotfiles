@@ -10,6 +10,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-commentary'
+Plugin 'dracula/vim'
 
 call vundle#end()
 " Vundle stuff ends here
@@ -33,7 +34,9 @@ filetype plugin indent on
 " compiling for different file types
 " autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f gfm -V geometry=margin=0.75in --resource-path="expand('%:p:h')/img" -V links-as-notes -o %.pdf %<Enter><Enter>
 "autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex -V geometry=margin=0.75in -V papersize=A4 -o pdf/%.pdf %<Enter><Enter>
-autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ./header -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
+"
+" autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ./header -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
+autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
 autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
