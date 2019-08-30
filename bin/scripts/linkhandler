@@ -8,6 +8,7 @@
 
 # Sci-Hub's domain occasionally changes due to shutdowns:
 scihub="http://sci-hub.tw/"
+TRUEBROWSER=$BROWSER
 
 # If no url given. Opens browser. For using script as $BROWSER.
 [ -z "$1" ] && { "$TRUEBROWSER"; exit; }

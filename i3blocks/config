@@ -1,7 +1,12 @@
-#[iface]
-#color=#49A2D1
-#interval=10
-#command=~/.config/i3blocks/iface
+# [bandwidth]
+# command=~/.config/i3blocks/bandwidth2 
+# interval=persist
+# markup=pango
+
+[iface]
+color=#49A2D1
+interval=10
+command=~/.config/i3blocks/iface
 
 #[match]
 #command=match_score
@@ -34,10 +39,6 @@ command=~/.config/i3blocks/newsboat
 interval=once
 signal=10
 
-# [bandwidth]
-# command=~/.config/i3blocks/bandwidth2 
-# interval=persist
-# markup=pango
 
 [cpu_load]
 command=~/.config/i3blocks/cpu_load
