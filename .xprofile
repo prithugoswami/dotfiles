@@ -1,0 +1,5 @@
+#xset r rate 250 50
+
+#setxkbmap -layout us,in -option "grp:alt_caps_toggle"
+
+clipmenud &
