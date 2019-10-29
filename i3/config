@@ -4,7 +4,7 @@
 
 ## Wallpaper ## {{{
 
-set $wall_set feh --bg-fill ~/desktop/walls/0f1111.png
+set $wall_set feh --bg-fill ~/desktop/walls/wall.jpg
 
 #set $wall_set wal -e -s -i ~/desktop/walls/canvas.jpg
 # pywal will set the wallpaper and change the colors only for
@@ -440,6 +440,7 @@ exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
 exec --no-startup-id ~/.config/last_layout
 #exec_always --no-startup-id $wall_set
+exec --no-startup-id touchpad-conf && toggle_touchpad
 # disable the trackpad
 #exec --no-startup-id toggle_touchpad
 #exec --no-startup-id syncthing -no-browser

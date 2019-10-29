@@ -3,6 +3,10 @@
 # interval=persist
 # markup=pango
 
+#[ping]
+#command=nping l
+#interval=persist
+
 [iface]
 color=#49A2D1
 interval=10
