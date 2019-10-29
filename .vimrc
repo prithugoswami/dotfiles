@@ -24,7 +24,7 @@ set smartindent
 " when opening a new line, keep the same indentation if no
 " file-specific indenting is enabled
 set autoindent
-set viminfo='10,<100,:100,%,n~/.vim/.viminfo
+" set viminfo='10,<100,:100,%,n~/.vim/.viminfo
 set undofile
 
 
@@ -35,9 +35,10 @@ filetype plugin indent on
 " autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f gfm -V geometry=margin=0.75in --resource-path="expand('%:p:h')/img" -V links-as-notes -o %.pdf %<Enter><Enter>
 "autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex -V geometry=margin=0.75in -V papersize=A4 -o pdf/%.pdf %<Enter><Enter>
 "
-" autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ./header -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
-autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
-autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
+autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ~/.config/header -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
+" autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
+autocmd FileType tex nnoremap cm :w<Enter>:!xelatex % 1&>/dev/null<Enter><Enter>
+" autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
@@ -69,6 +70,8 @@ set incsearch "search as characters are entered
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader>hs i\texthindi{<Esc>:r !zenity --entry --width=800<Enter>kJxA}<CR><Esc>
+nnoremap <leader>hh :r !zenity --entry --width=800<Enter>
 
 set foldenable " enable folding
 
@@ -106,16 +109,19 @@ nnoremap <C-l> <C-W><C-L>
 nnoremap <unique> <C-_> :FZF<CR>
 nnoremap <unique> <C-B> :Buffers<CR>
 
+set autoread
+nnoremap <leader>r :e!<Enter>
+
 " jk is escape
 inoremap jk <esc>
 
 " Use a blinking upright bar cursor in Insert mode, a blinking block in normal
 "if &term == 'xterm-256color' || &term == 'screen-256color'
 let &t_SI = "\<Esc>[5 q"
-let &t_EI = "\<Esc>[1 q"
+let &t_EI = "\<Esc>[4 q"
 "endif
 
-if exists('$TMUX')
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-endif
+" if exists('$TMUX')
+"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+" endif

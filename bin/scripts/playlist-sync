@@ -13,6 +13,9 @@
 # module written by ritiek [https://github.com/ritiek/spotify-downloader]
 # Conifg file : ~/.config/playlist-syncer/config.json
 # The config file is in json and is read to get a list of playlists to sync
+# 
+# Requirements:
+# 'spotdl', 'unicode-slugify', 'spotipy'
 #
 # Example config file:
 #
@@ -72,9 +75,11 @@ config={}
 def create_config():
     ans = input("Config file does not exist. Create it? [y/n] ")
     if ans in "yY":
+        os.mkdir(HOME+'/.config/playlist-sync')
+        global config
+        config={'playlists':[]}
         with open(config_path, 'w') as jsonfile:
-            config_data={'playlists':[]}
-            json.dump(config_data, jsonfile, indent=4)
+            json.dump(config, jsonfile, indent=4)
         ans = input("\nWould you also like to add a playlist? [y/n] ")
         if ans in "yY":
             pl_id=input('\nPlaylist Id > ')
@@ -90,29 +95,29 @@ def create_config():
 
 
 def add_playlist(plid, path):
-        try:
-            pl=sp.user_playlist(' ', plid)
-        except spotipy.client.SpotifyException:
-            print('Err:Invalid Playlist Id')
-            exit(1)
+    try:
+        pl=sp.user_playlist(' ', plid)
+    except spotipy.client.SpotifyException:
+        print('Err:Invalid Playlist Id')
+        exit(1)
 
-        playlist= {
-            "name": pl['name'],
-            "id": pl['id'],
-            "location": path,
-            "snapshot_id": ' ',
-            "last_updated": 'never'
-        }
-        config['playlists'].append(playlist)
-        with open(config_path, 'w') as jsonfile:
-            json.dump(config, jsonfile, indent=4)
+    playlist= {
+        "name": pl['name'],
+        "id": pl['id'],
+        "location": path,
+        "snapshot_id": ' ',
+        "last_updated": 'never'
+    }
+    config['playlists'].append(playlist)
+    with open(config_path, 'w') as jsonfile:
+        json.dump(config, jsonfile, indent=4)
 
-        print('Added playlist: {} \n'
-              'Sync path: {}'.format(pl['name'], path))
-        print('\nUpdated config file')
-        if not os.path.exists(path):
-            os.mkdir(path)
-            print('Created directory: {}'.format(path))
+    print('Added playlist: {} \n'
+          'Sync path: {}'.format(pl['name'], path))
+    print('\nUpdated config file')
+    if not os.path.exists(path):
+        os.mkdir(path)
+        print('Created directory: {}'.format(path))
 
 def requires_update(playlist_data, playlist):
     return playlist_data['snapshot_id'] != playlist['snapshot_id']
