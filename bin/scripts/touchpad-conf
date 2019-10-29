@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+# very ugly, I know
+
+id=$(xinput | grep -i touchpad | grep -o "id=[0-9]*" | grep -o "[0-9]*")
+tapen=$(xinput list-props $id | grep "Tapping Enabled" |\
+    awk 'NR==1 {print $(NF-1)}' | cut -d '(' -f 2 | cut -d ')' -f 1)
+natscr=$(xinput list-props $id | grep "Natural Scrolling" |\
+    awk 'NR==1 {print $(NF-1)}' | cut -d '(' -f 2 | cut -d ')' -f 1)
+
+xinput set-prop $id $tapen 1
+xinput set-prop $id $natscr 1
+

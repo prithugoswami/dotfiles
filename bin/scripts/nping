@@ -1,0 +1,21 @@
+#!/usr/bin/sh
+
+
+if [[ $1 = "l" ]]; then
+    while [ 1 ]; do
+        ping -c 1 1.1.1.1 | awk 'NR==2 {print $(NF-1) " " $NF}' | 
+            cut -d '=' -f2
+        if [[ $2 -ne 0 ]]; then
+            sleep $2
+        else
+            sleep 1 #default loop sleep
+        fi
+    done
+elif [[ $1 = "ll" ]]; then
+    while [ 1 ]; do
+        ping -c 1 1.1.1.1 | awk 'NR==2 {print $(NF-1) " " $NF}' | 
+            cut -d '=' -f2
+    done;
+else
+    ping -c 1 1.1.1.1 | awk 'NR==2 {print $(NF-1) " " $NF}' | cut -d '=' -f2
+fi
