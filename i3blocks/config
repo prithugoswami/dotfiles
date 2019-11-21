@@ -16,11 +16,11 @@ command=~/.config/i3blocks/iface
 #command=match_score
 #interval=10
 
-[package_updates]
-markup=pango
-command=~/.config/i3blocks/pacupdate
-interval=once
-signal=8
+# [package_updates]
+# markup=pango
+# command=~/.config/i3blocks/pacupdate
+# interval=once
+# signal=8
 
 [reminder]
 command=~/.config/i3blocks/note
