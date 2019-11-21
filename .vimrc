@@ -11,6 +11,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'dracula/vim'
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'dracula/vim', {'name':'dracula'}
+Plugin 'simeji/winresizer'
 
 call vundle#end()
 " Vundle stuff ends here
@@ -27,6 +30,9 @@ set autoindent
 " set viminfo='10,<100,:100,%,n~/.vim/.viminfo
 set undofile
 
+set background=dark
+colorscheme dracula
+set termguicolors
 
 " load filetype-specific indent files
 filetype plugin indent on
@@ -51,7 +57,6 @@ nnoremap cn :cn<CR>
 nnoremap cN :cN<CR>
 
 
-" colorscheme hybrid_reverse
 set backspace=indent,eol,start
 
 " visual autocomplete for command menu
@@ -70,8 +75,8 @@ set incsearch "search as characters are entered
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
-nnoremap <leader>hs i\texthindi{<Esc>:r !zenity --entry --width=800<Enter>kJxA}<CR><Esc>
-nnoremap <leader>hh :r !zenity --entry --width=800<Enter>
+nnoremap <leader>ihs i\texthindi{<Esc>:r !zenity --entry --width=800<Enter>kJxA}<CR><Esc>
+nnoremap <leader>ih :r !zenity --entry --width=800<Enter>
 
 set foldenable " enable folding
 
@@ -111,14 +116,15 @@ nnoremap <unique> <C-B> :Buffers<CR>
 
 set autoread
 nnoremap <leader>r :e!<Enter>
+nnoremap <leader>m :nohlsearch<CR>
 
 " jk is escape
 inoremap jk <esc>
 
 " Use a blinking upright bar cursor in Insert mode, a blinking block in normal
 "if &term == 'xterm-256color' || &term == 'screen-256color'
-let &t_SI = "\<Esc>[5 q"
-let &t_EI = "\<Esc>[4 q"
+" let &t_SI = "\<Esc>[5 q"
+" let &t_EI = "\<Esc>[2 q"
 "endif
 
 " if exists('$TMUX')
