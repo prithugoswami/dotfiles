@@ -14,6 +14,10 @@ Plugin 'dracula/vim'
 Plugin 'drewtempelmeyer/palenight.vim'
 Plugin 'dracula/vim', {'name':'dracula'}
 Plugin 'simeji/winresizer'
+Plugin 'rakr/vim-one'
+Plugin 'tomasr/molokai'
+Plugin 'junegunn/fzf.vim'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 " Vundle stuff ends here
@@ -31,7 +35,7 @@ set autoindent
 set undofile
 
 set background=dark
-colorscheme dracula
+colorscheme base16-classic-dark
 set termguicolors
 
 " load filetype-specific indent files
