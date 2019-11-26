@@ -427,9 +427,10 @@ mode "$mode_monitor_move"{
 exec --no-startup-id newsboat-cron
 #exec --no-startup-id pacupdate-cron
 # Typematic delay and rate (Autorepeating key in X server)
-exec --no-startup-id xset r rate 200 60
+exec --no-startup-id xset r rate 250 60
 # chaning keyboard layout using Alt+Caps from US to IN
-exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle"
+exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle" && sleep 1
+exec --no-startup-id xmodmap ~/.Xmodmap
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id compton -b
 #exec --no-startup-id nm-applet
@@ -525,7 +526,7 @@ bar {
 
      colors {
          separator #333333
-         background #000000 
+         background #050505
          # background $base00
          statusline $base05
 #                            border,      backgr,      text
