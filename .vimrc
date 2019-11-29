@@ -125,6 +125,10 @@ nnoremap <leader>m :nohlsearch<CR>
 " jk is escape
 inoremap jk <esc>
 
+let g:winresizer_start_key = '<leader>e'
+let g:winresizer_vert_resize = 4
+let g:winresizer_horiz_resize = 2
+
 " Use a blinking upright bar cursor in Insert mode, a blinking block in normal
 "if &term == 'xterm-256color' || &term == 'screen-256color'
 " let &t_SI = "\<Esc>[5 q"
