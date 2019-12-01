@@ -353,6 +353,8 @@ for_window [class="Thus"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [title="Nam Console v1.15"] floating enable move scratchpad
+for_window [title="nam: (?i)"] floating enable resize  set 800 720, move position 560 25
 
 # Resize floating file chooser
 for_window [window_role="GtkFileChooserDialog"] resize set 840 580, move position center
