@@ -430,11 +430,7 @@ exec --no-startup-id newsboat-cron
 #exec --no-startup-id pacupdate-cron
 # Typematic delay and rate (Autorepeating key in X server)
 exec --no-startup-id xset r rate 250 60
-# chaning keyboard layout using Alt+Caps from US to IN
-exec --no-startup-id setxkbmap -layout us,in -option "grp:alt_caps_toggle" && sleep 1
-exec --no-startup-id xmodmap ~/.Xmodmap
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id compton -b
 #exec --no-startup-id nm-applet
 #exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id xautolock -time 10 -locker blurlock
@@ -442,11 +438,8 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 # Configures the monitors according to the last set layout using xrandr
 exec --no-startup-id ~/.config/last_layout
-#exec_always --no-startup-id $wall_set
+exec_always --no-startup-id $wall_set
 exec --no-startup-id touchpad-conf && toggle_touchpad
-# disable the trackpad
-#exec --no-startup-id toggle_touchpad
-#exec --no-startup-id syncthing -no-browser
 
 #}}}
 

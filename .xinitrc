@@ -20,7 +20,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 xset r rate 200 60
-setxkbmap -layout 'us,in' -option "grp:alt_caps_toggle"
+setxkbmap -layout 'us,in' -option "grp:shifts_toggle"\
+    -option "ctrl:nocaps"
 
 touchpad-conf && toggle_touchpad
 
