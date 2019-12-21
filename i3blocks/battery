@@ -9,7 +9,18 @@ case $state in
     *)
         #symbol="<span font='Icons 11'>\uf213</span>"
         #symbol="<span font='Material Design Icons'>\uf079</span>"
+        [ $percent -le 30 ] && notify-send -u critical "Battery Low" -i battery-low
         ;;
 esac
 
+
 echo -e "$symbol$percent"
+
+awk -v percent=$percent '
+    BEGIN {
+        if (percent <= 30) {
+            print "#FF0000";
+            exit 33;
+        }
+    }
+'
