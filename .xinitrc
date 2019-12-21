@@ -19,9 +19,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-xset r rate 200 60
-setxkbmap -layout 'us,in' -option "grp:shifts_toggle"\
-    -option "ctrl:nocaps"
+xset r rate 250 60
+# setxkbmap -layout 'us,in' -option "grp:shifts_toggle"\
+#     -option "ctrl:nocaps"
 
 touchpad-conf && toggle_touchpad
 
