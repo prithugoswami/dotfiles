@@ -6,9 +6,13 @@
 #[ping]
 #command=nping l
 #interval=persist
+# [xkeyboard]
+# command=echo `xkblayout-state print %s`
+# interval=1
+
 
 [iface]
-color=#49A2D1
+# color=#49A2D1
 interval=10
 command=~/.config/i3blocks/iface
 
@@ -57,4 +61,4 @@ interval=10
 markup=pango
 interval=1
 # command=date +"%a,%d %b %Y<span foreground='#666666'>╱</span><b>%I:%M %P</b>"
-command=date +"%a, %d %b <b>%I:%M %P</b>"
+command=date +"%a %d %b %Y <b>%I:%M %P</b>"
