@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+wallpath=$(echo "$HOME/pictures/ep/$(ls pictures/ep | shuf | head -1)")
+feh --bg-fill $wallpath
+cp $wallpath $HOME/desktop/walls/wall.jpg

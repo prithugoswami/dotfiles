@@ -1,0 +1,13 @@
+#!/bin/sh
+epdir="$HOME/pictures/ep"
+if [ -d $epdir ]
+then
+    cd "$epdir"
+    wget reddit.com/r/earthporn.json || exit
+    cat earthporn.json | jq '.data.children[] .data.url' | tr -d '"' |\
+        grep -E "jpg|png$" | xargs wget
+    rm *json
+else
+    printf "$epdir doesn't exist\n"
+    exit
+fi
