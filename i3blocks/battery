@@ -1,6 +1,7 @@
 #!/bin/sh
 percent=$(acpi | cut -d ' ' -f4 | tail -1 |  tr -d ',')
 state=$(acpi | cut -d ' ' -f3 | tail -1 | tr -d ',')
+percent_no=$(echo -n $percent | tr -d '%')
 
 case $state in
     Charging)
@@ -9,14 +10,13 @@ case $state in
     *)
         #symbol="<span font='Icons 11'>\uf213</span>"
         #symbol="<span font='Material Design Icons'>\uf079</span>"
-        [ $percent -le 30 ] && notify-send -u critical "Battery Low" -i battery-low
+        [ $percent_no -le 30 ] && notify-send -i battery-low -u critical "Battery Low"
         ;;
 esac
 
-
 echo -e "$symbol$percent"
 
-awk -v percent=$percent '
+awk -v percent=$percent_no '
     BEGIN {
         if (percent <= 30) {
             print "#FF0000";
