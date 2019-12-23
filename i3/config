@@ -187,6 +187,10 @@ bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
 #bindsym $mod+Shift+u exec mpv "$(xsel -b)"
 bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(fzf --reverse)"'
 bindsym $mod+z exec --no-startup-id change-wall
+# change volume or toggle mute
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
 #bindsym $mod+slash exec --no-startup-id rifle `find ~/* -type f | dmenu $DMENU_ARGS -i -F -l 25`
 
 #}}}
@@ -511,7 +515,7 @@ bar {
     i3bar_command i3bar
     status_command i3blocks
     position top
-    font pango:Hack 9
+    font pango:DejaVu Sans Mono 9
     # separator_symbol " ╱ "
     separator_symbol "│"
 
