@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+memepath=$HOME/pictures/memes
+
+wget --quiet reddit.com/r/memes.json -O -| jq '.data.children[] |.data.url' | xargs wget --quiet -P "$memepath"

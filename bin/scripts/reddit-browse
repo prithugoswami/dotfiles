@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+
+[ -z $1 ] && exit 0
+after=""
+
+while [ 1 ]
+do
+    if [ "$2" = "top" ]
+    then
+        url="reddit.com/r/$1/top.json?t=all&after=$after"
+    else
+        url="reddit.com/r/$1.json?after=$after"
+    fi
+    wget --quiet -O - "$url" |\
+        tee /tmp/rtmp.json | jq '.data.children[] |.data.url' |\
+        grep -E 'jpg|png"$' | xargs feh -F
+    after=$(cat /tmp/rtmp.json | jq '.data.after' | tr -d '"')
+    printf "continue? [y/n]: "; read ans
+    [ $ans = "n" ] && exit 0
+done
