@@ -11,7 +11,7 @@ if [ $# -eq 0 ]; then
 fi
 
 case $output in
-    +) echo -n "" | $dmenu_cmd -p note >> $remind_path;;
+    add) echo -n "" | $dmenu_cmd -p "add note " >> $remind_path;;
     *) ans=$(echo -e "no\nyes" | $dmenu_cmd -p "Delete?")
        if [ $ans = "yes" ]; then
            sed -i "/$output/d" $remind_path
