@@ -10,12 +10,6 @@
 # command=echo `xkblayout-state print %s`
 # interval=1
 
-
-[iface]
-# color=#49A2D1
-interval=10
-command=~/.config/i3blocks/iface
-
 #[match]
 #command=match_score
 #interval=10
@@ -31,10 +25,15 @@ command=~/.config/i3blocks/note
 interval=1
 markup=pango
 
-#[taskwarrior]
-#command=~/.config/i3blocks/taskwarrior
-#interval=1
-#markup=pango
+# [taskwarrior]
+# command=~/.config/i3blocks/taskwarrior
+# interval=1
+# markup=pango
+
+[iface]
+# color=#49A2D1
+interval=10
+command=~/.config/i3blocks/iface
 
 [disk]
 command=~/.config/i3blocks/disk
