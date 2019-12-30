@@ -1,5 +1,6 @@
 #!/bin/sh
 
-avail=$(df -B 1 ~/ | awk 'NR==2 {printf "%0.1fGiB", $4/1024/1024/1024}')
+home_avail=$(df -B 1 ~/ | awk 'NR==2 {printf "%0.1fGiB", $4/1024/1024/1024}')
+root_avail=$(df -B 1 / | awk 'NR==2 {printf "%0.1fGiB", $4/1024/1024/1024}')
 # icon="<span font='Font Awesome 5 Free'>\uf0a0</span>"
-echo -e $icon$avail
+echo -e "$icon$home_avail"
