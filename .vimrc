@@ -121,6 +121,8 @@ nnoremap <unique> <C-B> :Buffers<CR>
 set autoread
 nnoremap <leader>r :e!<Enter>
 nnoremap <leader>m :nohlsearch<CR>
+" replace the char with '✓'
+nnoremap <leader>o r<C-k>OK
 
 " jk is escape
 inoremap jk <esc>
