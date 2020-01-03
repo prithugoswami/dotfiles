@@ -1,15 +1,16 @@
 http://lukesmith.xyz/rss.xml
 https://twobithistory.org/feed.xml
-https://www.wezm.net/feed/
 http://shallowsky.com/blog/index.rss   
 https://utcc.utoronto.ca/~cks/space/blog/?atom
 https://nullprogram.com/feed/
 https://n-o-d-e.net/rss/rss.xml
 https://www.archlinux.org/feeds/news/
 https://naveenaidu.github.io//feed.xml
-https://00f.net/atom.xml
 https://www.swalladge.net/feed.xml
 https://stackoverflow.blog/newsletter/feed
+
+#https://www.wezm.net/feed/
+#https://00f.net/atom.xml
 
 "======================================="
 "YouTube"
@@ -23,7 +24,6 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCS0N5baNlQWJCUrhCEo8WlA you
 https://www.youtube.com/feeds/videos.xml?channel_id=UC3azLjQuz9s5qk76KEXaTvA youtube # suckerpinch
 https://www.youtube.com/feeds/videos.xml?channel_id=UCeEf90AEmmxaQs5BUkHqR3Q youtube # mitxela
 https://www.youtube.com/feeds/videos.xml?channel_id=UCFzGyNKXPAglNq28qWYTDFA youtube # Kai Hendry
-https://www.youtube.com/feeds/videos.xml?channel_id=UCvuJAtwzU-fTQH3zQpvt7Fg youtube # PT Education
 https://www.youtube.com/feeds/videos.xml?channel_id=UCk9NvmsPBC3lTn_L9kFaylA youtube # iBSD
 https://www.youtube.com/feeds/videos.xml?channel_id=UCimiUgDLbi6P17BdaCZpVbg youtube # exurb1a
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA youtube # Computerphile
@@ -33,6 +33,8 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCsXVk37bltHxD1rDPwtNM8Q you
 https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A youtube # Tom Scott
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtgGOdTlM-NdJ9rPKIYN8UQ youtube # Slayy Point
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-lHJZR3Gqxm24_Vd_AJ5Yw youtube # PewDiePie
+
+#https://www.youtube.com/feeds/videos.xml?channel_id=UCvuJAtwzU-fTQH3zQpvt7Fg youtube # PT Education
 
 "======================================="
 "Podcasts"
