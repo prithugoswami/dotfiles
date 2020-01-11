@@ -4,7 +4,8 @@
 
 ## Wallpaper ## {{{
 
-set $wall_set feh --bg-fill ~/desktop/walls/wall.jpg
+# set $wall_set feh --bg-fill ~/desktop/walls/wall.jpg
+set $wall_set feh --bg-fill ~/desktop/walls/black.jpg
 
 #set $wall_set wal -e -s -i ~/desktop/walls/canvas.jpg
 # pywal will set the wallpaper and change the colors only for
@@ -126,7 +127,7 @@ set $base0F #8a553f
 ## Window Decorations ##{{{
 
 # class                   border             backgr.            text         indic.   child_border
-  client.focused          #333333   #333333  #dddddd
+  client.focused          #232323   #232323  #dddddd
   client.focused_inactive #000000   #000000  #dddddd
   client.unfocused        #000000   #000000  #777777
   client.urgent           $arc_red           $arc_red           $arc_white
