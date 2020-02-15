@@ -10,7 +10,7 @@ case $state in
     *)
         #symbol="<span font='Icons 11'>\uf213</span>"
         #symbol="<span font='Material Design Icons'>\uf079</span>"
-        [ $percent_no -le 30 ] && notify-send -i battery-low -u critical "Battery Low"
+        [ $percent_no -le 40 ] && notify-send -i battery-low -u critical "Battery Low"
         ;;
 esac
 
