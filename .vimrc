@@ -52,6 +52,7 @@ autocmd FileType tex nnoremap cm :w<Enter>:!xelatex % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
+autocmd BufRead *.pdentry set nosmartindent
 
 " leader is comma
 let mapleader=","
@@ -81,6 +82,7 @@ set incsearch "search as characters are entered
 nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <leader>ihs i\texthindi{<Esc>:r !zenity --entry --width=800<Enter>kJxA}<CR><Esc>
 nnoremap <leader>ih :r !zenity --entry --width=800<Enter>
+nnoremap <leader>iim i![](img/){width=80%}<Esc>F)
 
 set foldenable " enable folding
 
