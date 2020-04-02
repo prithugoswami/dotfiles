@@ -128,8 +128,8 @@ set $base0F #8a553f
 ## Window Decorations ##{{{
 
 # class                   border             backgr.            text         indic.   child_border
-  client.focused          #232323   #232323  #dddddd
-  client.focused_inactive #000000   #000000  #dddddd
+  client.focused          #232323   #232323  #cccccc
+  client.focused_inactive #000000   #000000  #cccccc
   client.unfocused        #000000   #000000  #777777
   client.urgent           $arc_red           $arc_red           $arc_white
   client.placeholder      #000000 #0c0c0c #ffffff #000000 
@@ -381,7 +381,7 @@ set $monitor_none "xrandr --output HDMI-1 --off --output eDPI-1 --mode 1366x768 
 
 set $monitor_duplicate "xrandr --output eDPI-1 --primary --mode 1366x768 --scale 1x1 --output HDMI-1 --same-as eDPI-1 --mode 1280x1024 --scale 0.75x0.75"
 
-set $monitor_right_r_left "xrandr --output HDMI-1 --mode 1280x1024 --pos 1370x0 --rotate left --output eDPI-1 --primary --mode 1366x768 --pos 0x0 --rotate normal"
+set $monitor_right_r_left "xrandr --output HDMI-1 --mode 1280x1024 --pos 1370x0 --rotate left --output eDPI-1 --mode 1366x768 --pos 0x0 --rotate normal"
 
 set $mode_monitor_position (T)-Monitor Top , (Y)-Monitor right , (G)-Monitor None , (F)-Monitor Mirror , (<C-y>)-Monitor Right Rotate Left
 bindsym $mod+y mode "$mode_monitor_position"
