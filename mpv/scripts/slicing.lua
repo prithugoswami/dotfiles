@@ -5,15 +5,16 @@ local options = require "mp.options"
 local cut_pos = nil
 local copy_audio = true
 local o = {
-    target_dir = "~",
-    vcodec = "rawvideo",
-    acodec = "pcm_s16le",
+    target_dir = "./",
+    vcodec = "x264",
+    acodec = "aac",
     prevf = "",
-    vf = "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
+    -- vf = "format=yuv444p16$hqvf,scale=in_color_matrix=$matrix,format=bgr24",
+    vf = "",
     hqvf = "",
     postvf = "",
     opts = "",
-    ext = "avi",
+    ext = "mp4",
     command_template = [[
         ffmpeg -v warning -y -stats
         -ss $shift -i "$in" -t $duration
@@ -41,14 +42,18 @@ function get_homedir()
 end
 
 function log(str)
-    local logpath = utils.join_path(
-        o.target_dir:gsub("~", get_homedir()),
-        "mpv_slicing.log")
-    f = io.open(logpath, "a")
-    f:write(string.format("# %s\n%s\n",
-        os.date("%Y-%m-%d %H:%M:%S"),
-        str))
+    -- local logpath = utils.join_path(
+    --     o.target_dir:gsub("~", get_homedir()),
+    --     "mpv_slicing.log")
+    local logpath = utils.join_path(utils.getcwd(),
+        "mpv_slice_cmd.log")
+    f = io.open(logpath, "w")
+    -- f:write(string.format("# %s\n%s\n",
+    --     os.date("%Y-%m-%d %H:%M:%S"),
+    --     str))
+    f:write(str)
     f:close()
+    return logpath
 end
 
 function escape(str)
@@ -90,7 +95,7 @@ function cut(shift, endpos)
         utils.getcwd(),
         mp.get_property("stream-path")))
     local outpath = escape(utils.join_path(
-        o.target_dir:gsub("~", get_homedir()),
+        utils.getcwd(),
         get_outname(shift, endpos)))
 
     cmd = cmd:gsub("$shift", shift)
@@ -110,8 +115,9 @@ function cut(shift, endpos)
     cmd = cmd:gsub("$in", inpath, 1)
 
     msg.info(cmd)
-    log(cmd)
-    os.execute(cmd)
+    local logpath = log(cmd)
+    -- os.execute(cmd)
+    os.execute(string.format("cat %s | xsel -ib",logpath))
 end
 
 function toggle_mark()
