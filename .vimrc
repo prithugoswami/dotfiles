@@ -119,6 +119,7 @@ nnoremap <C-l> <C-W><C-L>
 
 nnoremap <unique> <C-_> :FZF<CR>
 nnoremap <unique> <C-B> :Buffers<CR>
+nnoremap <unique> <C-a> :Ag<CR>
 
 set autoread
 nnoremap <leader>r :e!<Enter>
