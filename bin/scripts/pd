@@ -57,7 +57,7 @@
 
 
 import os
-import datetime
+from datetime import datetime as dt
 import tempfile
 import subprocess
 import shlex
@@ -89,6 +89,13 @@ if p.returncode:
     exit(p.returncode)
 
 
+def save_entry(entry):
+    entry_filename = dt.now().strftime('%s') + ".pdentry"
+    entry_file_path = env_home + "/" + entry_filename
+    print("Saving the entry to {}".format(entry_file_path))
+    with open(entry_file_path, 'w', encoding='utf8') as entry_file:
+        entry_file.write(entry)
+
 
 def fetch_and_decrypt():
     """
@@ -105,9 +112,10 @@ def fetch_and_decrypt():
         out, err = p.communicate()
         if p.returncode: # if gpg exits with a non-zero return code
             print("Error while decrypting :\n" + err)
-            exit()
+            return(p.returncode)
     else:
         print("Something went wrong")
+        return(1)
 
 
 def encrypt_and_push():
@@ -124,7 +132,7 @@ def encrypt_and_push():
     out, err = p.communicate()
     if p.returncode:
         print("Error while encrypting :\n" + err)
-        exit()
+        return(p.returncode)
 
     os.remove(tmp_pd_path)
     print("Pushing changes...")
@@ -132,6 +140,7 @@ def encrypt_and_push():
         print("Done")
     else:
         print("Something went wrong")
+        return(1)
 
 
 
@@ -172,15 +181,19 @@ with tempfile.NamedTemporaryFile(suffix='.pdentry') as temp:
         print("Nothing was entered...")
         exit()
 
-fetch_and_decrypt()
+if fetch_and_decrypt(): # if there was any error while fetching and decrypting
+    save_entry(entry)
+    exit(1)
 
 with open(tmp_pd_path, 'a', encoding='utf8') as fp:
-    dt = datetime.datetime.now()
-    date_string = dt.strftime('%a, %d %b %Y')
-    time_string = dt.strftime('%I:%M %p')
+    now = dt.now()
+    date_string = now.strftime('%a, %d %b %Y')
+    time_string = now.strftime('%I:%M %p')
     date_and_time = '[' + date_string + ' | ' + time_string + ']'
 
     fp.write('\n\n\n===============================\n' + date_and_time + '\n')
     fp.write(entry)
 
-encrypt_and_push()
+if encrypt_and_push():
+    save_entry(entry)
+    exit(1)
