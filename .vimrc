@@ -34,6 +34,8 @@ set autoindent
 " set viminfo='10,<100,:100,%,n~/.vim/.viminfo
 set undofile
 
+set mouse=a
+
 set background=dark
 colorscheme base16-classic-dark
 set termguicolors
