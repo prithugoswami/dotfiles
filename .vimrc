@@ -7,6 +7,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-commentary'
@@ -18,6 +19,7 @@ Plugin 'rakr/vim-one'
 Plugin 'tomasr/molokai'
 Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
+
 
 call vundle#end()
 " Vundle stuff ends here
