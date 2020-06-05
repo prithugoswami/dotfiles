@@ -28,3 +28,4 @@ touchpad-conf && toggle_touchpad
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 exec i3
+# exec xfce4-session
