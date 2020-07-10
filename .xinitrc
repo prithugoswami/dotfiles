@@ -29,3 +29,4 @@ touchpad-conf && toggle_touchpad
 
 exec i3
 # exec xfce4-session
+# exec dwm

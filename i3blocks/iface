@@ -66,5 +66,9 @@ esac
 
 #------------------------------------------------------------------------
 
+case $BLOCK_BUTTON in
+    1) setsid notify-send "`ping -c 1 1.1 | grep time=`";;
+esac
+
 echo "$LABEL$IPADDR" # full text
 echo "$LABEL$IPADDR" # short text
