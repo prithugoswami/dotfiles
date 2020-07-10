@@ -13,3 +13,6 @@ surf localhost:8080 #syncthing
 notes_scrot
 google
 ud
+setxkbmap -layout 'us,in' -option "grp:shifts_toggle" -option "ctrl:nocaps"
+xset r rate 250 60
+passmenu --type
