@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ "$1" ]
+then
+cat "$1" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g' > content
+
+cat <<EOF > payload
+{
+  "description": "REST API docs for LMM Counsellor App",
+  "files": {
+    "REST API Counsellor.md": {
+      "content": "`cat content`",
+      "filename": "REST API Counsellor.md"
+    }
+  }
+}
+EOF
+
+curl -s -X PATCH\
+    -H 'Authorization: token f9586f6dde6425d3e41569e1e6bf721b1abe4c4e'\
+    -d@payload\
+    https://api.github.com/gists/c1b86bac8046770f8718d60e120f92ea > /dev/null 2>&1
+
+rm payload content
+fi
