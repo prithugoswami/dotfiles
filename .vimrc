@@ -19,6 +19,7 @@ Plugin 'rakr/vim-one'
 Plugin 'tomasr/molokai'
 Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'dhruvasagar/vim-table-mode'
 
 
 call vundle#end()
@@ -150,3 +151,6 @@ let g:winresizer_horiz_resize = 2
 " endif
 "
 nnoremap <leader>n :w<Enter>:!ns %<Enter>
+
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
