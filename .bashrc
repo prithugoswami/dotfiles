@@ -14,6 +14,8 @@ cd() {
 	builtin cd "$@" && ls --color;
 }
 
+[[ -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
 
 sman(){
     man `man -k . | fzf -i --reverse --height=40% --tiebreak=begin |\
