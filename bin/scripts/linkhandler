@@ -19,7 +19,7 @@ ytdlfmt="bestvideo[height<=480]+bestaudio/best[height<=480]"
 case "$1" in
 	*mkv|*webm|*mp4|*gif)
 		setsid mpv -quiet "$1" >/dev/null 2>&1 & ;;
-	*youtube.com*|*youtu.be*)
+	*youtube.com*|*youtu.be*|*videos.lukesmith.xyz*)
 		# cq=""
 		# q=$(echo -en "1080p\n720p\n480p\n360p\n240p" | dmenu $DMENU_ARGS\
 		# -p 'Quality ')
@@ -34,7 +34,7 @@ case "$1" in
 
 		# notify-send -i youtube "Playing youtube video in $q quality" 
 		setsid mpv --ytdl-format=$ytdlfmt --quiet "$1" >/dev/null 2>&1 & ;;
-		#setsid youtube-viewer $cq "$1" >/dev/null 2>&1 & ;;
+		# setsid youtube-viewer $cq "$1" >/dev/null 2>&1 & ;;
 	*png|*jpg|*jpe|*jpeg)
 		setsid feh "$1" >/dev/null 2>&1 & ;;
 	*mp3|*flac|*opus|*mp3?source)

@@ -30,6 +30,11 @@ command=~/.config/i3blocks/taskwarrior
 interval=1
 markup=pango
 
+[mail]
+markup=pango
+command=~/.config/i3blocks/mail
+interval=1
+
 [iface]
 # color=#49A2D1
 interval=10
