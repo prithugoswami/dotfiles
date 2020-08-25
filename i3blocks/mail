@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+unread="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+mailicon=$(echo -en "<span font='Font Awesome 5 Free'>\uf0e0</span>")
+
+pidof mbsync >/dev/null 2>&1 && icon=$(echo -en "<span font='Font Awesome 5 Free 8'>\uf2f1</span>")
+
+# [ "$unread" = "0" ] && [ "$icon" = "" ] || echo -e "<span color='#1e82d9'>$mailicon $unread $icon</span>"
+[ "$unread" = "0" ] || echo -e "<span color='#1e82d9'>$mailicon $unread $icon</span>"

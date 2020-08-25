@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# quick and dirty file sharing script using rsync
+# .share folder has to be on the remote machine's
+# user's home directory
+
+remote_hostname="glix"
+remote_url="https://x.prithu.xyz"
+
+slugen () {
+    # generate a slug of alphabets
+    dd if=/dev/urandom status=none bs=1024 count=1 | \
+        strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-4}
+}
+
+
+if [ "$1" ]
+then
+    if [ -z "$2" ]
+    then
+        slug=$(slugen)
+        if echo "$1" | grep '\.' 2>&1 > /dev/null
+        then
+            ext=$(echo "$1" | grep '\.' | cut -d '.' -f2 | sed 's/^/\./')
+        else
+            ext=""
+        fi
+        rsync "$1" "$remote_hostname:.share/$slug$ext" || exit 1
+        echo "$remote_url/$slug$ext"
+    else
+        rsync "$1" "$remote_hostname:.share/$2" || exit 1
+        echo "$remote_url/$2"
+    fi
+fi
