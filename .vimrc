@@ -20,6 +20,8 @@ Plugin 'tomasr/molokai'
 Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'dense-analysis/ale'
+
 
 
 call vundle#end()
@@ -55,6 +57,7 @@ autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ~/.config/header -f m
 autocmd FileType tex nnoremap cm :w<Enter>:!xelatex % 1&>/dev/null<Enter><Enter>
 " autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
 autocmd BufRead *.pdentry set nosmartindent
@@ -156,6 +159,10 @@ nmap <leader>gs :G<CR>
 " endif
 "
 nnoremap <leader>n :w<Enter>:!ns %<Enter>
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
