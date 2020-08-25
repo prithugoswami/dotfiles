@@ -128,3 +128,8 @@ HISTSIZE=10000000
 HISTFILESIZE=10000000
 PROMPT_COMMAND='history -a'
 HISTIGNORE='ls:bg:fg:history:cd:rm'
+
+slugen () {
+    # generate a slug of alphabets
+    dd if=/dev/urandom status=none bs=1024 count=1 | strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-4}
+}
