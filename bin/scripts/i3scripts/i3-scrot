@@ -2,6 +2,9 @@
 # /usr/bin/i3-scrot
 #
 # simple screenshot-script using scrot for manjaro-i3 by oberon@manjaro.org
+# added some options to copy and upload the screenshot to a host using
+# my uploader `xup`
+
 
 _conf=$HOME/.config/i3-scrot.conf
 
@@ -14,6 +17,25 @@ source $_conf
 if ! [ -d $scrot_dir ]; then
 	mkdir -p $scrot_dir
 fi
+
+give_options () {
+    set -o pipefail
+    scrot_dir="$HOME/pictures/screenshots"
+    latest_screen=$(ls -tc $scrot_dir | head -1)
+    path="$(echo $scrot_dir/$latest_screen)"
+    echo $path
+    choice=$(echo -ne "copy\nupload" | dmenu $DMENU_ARGS)
+    case "$choice" in
+        upload)
+            xup "$path" | xsel -ib && notify-send "URL Copied";
+            ;;
+        copy)
+            xclip -selection clipboard -t image/png -i "$path"\
+                && notify-send "Copied"
+            ;;
+    esac
+}
+
 
 if ! [[ -z "$2" ]]; then
     cmd="scrot -d $2"
@@ -31,12 +53,14 @@ case "$1" in
 		cd $scrot_dir
 		$cmd -u &&
 		notify-send "Screenshot saved"
+        give_options
 		;;
 	--select|-s)
 		cd $scrot_dir
 		notify-send 'Select an area for the screenshot' &
 		scrot -s &&
 		notify-send "Screenshot saved"
+        give_options
 		;;
 	--help|-h)
 		echo "
