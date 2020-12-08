@@ -19,6 +19,10 @@
 # command=~/.config/i3blocks/pacupdate
 # interval=once
 # signal=8
+[btcprice]
+command=print_btc_price
+interval=120
+markup=pango
 
 [reminder]
 command=~/.config/i3blocks/note

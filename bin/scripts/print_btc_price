@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+url="https://api.coindcx.com/exchange/ticker"
+
+btc_price=$(curl -sL $url | jq -r '"\(.[0].last_price) \(.[0].change_24_hour)"')
+
+echo "󰠓 $btc_price"
