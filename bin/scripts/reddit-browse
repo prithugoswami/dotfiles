@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -o pipefail
+
 [ -z $1 ] && exit 0
 after=""
 
@@ -14,6 +16,10 @@ do
     wget --quiet -O - "$url" |\
         tee /tmp/rtmp.json | jq '.data.children[] |.data.url' |\
         grep -E 'jpg|png"$' | xargs feh -F 2>/dev/null
+
+    cat /tmp/rtmp.json | jq -r '.data.children[] |.data.url' |\
+        grep -E '(redgifs|gfycat|v.red)' | xargs mpv
+
     after=$(cat /tmp/rtmp.json | jq '.data.after' | tr -d '"')
     printf "continue? [y/n]: "; read ans
     [ $ans = "n" ] && exit 0
