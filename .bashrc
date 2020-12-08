@@ -32,14 +32,14 @@ f(){
     cd "$(dirname "$(fzf -i --reverse --height=40%)")"
 }
 
-# find from home
+# find from home and don't include *repos* in path
 fh(){
-    cd "$(dirname "$(find ~/* -type f | fzf -i --reverse --height=40% )")"
+    cd "$(dirname "$(find -H ~/* ! -path '*repos*' -type f | fzf -i --reverse --height=40% )")"
 }
 
 # find from home and edit
 fhe(){
-    vim "$(find ~/* -type f | fzf -i --reverse --height=40% )"
+    vim "$(find -H ~/* ! -path '*repos*' -type f | fzf -i --reverse --height=40% )"
 }
 
 # find and open
@@ -133,3 +133,5 @@ slugen () {
     # generate a slug of alphabets
     dd if=/dev/urandom status=none bs=1024 count=1 | strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-4}
 }
+PROMPT_DIRTRIM=2
+
