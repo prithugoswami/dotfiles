@@ -10,7 +10,7 @@ remote_url="https://x.prithu.xyz"
 slugen () {
     # generate a slug of alphabets
     dd if=/dev/urandom status=none bs=1024 count=1 | \
-        strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-4}
+        strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-3}
 }
 
 
