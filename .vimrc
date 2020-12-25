@@ -21,6 +21,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'dense-analysis/ale'
+" Plugin 'pedrohdz/vim-yaml-folds'
 
 
 
@@ -58,6 +59,8 @@ autocmd FileType tex nnoremap cm :w<Enter>:!xelatex % 1&>/dev/null<Enter><Enter>
 " autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal sw=2
+autocmd FileType yaml setlocal sw=2
+
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
 autocmd BufRead *.pdentry set nosmartindent
@@ -160,9 +163,15 @@ nmap <leader>gs :G<CR>
 "
 nnoremap <leader>n :w<Enter>:!ns %<Enter>
 
+let g:ale_enabled = 0
+
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
 
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='

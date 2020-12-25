@@ -7,6 +7,7 @@ export CM_SELECTIONS="clipboard"
 export TERMINAL="/usr/local/bin/st"
 export NNN_USE_EDITOR=1
 export NNN_OPENER=rifle
+export OPENER=rifle
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
