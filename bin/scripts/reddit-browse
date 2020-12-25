@@ -18,7 +18,7 @@ do
         grep -E 'jpg|png"$' | xargs feh -F 2>/dev/null
 
     cat /tmp/rtmp.json | jq -r '.data.children[] |.data.url' |\
-        grep -E '(redgifs|gfycat|v.red)' | xargs mpv
+        grep -E '(redgifs|gfycat|v.red)' | xargs mpv --loop-file=inf
 
     after=$(cat /tmp/rtmp.json | jq '.data.after' | tr -d '"')
     printf "continue? [y/n]: "; read ans
