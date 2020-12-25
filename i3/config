@@ -171,7 +171,7 @@ set $dmenu_args -nb "#000" -sb "#FFF" -sf "#000" -h 20
 
 bindsym $mod+Return exec --no-startup-id st
 bindsym $mod+Ctrl+Return exec --no-startup-id st -e tmux
-bindsym $mod+Shift+Return exec --no-startup-id samedir
+bindsym $mod+Shift+Return exec --no-startup-id st -t scratch-terminal
 bindsym $mod+b exec st -e "nnn"
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
@@ -186,7 +186,7 @@ bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu $dmenu
 bindsym $mod+p exec --no-startup-id dmenu_run $dmenu_args -l 20 -i -F
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
-bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(fzf --reverse)"'
+bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(find -H ~/* ! -path "*repos*" -type f | fzf -i --reverse)"'
 bindsym $mod+z exec --no-startup-id change-wall
 # change volume or toggle mute
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
@@ -239,6 +239,7 @@ mode "resize" {
 ## Window move ##{{{
 
 bindsym $mod+apostrophe mode "move" focus floating
+bindsym $mod+Shift+apostrophe sticky enable
 mode "move" {
     bindsym $mod+Tab focus right
 
@@ -254,7 +255,7 @@ mode "move" {
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
-    bindsym Escape mod
+    bindsym Escape mode "default"
 }
 
 #}}}
@@ -382,7 +383,8 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [title="Nam Console v1.15"] floating enable move scratchpad
-for_window [title="nam: (?i)"] floating enable resize  set 800 720, move position 560 25
+for_window [title="Mumble(?i)"] floating enable resize  set 575 385, move position 785 25
+for_window [title="scratch-terminal"] floating enable resize set 720 432, move position 0 22
 
 # Resize floating file chooser
 for_window [window_role="GtkFileChooserDialog"] resize set 840 580, move position center
