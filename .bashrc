@@ -114,7 +114,8 @@ alias yal="mpv --ytdl-format=251"
 alias ls='ls --color=auto'
 
 #PS1='\[\033[34m\][\u@\h\[\033[01;00m\] \w\[\033[34m]\]\[\033[00m\]$ '
-PS1="\[\033[01;34m\][\[\033[01;00m\]\w\[\033[01;34m\]]\[\033[01;00m\]\[\033[01;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's/^/ (/' | sed 's/$/)/') \[\033[01;00m\]"
+# PS1="\[\033[01;34m\][\[\033[01;00m\]\w\[\033[01;34m\]]\[\033[01;00m\]\[\033[01;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's/^/ (/' | sed 's/$/)/') \[\033[01;00m\]\n› "
+PS1="\w\[\033[01;34m\]\[\033[01;00m\]\[\033[01;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's/^/ (/' | sed 's/$/)/') \[\033[01;00m\]› "
 
 #PS1='\[\033[01;32m\]ॐ [\[\033[37m\]\w\[\033[32m\]]\[\033[00m\] '
 #PS1='\[\033[01;32m\]⮞ [\[\033[37m\]\w\[\033[32m\]]\[\033[00m\] '
@@ -131,7 +132,7 @@ HISTIGNORE='ls:bg:fg:history:cd:rm'
 
 slugen () {
     # generate a slug of alphabets
-    dd if=/dev/urandom status=none bs=1024 count=1 | strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-4}
+    dd if=/dev/urandom status=none bs=1024 count=1 | strings | tr -d '[:space:][:punct:][:digit:][Ilq]' | cut -c -${1:-4}
 }
 PROMPT_DIRTRIM=2
 

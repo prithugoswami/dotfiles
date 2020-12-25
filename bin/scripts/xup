@@ -10,7 +10,7 @@ remote_url="https://x.prithu.xyz"
 slugen () {
     # generate a slug of alphabets
     dd if=/dev/urandom status=none bs=1024 count=1 | \
-        strings | tr -d '[:space:][:punct:][:digit:]' | cut -c -${1:-3}
+        strings | tr -d '[:space:][:punct:][:digit:][lIq]' | cut -c -${1:-3}
 }
 
 
@@ -25,10 +25,10 @@ then
         else
             ext=""
         fi
-        rsync "$1" "$remote_hostname:.share/$slug$ext" || exit 1
+        rsync --ignore-existing "$1" "$remote_hostname:.share/$slug$ext" || exit 1
         echo "$remote_url/$slug$ext"
     else
-        rsync "$1" "$remote_hostname:.share/$2" || exit 1
+        rsync --ignore-existing "$1" "$remote_hostname:.share/$2" || exit 1
         echo "$remote_url/$2"
     fi
 fi
