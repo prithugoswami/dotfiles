@@ -1,36 +1,3 @@
 [submodule "oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh
-[submodule ".vim/bundle/goyo.vim"]
-	path = .vim/bundle/goyo.vim
-	url = https://github.com/junegunn/goyo.vim
-[submodule ".vim/bundle/molokai"]
-	path = .vim/bundle/molokai
-	url = https://github.com/tomasr/molokai
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
-[submodule ".vim/bundle/onedark.vim"]
-	path = .vim/bundle/onedark.vim
-	url = https://github.com/joshdick/onedark.vim
-[submodule ".vim/bundle/papercolor-theme"]
-	path = .vim/bundle/papercolor-theme
-	url = https://github.com/nlknguyen/papercolor-theme
-[submodule ".vim/bundle/vim-hybrid-material"]
-	path = .vim/bundle/vim-hybrid-material
-	url = https://github.com/kristijanhusak/vim-hybrid-material
-[submodule ".vim/bundle/vim-jsbeautify"]
-	path = .vim/bundle/vim-jsbeautify
-	url = https://github.com/maksimr/vim-jsbeautify.git
-[submodule ".vim/bundle/vim-monokai"]
-	path = .vim/bundle/vim-monokai
-	url = https://github.com/sickill/vim-monokai
-[submodule ".vim/bundle/Colorizer"]
-	path = .vim/bundle/Colorizer
-	url = https://github.com/chrisbra/Colorizer
-[submodule ".vim/bundle/dracula-theme"]
-	path = .vim/bundle/dracula-theme
-	url = git@github.com:dracula/vim.git
-[submodule ".vim/bundle/fzf.vim"]
-	path = .vim/bundle/fzf.vim
-	url = https://github.com/junegunn/fzf.vim
