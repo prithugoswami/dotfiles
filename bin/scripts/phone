@@ -1,0 +1,17 @@
+#!/bin/sh
+
+options="pull\npush\nscreen"
+
+select=$(echo -e $options | fzf)
+
+case $select in 
+    "pull")
+        adb shell find sdcard/ | fzf | xargs -i adb pull "{}";;
+    "push")
+        src="$(fzf -i)"
+        adb shell find sdcard/ -type d | fzf | xargs -i adb push "$src" {}
+        ;;
+    "screen")
+        scrcpy;;
+esac
+
