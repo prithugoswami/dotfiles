@@ -18,4 +18,4 @@ bin/tmp/*
 #newsboat unread count file
 newsboat/unread
 
-mpv/watch_later
+config/mpv/watch_later
