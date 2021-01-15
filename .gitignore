@@ -16,6 +16,6 @@ __pycache__
 bin/tmp/*
 
 #newsboat unread count file
-newsboat/unread
+config/newsboat/unread
 
 config/mpv/watch_later

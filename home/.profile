@@ -11,3 +11,4 @@ export OPENER=rifle
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+source $HOME/.config/secrets
