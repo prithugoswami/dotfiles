@@ -64,6 +64,7 @@ autocmd FileType yaml setlocal sw=2
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
 autocmd BufRead *.pdentry set nosmartindent
+autocmd BufRead *.md set nosmartindent
 
 " leader is comma
 let mapleader=","
