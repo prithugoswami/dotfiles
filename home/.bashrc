@@ -110,8 +110,10 @@ alias tt="transmission-remote"
 # alias yw="mpv --ytdl-format=\"best[height<=480]\""
 alias yw="mpv --ytdl-format=\"bestvideo[height<=480]+bestaudio/best[height<=480]\""
 alias yal="mpv --ytdl-format=251"
+alias tmuxl="tmux list-session"
 
 alias ls='ls --color=auto'
+
 
 #PS1='\[\033[34m\][\u@\h\[\033[01;00m\] \w\[\033[34m]\]\[\033[00m\]$ '
 # PS1="\[\033[01;34m\][\[\033[01;00m\]\w\[\033[01;34m\]]\[\033[01;00m\]\[\033[01;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's/^/ (/' | sed 's/$/)/') \[\033[01;00m\]\n› "
@@ -136,3 +138,4 @@ slugen () {
 }
 PROMPT_DIRTRIM=2
 
+# source /usr/share/nvm/init-nvm.sh
