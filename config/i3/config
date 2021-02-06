@@ -186,7 +186,7 @@ bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu $dmenu
 bindsym $mod+p exec --no-startup-id dmenu_run $dmenu_args -l 20 -i -F
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "rofi -show window -width 70"
-bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(find -H ~/* ! -path "*repos*" -type f | fzf -i --reverse)"'
+bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(find ~/ -path "/home/prithu/.*" -prune -o -print  -path "/home/prithu/repos" -prune -o -print -type f | fzf -i --reverse)"'
 bindsym $mod+z exec --no-startup-id change-wall
 # change volume or toggle mute
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
