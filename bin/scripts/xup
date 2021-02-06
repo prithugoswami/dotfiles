@@ -5,7 +5,7 @@
 # user's home directory
 
 remote_hostname="glix"
-remote_url="https://x.prithu.xyz"
+remote_url="https://i.prithu.xyz"
 
 slugen () {
     # generate a slug of alphabets
@@ -21,14 +21,26 @@ then
         slug=$(slugen)
         if echo "$1" | grep '\.' 2>&1 > /dev/null
         then
-            ext=$(echo "$1" | grep '\.' | cut -d '.' -f2 | sed 's/^/\./')
+            ext=$(echo "$1" | grep '\.' | awk -F'.' '{print "."$NF}')
         else
             ext=""
         fi
-        rsync --ignore-existing "$1" "$remote_hostname:.share/$slug$ext" || exit 1
-        echo "$remote_url/$slug$ext"
+        if ssh $remote_hostname "test -f .share/$slug$ext"
+        then
+            echo "Error: File already exists: .share/$slug$ext"
+            exit 1
+        else
+            rsync --ignore-existing --info=progress1 "$1" "$remote_hostname:.share/$slug$ext" 1>&2 || exit 1
+            echo "$remote_url/$slug$ext"
+        fi
     else
-        rsync --ignore-existing "$1" "$remote_hostname:.share/$2" || exit 1
-        echo "$remote_url/$2"
+        if ssh $remote_hostname "test -f .share/$2"
+        then
+            echo "Error: File already exists: .share/$2"
+            exit 1
+        else
+            rsync --ignore-existing --info=progress1 "$1" "$remote_hostname:.share/$2" 1>&2 || exit 1
+            echo "$remote_url/$2"
+        fi
     fi
 fi

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-options="pull\npush\nscreen"
+options="pull\npush\nscreen\ndevices"
 
 select=$(echo -e $options | fzf)
 
@@ -13,5 +13,7 @@ case $select in
         ;;
     "screen")
         scrcpy;;
+    "devices")
+        adb devices;;
 esac
 
