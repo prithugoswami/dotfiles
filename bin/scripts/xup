@@ -27,7 +27,7 @@ then
         fi
         if ssh $remote_hostname "test -f .share/$slug$ext"
         then
-            echo "Error: File already exists: .share/$slug$ext"
+            echo "[Error] File already exists: $slug$ext" 1>&2
             exit 1
         else
             rsync --ignore-existing --info=progress1 "$1" "$remote_hostname:.share/$slug$ext" 1>&2 || exit 1
@@ -36,7 +36,7 @@ then
     else
         if ssh $remote_hostname "test -f .share/$2"
         then
-            echo "Error: File already exists: .share/$2"
+            echo "[Error] File already exists: $2" 1>&2
             exit 1
         else
             rsync --ignore-existing --info=progress1 "$1" "$remote_hostname:.share/$2" 1>&2 || exit 1
