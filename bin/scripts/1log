@@ -1,0 +1,8 @@
+#!/bin/sh
+# life log (stole from icy)
+# git.icyphox.sh/dotfiles/tree/home/bin/log
+
+date="$(date "+%Y-%m-%d %H:%M:%S")"
+l="$(printf '' | dmenu -p "$date")"
+[ "$l" = "" ] && exit
+printf '%s\t%s\n' "$date" "$l" >> ~/.config/ll
