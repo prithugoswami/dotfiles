@@ -11,7 +11,7 @@ set -o vi
 [[ -f ~/.profile ]] && . ~/.profile
 
 cd() {
-	builtin cd "$@" && ls --color;
+	builtin cd "$@" && exa;
 }
 
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
@@ -112,7 +112,8 @@ alias yw="mpv --ytdl-format=\"bestvideo[height<=480]+bestaudio/best[height<=480]
 alias yal="mpv --ytdl-format=251"
 alias tmuxl="tmux list-session"
 
-alias ls='ls --color=auto'
+# alias ls='ls --color=auto'
+alias ls='exa'
 
 
 #PS1='\[\033[34m\][\u@\h\[\033[01;00m\] \w\[\033[34m]\]\[\033[00m\]$ '
