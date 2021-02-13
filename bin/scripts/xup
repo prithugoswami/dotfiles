@@ -25,22 +25,22 @@ then
         else
             ext=""
         fi
-        if ssh $remote_hostname "test -f .share/$slug$ext"
-        then
-            echo "[Error] File already exists: $slug$ext" 1>&2
-            exit 1
-        else
-            rsync --ignore-existing --info=progress1 "$1" "$remote_hostname:.share/$slug$ext" 1>&2 || exit 1
+        # if ssh $remote_hostname "test -f .share/$slug$ext"
+        # then
+            # echo "[Error] File already exists: $slug$ext" 1>&2
+            # exit 1
+        # else
+            rsync --ignore-existing --info=progress1,skip "$1" "$remote_hostname:.share/$slug$ext" 1>&2 || exit 1
             echo "$remote_url/$slug$ext"
-        fi
+        # fi
     else
-        if ssh $remote_hostname "test -f .share/$2"
-        then
-            echo "[Error] File already exists: $2" 1>&2
-            exit 1
-        else
-            rsync --ignore-existing --info=progress1 "$1" "$remote_hostname:.share/$2" 1>&2 || exit 1
+        # if ssh $remote_hostname "test -f .share/$2"
+        # then
+        #     echo "[Error] File already exists: $2" 1>&2
+        #     exit 1
+        # else
+            rsync --ignore-existing --info=progress1,skip "$1" "$remote_hostname:.share/$2" 1>&2 || exit 1
             echo "$remote_url/$2"
-        fi
+        # fi
     fi
 fi

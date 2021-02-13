@@ -1,0 +1,11 @@
+#!/bin/sh
+# life log (stole from icy)
+# git.icyphox.sh/dotfiles/tree/home/bin/log
+
+key="A17AFDEA2EF9A76AA868285DE2AB251EDB8945E5"
+log_path=~/docs/org/lifelog/ll.gpg
+l="$(printf '' | dmenu)"
+date="$(date "+%Y-%m-%d %H:%M:%S")"
+[ "$l" = "" ] && exit
+printf '%s\t%s\n' "$date" "$l" | cat <(gpg -d $log_path 2>/dev/null) - | gpg --yes -r $key -e -o $log_path
+# cd `dirname $log_path` && git commit -am "lifelog commit" && git push
