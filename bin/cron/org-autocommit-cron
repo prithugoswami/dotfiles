@@ -5,3 +5,6 @@ cmsg=$(git status -s)
 git add . && git commit -m "auto commit: $(whoami)@$(hostname)"\
     -m "$cmsg"
 ping -q -c 1 google.com >/dev/null && git push
+
+cd $HOME
+pass git pull && pass git push && pass git push glix

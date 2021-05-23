@@ -1,0 +1,9 @@
+#!/bin/bash
+
+file="$HOME/docs/org/investments.csv"
+
+sc=$(awk -F, '/,/{gsub(/ /, "",$2); if ($2=="SC") sum+=$1 } END { print sum }' $file)
+c=$(awk -F ',' '/,/{gsub(/ /, "",$2); if ($2=="C") sum+=$1 } END { print sum }' $file)
+t=$(awk -F ',' '/,/{sum+=$1 } END { print sum }' $file)
+
+echo -e "SC: \t$sc\nC:\t$c\nTotal:\t$t"

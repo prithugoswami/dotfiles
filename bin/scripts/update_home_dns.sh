@@ -24,7 +24,7 @@
 ACCESS_TOKEN="$NETLIFY_ACCESS_TOKEN"
 DOMAIN="prithu.xyz"
 SUBDOMAIN="$SUBDOMAIN_"
-TTL="300"
+TTL="5"
 
 NETLIFY_API="https://api.netlify.com/api/v1"
 

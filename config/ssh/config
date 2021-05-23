@@ -1,0 +1,25 @@
+Host glix
+    HostName glix
+    User prithu
+    IdentityFile ~/.ssh/glix_rsa
+    SetEnv TERM=xterm-color
+Host inty
+    HostName inty.prithu.xyz
+    user ubuntu
+    IdentityFile ~/.ssh/id_rsa
+Host reed
+    HostName reed.prithu.xyz
+    user ubuntu
+    IdentityFile ~/.ssh/id_rsa
+Host rpi
+    HostName rpi
+    user pi
+    IdentityFile ~/.ssh/id_rsa
+Host lmmdev
+    HostName lmmvm
+    user prithugoswami524
+    IdentityFile ~/.ssh/id_rsa
+Host lmmprod
+    HostName lmmaws
+    user lmm_dev
+    IdentityFile ~/.ssh/id_rsa

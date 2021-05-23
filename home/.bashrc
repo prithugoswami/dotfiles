@@ -129,8 +129,8 @@ PS1="\w\[\033[01;34m\]\[\033[01;00m\]\[\033[01;32m\]\$(git branch 2>/dev/null | 
 [[ -f ~/bin/bash_prompt.sh ]] && . ~/bin/bash_prompt.sh
 
 HISTCONTROL=ingoreboth
-HISTSIZE=10000000
-HISTFILESIZE=10000000
+HISTSIZE=100000000
+HISTFILESIZE=100000000
 PROMPT_COMMAND='history -a'
 HISTIGNORE='ls:bg:fg:history:cd:rm'
 
@@ -141,3 +141,7 @@ slugen () {
 PROMPT_DIRTRIM=2
 
 # source /usr/share/nvm/init-nvm.sh
+
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

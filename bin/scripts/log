@@ -8,7 +8,7 @@ tmp_file_path=/tmp/llentry
 l="$(printf '' | dmenu)"
 date="$(date "+%Y-%m-%d %H:%M:%S")"
 [ "$l" = "" ] && exit
-printf '%s\t%s\n' "$date" "$l" | cat <(gpg -d $log_path 2>/dev/null) - > $tmp_file_path
+printf '%s\t%s\n' "$date" "$l" | cat <(gpg -d $log_path 2>/dev/null || exit) - > $tmp_file_path
 gpg --yes -r $key -o $log_path -e $tmp_file_path
 # printf '%s\t%s\n' "$date" "$l" > $tmp_file_path
 rm $tmp_file_path

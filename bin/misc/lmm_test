@@ -1,0 +1,76 @@
+#!/bin/sh
+
+ADMIN_TOKEN=""
+BASE_URL="https://lmmdev.tk"
+#BASE_URL="http://localhost:8000"
+
+if [ -z $LT_ENV ]
+then
+    printf 'set $LT_ENV to local or remote\n'
+else
+    if [ $LT_ENV = "local" ]
+    then
+        BASE_URL="localhost:8000"
+    else
+        # BASE_URL="https://lmmdev.tk"
+        BASE_URL="https://lmm.gdaschools.com"
+    fi
+fi
+
+
+method="$1"
+if [ $method = "POST" ]
+then
+    file="$2"
+    api_endpoint="$3"
+
+    if [ -n "$4" ]
+    then
+        if [ "$4" = none ]
+        then
+            token=""
+            auth_header=""
+        else
+            token="$4"
+            auth_header="Authorization: Bearer $token"
+        fi
+    else
+        token="$ADMIN_TOKEN"
+        auth_header="Authorization: Bearer $token"
+    fi
+
+    url="$BASE_URL$api_endpoint"
+    curl -X POST\
+        -d@"$file"\
+        -H 'Content-Type: application/json'\
+        -H "$auth_header"\
+        "$url"
+
+elif [ $method = "GET" ]
+then
+    api_endpoint="$2"
+    if [ -n "$3" ]
+    then
+        if [ "$3" = none ]
+        then
+            token=""
+            auth_header=""
+        else
+            token="$3"
+            auth_header="Authorization: Bearer $token"
+        fi
+    else
+        token=$ADMIN_TOKEN
+        auth_header="Authorization: Bearer $token"
+    fi
+
+    url="$BASE_URL$api_endpoint"
+    curl -L -X GET\
+        -H 'Content-Type: application/json'\
+        -H "$auth_header"\
+        "$url"
+fi
+
+
+
+

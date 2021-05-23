@@ -13,14 +13,14 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'dracula/vim'
 Plugin 'drewtempelmeyer/palenight.vim'
-Plugin 'dracula/vim', {'name':'dracula'}
 Plugin 'simeji/winresizer'
 Plugin 'rakr/vim-one'
 Plugin 'tomasr/molokai'
 Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
-Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'dense-analysis/ale'
+Plugin 'szw/vim-maximizer'
 " Plugin 'pedrohdz/vim-yaml-folds'
 
 
@@ -39,6 +39,7 @@ set smartindent
 set autoindent
 " set viminfo='10,<100,:100,%,n~/.vim/.viminfo
 set undofile
+set colorcolumn=80
 
 set mouse=a
 
@@ -56,15 +57,22 @@ filetype plugin indent on
 autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -H ~/.config/header -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
 " autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f markdown+raw_tex+raw_attribute -o pdf/%.pdf %<Enter><Enter>
 autocmd FileType tex nnoremap cm :w<Enter>:!xelatex % 1&>/dev/null<Enter><Enter>
+autocmd BufRead *make_request.sh nnoremap cm :w<CR>:!./%<CR>
 " autocmd FileType tex nnoremap cm :w<Enter>:!pdflatex -interaction nonstopmode % 1&>/dev/null<Enter><Enter>
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal sw=2
+autocmd FileType typescript setlocal sw=2
 autocmd FileType yaml setlocal sw=2
+autocmd BufRead  *jsx setlocal sw=2
 
 " autocmd FileType c nnoremap cp :w<Enter>:!clear && gcc % && ./a.out<Enter>
 autocmd BufRead *.pdentry :Goyo
 autocmd BufRead *.pdentry set nosmartindent
 autocmd BufRead *.md set nosmartindent
+
+
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0) 
+
 
 " leader is comma
 let mapleader=","
@@ -72,6 +80,8 @@ let mapleader=","
 " QuickFix Navigation
 nnoremap cn :cn<CR>
 nnoremap cN :cN<CR>
+nnoremap H gT
+nnoremap L gt
 
 
 set backspace=indent,eol,start
@@ -103,7 +113,7 @@ set foldnestmax=10 " 10 nested folds max
 set foldmethod=indent " fold based on indent
 
 " <Space> is foldToggle (za) in normal mode
-nnoremap <silent> <Tab> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " <C-c> in visual mode copies to clipboard
 vnoremap <C-c> "+y
@@ -131,7 +141,7 @@ nnoremap <C-l> <C-W><C-L>
 
 nnoremap <unique> <C-_> :FZF<CR>
 nnoremap <unique> <C-B> :Buffers<CR>
-nnoremap <unique> <C-a> :Ag<CR>
+nnoremap <leader>f :Rg<CR>
 
 set autoread
 nnoremap <leader>r :e!<Enter>
@@ -162,17 +172,28 @@ nmap <leader>gs :G<CR>
 "     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 " endif
 "
-nnoremap <leader>n :w<Enter>:!ns %<Enter>
+" nnoremap <leader>n :w<Enter>:!ns %<Enter>
 
 let g:ale_enabled = 0
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
+\   'javascript': ['prettier'],
 \}
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
+let g:ale_fixers = {'javascript': ['prettier']}
+let g:ale_fix_on_save = 1
+
+
 
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
+
+let $FZF_DEFAULT_COMMAND= 'rg . -l'
+
+let g:maximizer_set_default_mapping = 0
+
+nnoremap <leader>z :MaximizerToggle<CR>
+

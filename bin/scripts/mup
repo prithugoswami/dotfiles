@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# quick and dirty file sharing script using rsync
+# .share folder has to be on the remote machine's
+# user's home directory
+
+remote_hostname="inty"
+remote_url="https://m.prithu.dev"
+# remote_url="https://m.prithu.xyz"
+
+slugen () {
+    # generate a slug of alphabets
+    dd if=/dev/urandom status=none bs=1024 count=1 | \
+        strings | tr -d '[:space:][:punct:][:digit:][lIq]' | cut -c -${1:-3}
+}
+
+
+if [ "$1" ]
+then
+    if [ -z "$2" ]
+    then
+        slug=$(slugen)
+        if echo "$1" | grep '\.' 2>&1 > /dev/null
+        then
+            ext=$(echo "$1" | grep '\.' | awk -F'.' '{print "."$NF}')
+        else
+            ext=""
+        fi
+        # if ssh $remote_hostname "test -f .share/$slug$ext"
+        # then
+            # echo "[Error] File already exists: $slug$ext" 1>&2
+            # exit 1
+        # else
+            rsync --ignore-existing --info=progress1,skip "$1" "$remote_hostname:.share/$slug$ext" 1>&2 || exit 1
+            echo "$remote_url/$slug$ext"
+        # fi
+    else
+        # if ssh $remote_hostname "test -f .share/$2"
+        # then
+        #     echo "[Error] File already exists: $2" 1>&2
+        #     exit 1
+        # else
+            rsync --ignore-existing --info=progress1,skip "$1" "$remote_hostname:.share/$2" 1>&2 || exit 1
+            echo "$remote_url/$2"
+        # fi
+    fi
+fi

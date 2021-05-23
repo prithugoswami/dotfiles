@@ -13,4 +13,5 @@ notes_scrot
 google
 ud
 passmenu --type
+passmenu-otp --type
 st -e bash -c neomutt

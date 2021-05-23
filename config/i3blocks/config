@@ -19,25 +19,25 @@
 # command=~/.config/i3blocks/pacupdate
 # interval=once
 # signal=8
-[btcprice]
-command=print_btc_price
-interval=120
-markup=pango
+# [btcprice]
+# command=print_btc_price
+# interval=120
+# markup=pango
 
 [reminder]
 command=~/.config/i3blocks/note
 interval=1
 markup=pango
 
-[taskwarrior]
-command=~/.config/i3blocks/taskwarrior
-interval=1
-markup=pango
+# [taskwarrior]
+# command=~/.config/i3blocks/taskwarrior
+# interval=1
+# markup=pango
 
-[mail]
-markup=pango
-command=~/.config/i3blocks/mail
-interval=1
+# [mail]
+# markup=pango
+# command=~/.config/i3blocks/mail
+# interval=1
 
 [iface]
 # color=#49A2D1
