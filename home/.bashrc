@@ -112,6 +112,7 @@ alias yw="mpv --ytdl-format=\"bestvideo[height<=480]+bestaudio/best[height<=480]
 alias yal="mpv --ytdl-format=251"
 alias tmuxl="tmux list-session"
 alias rl="gpg -d ~/docs/org/lifelog/ll.gpg | sed 's/\t/ │ /' | less"
+alias tb="nc termbin.com 9999"
 
 # alias ls='ls --color=auto'
 alias ls='exa'

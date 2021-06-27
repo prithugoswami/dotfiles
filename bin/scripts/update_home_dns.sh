@@ -28,7 +28,10 @@ TTL="5"
 
 NETLIFY_API="https://api.netlify.com/api/v1"
 
-EXTERNAL_IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+ping -q -c 1 ifconfig.io >/dev/null || exit
+EXTERNAL_IP=`curl -s ifconfig.io`
+
+#EXTERNAL_IP=`dig +short myip.opendns.com @resolver1.opendns.com`
 echo "Current external IP is $EXTERNAL_IP"
 
 HOSTNAME="$SUBDOMAIN.$DOMAIN"

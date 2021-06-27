@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cp -r $HOME/.password-store /tmp
+rm -rf /tmp/.password-store/.git
+cd /tmp
+tar czf passwords.tar.gz .password-store
+rclone copy passwords.tar.gz drive:
+mv passwords.tar.gz $HOME
