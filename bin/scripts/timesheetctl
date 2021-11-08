@@ -1,0 +1,45 @@
+#!/bin/sh
+ts_file="$HOME/docs/org/comono/inspera/timesheet-`date +%Y%m`.csv"
+make_timesheet() {
+    last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
+    if [[ -f $ts_file ]]
+    then
+        echo "Error: File exists - $ts_file" 1>&2
+        exit
+    fi
+    # for i in $(seq -f %02g 1 $last_day)
+    for((i=01;i<=last_day;i++))
+    do
+        printf "%02d-%s;   ; inspera;\n" $i `date +%m-%Y` >> $ts_file
+    done
+}
+
+edit_timesheet() {
+    if [[ ! -f $ts_file ]]
+    then
+        make_timesheet
+    fi
+    vim $ts_file
+}
+
+ts_summary() {
+    hr_spent="$(awk -F';' '{ sum+=$2 } END {print sum}' $ts_file)"
+    last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
+    days_left="$(expr $last_day - `date +%d`)"
+    hr_left="$(expr 160 - $hr_spent)"
+    avg_hrs="$(awk "BEGIN {printf \"%.2f\", $hr_left/$days_left;exit}")"
+    echo -e "Hours put in:\t\t$hr_spent"
+    echo -e "Days Left:\t\t$days_left"
+    echo -e "\x1b[48;5;238mAvg. Hours to put in:   \x1b[1m$avg_hrs\x1b[0m"
+}
+
+option="$1"
+case "$option" in
+    edit|e) edit_timesheet
+        ;;
+    make|m) make_timesheet
+        ;;
+    summary|s) ts_summary
+        ;;
+esac
+

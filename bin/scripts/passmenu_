@@ -1,0 +1,3 @@
+#!/bin/sh
+
+passmenu --type -nb '#000' -sb '#FFF' -sf '#000' -h 20 -l 6
