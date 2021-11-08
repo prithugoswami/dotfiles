@@ -1,17 +1,10 @@
 log
-firefox-developer-edition
-qutebrowser
+passmenu_
+otp
 i3lock -c 000000
-telegram-desktop
-pamac-manager
-tixati
 note
 chromium
 nautilus
 newsboat_
 notes_scrot
-google
-ud
-passmenu --type
-passmenu-otp --type
 st -e bash -c neomutt

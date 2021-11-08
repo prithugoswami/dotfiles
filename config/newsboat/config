@@ -14,4 +14,4 @@ bind-key k up
 bind-key l open
 bind-key h quit
 
-browser linkhandler %u
+# browser linkhandler %u

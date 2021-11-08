@@ -27,6 +27,7 @@ fe(){
     vim "`fzf -i --reverse --height=40%`"
 }
 
+
 # f - simply cd's into the dir beneath the current
 f(){
     cd "$(dirname "$(fzf -i --reverse --height=40%)")"
@@ -113,6 +114,11 @@ alias yal="mpv --ytdl-format=251"
 alias tmuxl="tmux list-session"
 alias rl="gpg -d ~/docs/org/lifelog/ll.gpg | sed 's/\t/ │ /' | less"
 alias tb="nc termbin.com 9999"
+alias tl="curl -s https://api.kraken.com/0/public/Ticker?pair=XBTUSD | jq -r '.result.XXBTZUSD.c[0]' | cut -d. -f1"
+alias tf="terraform"
+alias tss="timesheetctl s"
+alias tse="timesheetctl e"
+
 
 # alias ls='ls --color=auto'
 alias ls='exa'
@@ -141,8 +147,10 @@ slugen () {
 }
 PROMPT_DIRTRIM=2
 
-# source /usr/share/nvm/init-nvm.sh
+activate_nvm () {
+    source /usr/share/nvm/init-nvm.sh
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+}
 
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+complete -C /usr/bin/terraform terraform

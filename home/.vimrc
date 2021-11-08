@@ -121,7 +121,7 @@ nnoremap <C-S-p> "+P
 
 map <C-n> :NERDTreeToggle<CR>
 
-set number " number line
+set number relativenumber " number line
 set showcmd " show command in bottom bar
 
 " MOVEMENT " 
@@ -177,14 +177,14 @@ nmap <leader>gs :G<CR>
 let g:ale_enabled = 0
 
 let g:ale_linters = {
-\   'javascript': ['prettier'],
+\   'javascript': ['eslint'],
 \}
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
-let g:ale_fixers = {'javascript': ['prettier']}
-let g:ale_fix_on_save = 1
+let g:ale_fixers = {'javascript': ['eslint']}
+let g:ale_fix_on_save = 0
 
 
 
@@ -197,3 +197,7 @@ let g:maximizer_set_default_mapping = 0
 
 nnoremap <leader>z :MaximizerToggle<CR>
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+let NERDTreeIgnore=['__pycache__']
