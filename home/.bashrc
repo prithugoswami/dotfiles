@@ -3,7 +3,6 @@
 #
 set -o vi
 
-. $HOME/bin/tmp/z.sh
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -11,7 +10,7 @@ set -o vi
 [[ -f ~/.profile ]] && . ~/.profile
 
 cd() {
-	builtin cd "$@" && exa;
+	builtin cd "$@" && ls;
 }
 
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
@@ -120,8 +119,8 @@ alias tss="timesheetctl s"
 alias tse="timesheetctl e"
 
 
-# alias ls='ls --color=auto'
-alias ls='exa'
+alias ls='ls --color=auto'
+#alias ls='ls'
 
 
 #PS1='\[\033[34m\][\u@\h\[\033[01;00m\] \w\[\033[34m]\]\[\033[00m\]$ '

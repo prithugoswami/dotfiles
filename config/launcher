@@ -3,8 +3,9 @@ passmenu_
 otp
 i3lock -c 000000
 note
-chromium
+google-chrome-stable
 nautilus
 newsboat_
 notes_scrot
 st -e bash -c neomutt
+firefox
