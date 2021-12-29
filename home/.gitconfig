@@ -9,6 +9,7 @@
     lg  = !"git lg1"
     sra = !"git log --format=%H -n 10 --all | xargs git show"
     sr  = !"git log --format=%H -n 10 | xargs git show"
+    pushall = !"git remote | xargs -L1 git push"
     st = status --short
     ci = commit
     ca = commit --amend
