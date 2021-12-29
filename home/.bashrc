@@ -9,6 +9,8 @@ set -o vi
 
 [[ -f ~/.profile ]] && . ~/.profile
 
+alias ls='ls --color=auto'
+
 cd() {
 	builtin cd "$@" && ls;
 }
@@ -119,7 +121,6 @@ alias tss="timesheetctl s"
 alias tse="timesheetctl e"
 
 
-alias ls='ls --color=auto'
 #alias ls='ls'
 
 
@@ -153,3 +154,4 @@ activate_nvm () {
 }
 
 complete -C /usr/bin/terraform terraform
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

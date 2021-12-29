@@ -9,3 +9,6 @@ newsboat_
 notes_scrot
 st -e bash -c neomutt
 firefox
+rofi -show emoji
+rofi -show drun
+rofi -show calc -modi calc -no-show-match -no-sort -no-history
