@@ -2,6 +2,8 @@
 set nocompatible
 filetype off
 
+let g:polyglot_disabled = ['csv', 'python']
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -18,6 +20,7 @@ Plugin 'rakr/vim-one'
 Plugin 'tomasr/molokai'
 Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'sheerun/vim-polyglot'
 " Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'dense-analysis/ale'
 Plugin 'szw/vim-maximizer'
@@ -49,6 +52,9 @@ set termguicolors
 
 " load filetype-specific indent files
 filetype plugin indent on
+
+
+
 
 " compiling for different file types
 " autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f gfm -V geometry=margin=0.75in --resource-path="expand('%:p:h')/img" -V links-as-notes -o %.pdf %<Enter><Enter>
