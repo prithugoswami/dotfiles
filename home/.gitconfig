@@ -1,3 +1,6 @@
+[core]
+    pager = delta
+
 [user]
 	email = pg@prithu.dev
 	name = Prithu Goswami
@@ -22,3 +25,15 @@
 	rebase = false
 [init]
 	defaultBranch = master
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
