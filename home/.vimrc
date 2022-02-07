@@ -21,11 +21,13 @@ Plugin 'tomasr/molokai'
 Plugin 'junegunn/fzf.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'neovim/nvim-lspconfig'
+Plugin 'ms-jpq/coq_nvim', {'branch': 'coq'}
+
 " Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'dense-analysis/ale'
 Plugin 'szw/vim-maximizer'
 " Plugin 'pedrohdz/vim-yaml-folds'
-
 
 
 call vundle#end()
@@ -53,8 +55,7 @@ set termguicolors
 " load filetype-specific indent files
 filetype plugin indent on
 
-
-
+let g:coq_settings = { 'auto_start': 'shut-up', 'keymap.jump_to_mark': ''}
 
 " compiling for different file types
 " autocmd FileType markdown nnoremap cm :w<Enter>:!pandoc -f gfm -V geometry=margin=0.75in --resource-path="expand('%:p:h')/img" -V links-as-notes -o %.pdf %<Enter><Enter>
@@ -167,18 +168,14 @@ nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
-" Use a blinking upright bar cursor in Insert mode, a blinking block in normal
-"if &term == 'xterm-256color' || &term == 'screen-256color'
-" let &t_SI = "\<Esc>[5 q"
-" let &t_EI = "\<Esc>[2 q"
-"endif
-
-" if exists('$TMUX')
-"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+ " Use a blinking upright bar cursor in Insert mode, a blinking block in normal
+" if &term == 'xterm-256color' || &term == 'screen-256color'
+ " let &t_SI = "\<Esc>[5 q"
+ " let &t_EI = "\<Esc>[2 q"
 " endif
 "
-" nnoremap <leader>n :w<Enter>:!ns %<Enter>
+
+ " nnoremap <leader>n :w<Enter>:!ns %<Enter>
 
 let g:ale_enabled = 0
 
@@ -190,7 +187,7 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
-let g:ale_fixers = {'javascript': ['eslint'], 'python': ['black', 'isort']}
+let g:ale_fixers = {'jsx': ['prettier', 'eslint'], 'python': ['black', 'isort']}
 let g:ale_fix_on_save = 0
 
 
