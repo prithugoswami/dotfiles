@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.63.3",
+  "settingsVersion": "1.67",
   "exclusionRules": [
     {
       "pattern": "https?://hackertyper.com/*",
@@ -125,8 +125,8 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "map s scrollDown\nmap w scrollUp\nunmap <C-D-v>\nunmap H\nunmap L\nunmap J\nunmap K\nmap H previousTab\nmap L nextTab\nmap <a-h> goBack\nmap <a-l> goForward",
-  "linkHintCharacters": "sadfjklewcmpgh",
+  "keyMappings": "map s scrollDown\nmap w scrollUp\nmap D nextTab\nmap S previousTab\nunmap <C-D-v>\nunmap H\nunmap L\nunmap J\nunmap K\nmap H previousTab\nmap L nextTab\nmap <a-h> goBack\nmap <a-l> goForward",
+  "linkHintCharacters": "werasdfxcv",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "about:newtab",
   "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
