@@ -4,8 +4,12 @@ cd $HOME/docs/org
 cmsg=$(git status -s)
 git add . && git commit -m "auto commit: $(whoami)@may"\
     -m "$cmsg"
-ping -q -c 1 google.com >/dev/null && git push && git push glix
 
-cd $HOME
-pass git remote | xargs -I B pass git pull B master
-pass git remote | xargs -L1 pass git push
+# check for connectivity before pushing
+if nc -dzw1 google.com 443; then
+    git push && git push glix
+    cd $HOME
+    pass git remote | xargs -I B pass git pull B master
+    pass git remote | xargs -L1 pass git push
+fi
+
