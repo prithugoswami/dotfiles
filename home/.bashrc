@@ -28,6 +28,8 @@ fe(){
     vim "`fzf -i --reverse --height=40%`"
 }
 
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
 
 # f - simply cd's into the dir beneath the current
 f(){
@@ -92,6 +94,8 @@ todo(){
     fi
 }
 
+alias colemak="setxkbmap -layout 'us,in'  -variant colemak, -option 'grp:shifts_toggle'    -option 'ctrl:nocaps'"
+alias qwerty="setxkbmap -layout 'us,in'   -option 'grp:shifts_toggle'    -option 'ctrl:nocaps'"
 alias cfi="vim ~/.config/i3/config"
 alias cfz="vim ~/.zshrc"
 alias cfb="vim ~/.bashrc"
@@ -119,6 +123,9 @@ alias tl="curl -s https://api.kraken.com/0/public/Ticker?pair=XBTUSD | jq -r '.r
 alias tf="terraform"
 alias tss="timesheetctl s"
 alias tse="timesheetctl e"
+# generate a qrcode from contents of clipboard
+alias qrclip="xsel -ob | qrencode -o - | feh --force-aliasing -Z -"
+alias b="buku --suggest"
 
 
 #alias ls='ls'
@@ -155,3 +162,4 @@ activate_nvm () {
 
 complete -C /usr/bin/terraform terraform
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

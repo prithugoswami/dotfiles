@@ -1,5 +1,6 @@
 #!/bin/sh
-ts_file="$HOME/docs/org/comono/inspera/timesheet-`date +%Y%m`.csv"
+ts_dir="$HOME/docs/org/comono/inspera/timesheets"
+ts_file="$ts_dir/timesheet-`date +%Y%m`.csv"
 make_timesheet() {
     last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
     if [[ -f $ts_file ]]
