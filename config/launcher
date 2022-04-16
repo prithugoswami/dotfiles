@@ -3,7 +3,7 @@ passmenu_
 otp
 i3lock -c 000000
 note
-google-chrome-stable
+chromium
 nautilus
 newsboat_
 notes_scrot
