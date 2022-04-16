@@ -128,7 +128,7 @@ nnoremap <C-S-p> "+P
 
 map <C-n> :NERDTreeToggle<CR>
 
-set number relativenumber " number line
+set number " number line
 set showcmd " show command in bottom bar
 
 " MOVEMENT " 
