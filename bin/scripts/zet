@@ -1,0 +1,53 @@
+#!/bin/bash
+ 
+ZET_DIR="$HOME/docs/org/zet"
+if [ ! -d "$ZET_DIR" ]
+then
+    echo "error: zet dir not present - $ZET_DIR"
+    exit 1
+fi
+
+list(){
+    for a in $ZET_DIR/*
+    do 
+        title=$(cat $a | head -1)
+        printf '%s: %s\n' `basename $a` "${title/\# }"
+    done
+}
+
+create(){
+    title="$@"
+    filename="`date +%Y%m%d%H%M`.md"
+    printf "# %s\n\n\n" "$title" > $ZET_DIR/$filename
+    vim +3 $ZET_DIR/$filename
+    t=$(cat $ZET_DIR/$filename | head -1)
+    title=$(printf "%s" "${t/\# }")
+    cd $ZET_DIR
+    git add $filename
+    git commit -m "zet: $title" > /dev/null
+    echo "Created zet $ZET_DIR/$filename"
+}
+
+
+case $1 in
+    list|l)
+        list
+        ;;
+    fzf|f)
+        list | fzf --tac
+        ;;
+    dir|d)
+        echo $ZET_DIR
+        ;;
+    c)
+        shift
+        create $@
+        ;;
+    edit|e)
+        choice=$(list | fzf --tac)
+        if [ "$choice" ]
+        then
+            filename="$(echo $choice | cut -d: -f1)"
+            vim $ZET_DIR/$filename
+        fi
+esac
