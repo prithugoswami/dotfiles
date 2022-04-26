@@ -5,7 +5,7 @@
 # user's home directory
 
 remote_hostname="inty"
-remote_url="https://m.prithu.dev"
+remote_url="https://i.prithu.dev"
 # remote_url="https://m.prithu.xyz"
 
 slugen () {
