@@ -23,6 +23,8 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'neovim/nvim-lspconfig'
 Plugin 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plugin 'iamcco/markdown-preview.nvim'
+" Plugin 'mzlogin/vim-markdown-toc'
 
 " Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'dense-analysis/ale'
