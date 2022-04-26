@@ -56,25 +56,6 @@ cheat(){
     curl -s cheat.sh/$1
 }
 
-pdrc(){
-    ping -c 1 8.8.8.8 > /dev/null || return
-    rclone cat drop:/pd/pd > /tmp/pd && gpg -o /tmp/pd.tmp -d /tmp/pd &&\
-        less /tmp/pd.tmp && rm /tmp/pd.tmp && rm /tmp/pd
-}
-
-pdrl(){
-    cp ~/dropbox/pd/pd /tmp/pd || return
-    gpg -o /tmp/pd.tmp -d /tmp/pd || (rm /tmp/pd && return)
-    less /tmp/pd.tmp && rm /tmp/pd.tmp && rm /tmp/pd
-}
-
-dropsync(){
-	case "$1" in
-		"pull") rclone sync -v drop:/ $HOME/dropbox/ "${@:2}" ;;
-		"push") rclone sync -v $HOME/dropbox drop:/  "${@:2}" ;;
-	esac
-}
-
 inb(){
     if [ "$#" = "0" ]; then
         task next +in
@@ -94,6 +75,8 @@ todo(){
     fi
 }
 
+alias es="vim +$ '+norm zz' $HOME/docs/org/snippets.md"
+alias eb="vim $HOME/docs/org/bookmarks/index.md"
 alias colemak="setxkbmap -layout 'us,in'  -variant colemak, -option 'grp:shifts_toggle'    -option 'ctrl:nocaps'"
 alias qwerty="setxkbmap -layout 'us,in'   -option 'grp:shifts_toggle'    -option 'ctrl:nocaps'"
 alias cfi="vim ~/.config/i3/config"
