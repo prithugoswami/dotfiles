@@ -11,7 +11,8 @@ list(){
     for a in $ZET_DIR/*
     do 
         title=$(cat $a | head -1)
-        printf '%s: %s\n' `basename $a` "${title/\# }"
+        tags=$(cat $a | tail -1 | grep '^tags:.*$' | sed 's/tags:/# /') # replace with pure bash later
+        printf '%s: %s %s\n' `basename $a` "${title/\# }" "$tags"
     done
 }
 
@@ -49,5 +50,19 @@ case $1 in
         then
             filename="$(echo $choice | cut -d: -f1)"
             vim $ZET_DIR/$filename
+            t=$(cat $ZET_DIR/$filename | head -1)
+            title=$(printf "%s" "${t/\# }")
+            cd $ZET_DIR
+            git add $filename
+            git commit -m "zet: $title" > /dev/null
+            echo "Edited zet $ZET_DIR/$filename"
+        fi
+        ;;
+    print|p)
+        choice=$(list | fzf --tac)
+        if [ "$choice" ]
+        then
+            filename="$(echo $choice | cut -d: -f1)"
+            cat $ZET_DIR/$filename
         fi
 esac
