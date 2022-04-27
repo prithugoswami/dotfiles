@@ -1,5 +1,6 @@
 log
 passmenu_
+shiori-menu
 otp
 i3lock -c 000000
 note
@@ -12,3 +13,4 @@ firefox
 rofi -show emoji
 rofi -show drun
 rofi -show calc -modi calc -no-show-match -no-sort -no-history
+mpv --ytdl-format=720p60 https://twitch.tv/rwxrob

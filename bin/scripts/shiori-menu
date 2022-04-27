@@ -1,0 +1,23 @@
+#!/bin/bash
+
+url=$(printf "" | dmenu -p URL)
+tags=$(printf "" | dmenu -p tags)
+archive=$(printf "yes\nno" | dmenu -p archive )
+
+if [ $archive = "yes" ]
+then
+    aopt=""
+elif [ $archive = "no" ]
+then
+    aopt="--no-archival"
+fi
+
+if [ "$url" ]
+then
+    if [ "$tags" ]
+    then
+        ssh inty "shiori add $aopt -t \"$tags\" $url"
+    else
+        ssh inty "shiori add $aopt $url"
+    fi
+fi
