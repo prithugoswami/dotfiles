@@ -1,7 +1,3 @@
-Host btc
-    Hostname ec2-3-110-183-152.ap-south-1.compute.amazonaws.com
-    User ubuntu
-    IdentityFile ~/.ssh/btc-node.pem
 Host glix
     HostName glix
     User prithu
@@ -17,7 +13,7 @@ Host reed
     IdentityFile ~/.ssh/id_rsa
 Host rpi
     HostName rpi
-    user pi
+    user prithu
     IdentityFile ~/.ssh/id_rsa
 Host lmmdev
     HostName lmmvm

@@ -14,3 +14,4 @@ rofi -show emoji
 rofi -show drun
 rofi -show calc -modi calc -no-show-match -no-sort -no-history
 mpv --ytdl-format=720p60 https://twitch.tv/rwxrob
+zbarcam -1 --raw | xsel -ib
