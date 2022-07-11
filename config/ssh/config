@@ -13,6 +13,7 @@ Host reed
     IdentityFile ~/.ssh/id_rsa
 Host rpi
     HostName rpi
+    Port 24599
     user prithu
     IdentityFile ~/.ssh/id_rsa
 Host lmmdev
