@@ -1,40 +1,28 @@
-" Vundle stuff starts here
+call plug#begin()
+
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-commentary'
+Plug 'dracula/vim'
+Plug 'simeji/winresizer'
+Plug 'junegunn/fzf.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'neovim/nvim-lspconfig'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'iamcco/markdown-preview.nvim'
+" Plug 'mzlogin/vim-markdown-toc'
+" Plug 'dhruvasagar/vim-table-mode'
+Plug 'dense-analysis/ale'
+Plug 'szw/vim-maximizer'
+" Plug 'pedrohdz/vim-yaml-folds'
+
+call plug#end()
+
 set nocompatible
-filetype off
-
 let g:polyglot_disabled = ['csv', 'python']
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'junegunn/goyo.vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'dracula/vim'
-Plugin 'drewtempelmeyer/palenight.vim'
-Plugin 'simeji/winresizer'
-Plugin 'rakr/vim-one'
-Plugin 'tomasr/molokai'
-Plugin 'junegunn/fzf.vim'
-Plugin 'chriskempson/base16-vim'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'neovim/nvim-lspconfig'
-Plugin 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plugin 'iamcco/markdown-preview.nvim'
-" Plugin 'mzlogin/vim-markdown-toc'
-
-" Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'dense-analysis/ale'
-Plugin 'szw/vim-maximizer'
-" Plugin 'pedrohdz/vim-yaml-folds'
-
-
-call vundle#end()
-" Vundle stuff ends here
-
 set tabstop=4 " number of visual spaces per tab
 set softtabstop=4 " number of spaces in the tab when editing
 set expandtab " tabs are shortcut for spaces
