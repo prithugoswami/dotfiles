@@ -91,7 +91,6 @@ alias egc="vim ~/docs/org/growth-cal.txt"
 alias rx="xrdb ~/.Xresources"
 alias tmux="tmux -u"
 alias ch="ping 8.8.8.8"
-alias n="nautilus"
 alias yv="youtube-viewer"
 alias mkddir="mkdir `date +%d-%m-%Y`"
 alias thot="vim ~/docs/org/thoughts/`date +%s`"
@@ -138,7 +137,6 @@ slugen () {
 PROMPT_DIRTRIM=2
 
 activate_nvm () {
-    source /usr/share/nvm/init-nvm.sh
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 }
