@@ -7,7 +7,7 @@ git add . && git commit -m "auto commit: $(whoami)@may"\
 
 # check for connectivity before pushing
 if nc -dzw1 google.com 443; then
-    git push && git push glix
+    git remote | xargs -L1 git push
     cd $HOME
     pass git remote | xargs -I B pass git pull B master
     pass git remote | xargs -L1 pass git push
