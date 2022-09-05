@@ -14,7 +14,6 @@ o.showmatch = true
 o.incsearch = true
 o.foldenable = true
 o.foldmethod = 'indent'
--- open most folds by default
 o.foldlevelstart = 10
 o.foldnestmax = 10
 o.number = true
