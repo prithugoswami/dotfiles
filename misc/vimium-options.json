@@ -120,6 +120,18 @@
     {
       "pattern": "https?://vim-adventures.com/*",
       "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.tldraw.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://foobar.withgoogle.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://monkeytype.com/*",
+      "passKeys": ""
     }
   ],
   "filterLinkHints": false,
