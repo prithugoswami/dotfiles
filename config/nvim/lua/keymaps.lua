@@ -46,7 +46,7 @@ k('n', '<leader>h', ':Telescope help_tags<CR>', options)
 
 k('n', '<leader>m', ':nohlsearch<CR>', options)
 k('n', '<leader>z', '<C-W>_', options)
-k('n', '<leader>r', ':so ~/.config/nvim/init.lua<CR>', options)
+k('n', 'n', 'nzz', options)
 
 -- fugitive
 k('n', '<leader>g', ':G<CR>', options)
