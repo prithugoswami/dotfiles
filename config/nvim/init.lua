@@ -2,6 +2,7 @@ require 'plugins'
 require 'options'
 require 'keymaps'
 require 'completion'
+require 'lsp'
 vim.cmd('colorscheme darkplus')
 
 

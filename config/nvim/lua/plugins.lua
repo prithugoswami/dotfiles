@@ -9,15 +9,14 @@ vim.cmd([[
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use 'rstacruz/vim-closer'
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
+
   -- themes
   use 'ayu-theme/ayu-vim'
   use 'folke/tokyonight.nvim'
   use 'LunarVim/Colorschemes'
-  use 'L3MON4D3/LuaSnip'
+
+  -- lsp
+  use 'neovim/nvim-lspconfig'
 
   -- completion
   use 'hrsh7th/nvim-cmp'
@@ -25,12 +24,17 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
 
+  -- tpope deserves his own section. All hail lord tpope!
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-commentary'
 
+  use 'rstacruz/vim-closer'
   use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', cmd = 'MarkdownPreview'}
-
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
