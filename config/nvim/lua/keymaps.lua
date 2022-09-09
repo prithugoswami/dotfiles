@@ -14,6 +14,7 @@ k('n', '<C-j>', '<C-W><C-J>', options)
 k('n', '<C-k>', '<C-W><C-K>', options)
 k('n', '<C-h>', '<C-W><C-H>', options)
 k('n', '<C-l>', '<C-W><C-L>', options)
+vim.g.winresizer_start_key = '<leader>e'
 
 -- tab navigation
 k('n', 'H', 'gT', options)
@@ -38,5 +39,5 @@ k('v', '>', '>gv', options)
 k('v', '<', '<gv', options)
 
 k('n', '<leader>m', ':nohlsearch<CR>', options)
-k('n', '<leader>z', ':MaximizerToggle<CR>', options)
+k('n', '<leader>z', '<C-W>_', options)
 k('n', '<leader>r', ':so ~/.config/nvim/init.lua<CR>', options)

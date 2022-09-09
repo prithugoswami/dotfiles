@@ -3,14 +3,14 @@ require 'options'
 require 'keymaps'
 require 'completion'
 require 'lsp'
-vim.cmd('colorscheme darkplus')
-
-
 
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   filters = {
     custom = {"__pycache__"}
+  },
+  diagnostics = {
+    enable = true
   },
   renderer = {
     indent_markers = {

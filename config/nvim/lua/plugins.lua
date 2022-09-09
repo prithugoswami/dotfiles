@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
   use 'ayu-theme/ayu-vim'
   use 'folke/tokyonight.nvim'
   use 'LunarVim/Colorschemes'
+  use 'chriskempson/base16-vim'
 
   -- lsp
   use 'neovim/nvim-lspconfig'
@@ -33,6 +34,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
 
+  use 'simeji/winresizer'
   use 'rstacruz/vim-closer'
   use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', cmd = 'MarkdownPreview'}
   use {
