@@ -2,6 +2,7 @@ local k = vim.api.nvim_set_keymap
 local options = { noremap = true, silent = true }
 
 vim.g.mapleader = ' '
+k('', '<Space>', '<Nop>', options)
 k('i', 'jk', '<esc>', options)
 
 -- move around visually (when line is wrapped)
@@ -23,14 +24,19 @@ k('n', '<C-n>', ':NvimTreeToggle<CR>', options)
 
 
 -- folds
-k('n', '<leader>j', 'za', options)
+k('n', '<leader>l', 'za', options)
 -- add keymap to unfold and others
 
 -- visual 
 -- copy to clipbaord in visual mode
 k('v', '<C-c>', '"+y', options)
+-- move blocks of text visually
 k('v', 'J', ':m \'>+1<CR>gv=gv', options)
 k('v', 'K',':m \'<-2<CR>gv=gv', options)
+-- stay in visual mode while indenting
+k('v', '>', '>gv', options)
+k('v', '<', '<gv', options)
 
 k('n', '<leader>m', ':nohlsearch<CR>', options)
 k('n', '<leader>z', ':MaximizerToggle<CR>', options)
+k('n', '<leader>r', ':so ~/.config/nvim/init.lua<CR>', options)
