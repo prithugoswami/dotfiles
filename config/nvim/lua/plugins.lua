@@ -43,4 +43,11 @@ return require('packer').startup(function(use)
       'kyazdani42/nvim-web-devicons',
     }
   }
+
+  use 'nvim-lua/plenary.nvim'
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 end)

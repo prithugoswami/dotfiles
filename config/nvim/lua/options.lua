@@ -16,12 +16,9 @@ vim.opt.foldlevelstart = 10
 vim.opt.foldnestmax = 10
 vim.opt.number = true
 vim.opt.backspace = 'indent,eol,start'
-vim.opt.iskeyword:append "-"  -- treat hyphen a part of a word and not a boundary
 vim.opt.termguicolors = true
 
 vim.cmd('colorscheme base16-classic-dark')
 
 vim.g.winresizer_vert_resize = 4
 vim.g.winresizer_horiz_resize = 2
-
-

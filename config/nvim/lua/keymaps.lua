@@ -38,6 +38,15 @@ k('v', 'K',':m \'<-2<CR>gv=gv', options)
 k('v', '>', '>gv', options)
 k('v', '<', '<gv', options)
 
+-- telescope
+k('n', '<C-_>', ':Telescope find_files<CR>', options)
+k('n', '<leader>f', ':Telescope live_grep<CR>', options)
+k('n', '<C-b>', ':Telescope buffers<CR>', options)
+k('n', '<leader>h', ':Telescope help_tags<CR>', options)
+
 k('n', '<leader>m', ':nohlsearch<CR>', options)
 k('n', '<leader>z', '<C-W>_', options)
 k('n', '<leader>r', ':so ~/.config/nvim/init.lua<CR>', options)
+
+-- fugitive
+k('n', '<leader>g', ':G<CR>', options)
