@@ -34,6 +34,19 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
 
+  -- telescope
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
+  -- treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+
   use 'simeji/winresizer'
   use 'rstacruz/vim-closer'
   use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', cmd = 'MarkdownPreview'}
@@ -44,10 +57,4 @@ return require('packer').startup(function(use)
     }
   }
 
-  use 'nvim-lua/plenary.nvim'
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
 end)
