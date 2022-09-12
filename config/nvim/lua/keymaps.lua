@@ -10,10 +10,10 @@ k('n', 'j', 'gj', options)
 k('n', 'k', 'gk', options)
 
 -- window navigation
-k('n', '<C-j>', '<C-W><C-J>', options)
-k('n', '<C-k>', '<C-W><C-K>', options)
-k('n', '<C-h>', '<C-W><C-H>', options)
-k('n', '<C-l>', '<C-W><C-L>', options)
+k('n', '<C-j>', '<C-W><C-j>', options)
+k('n', '<C-k>', '<C-W><C-k>', options)
+k('n', '<C-h>', '<C-W><C-h>', options)
+k('n', '<C-l>', '<C-W><C-l>', options)
 vim.g.winresizer_start_key = '<leader>e'
 
 -- tab navigation

@@ -108,7 +108,7 @@ alias tse="timesheetctl e"
 # generate a qrcode from contents of clipboard
 alias qrclip="xsel -ob | qrencode -o - | feh --force-aliasing -Z -"
 alias b="buku --suggest"
-alias lncli="lncli -n testnet"
+#alias lncli="lncli -n testnet"
 
 
 #alias ls='ls'

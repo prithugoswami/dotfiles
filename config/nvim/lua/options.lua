@@ -19,6 +19,7 @@ vim.opt.backspace = 'indent,eol,start'
 vim.opt.termguicolors = true
 
 vim.cmd('colorscheme base16-classic-dark')
+vim.cmd('filetype plugin indent on')
 
 vim.g.winresizer_vert_resize = 4
 vim.g.winresizer_horiz_resize = 2
