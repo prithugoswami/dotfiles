@@ -81,28 +81,44 @@ require('telescope').setup {
     }
   }
 }
+
 require('telescope').load_extension('fzf')
 
--- require'nvim-treesitter.configs'.setup {
---   ensure_installed = { "python", "hcl", "json", "go", "lua", "javascript", "typescript", "html", "css", "c", "cpp", "rust" },
---   sync_install = false,
---   auto_install = true,
---   -- ignore_install = { "javascript" },
---   highlight = {
---     enable = true,
---     -- disable = { "c", "rust" },
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "python", "hcl", "json", "go", "lua", "javascript", "typescript", "html", "css", "c", "cpp", "rust" },
+  sync_install = false,
+  auto_install = true,
+  -- ignore_install = { "javascript" },
+  highlight = {
+    enable = true,
+    -- disable = { "c", "rust" },
 
---     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
---     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
---     -- Using this option may slow down your editor, and you may see some duplicate highlights.
---     -- Instead of true it can also be a list of languages
---     additional_vim_regex_highlighting = true,
---   },
---   indent = {
---     enable = false,
---     disable = {"hcl", "python"}
---   }
--- }
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+    enable = false,
+    disable = {"hcl", "python"}
+  }
+}
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  debug = false,
+  sources = {
+    -- (java|type)script
+    null_ls.builtins.formatting.prettier,
+    -- python
+    null_ls.builtins.formatting.black.with({extra_args={"--fast"}}),
+    null_ls.builtins.formatting.isort,
+    null_ls.builtins.diagnostics.flake8,
+    null_ls.builtins.diagnostics.mypy,
+  }
+})
 
 -- TODO move to seperate autocmd file
 vim.cmd ([[
