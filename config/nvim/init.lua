@@ -115,8 +115,16 @@ null_ls.setup({
     -- python
     null_ls.builtins.formatting.black.with({extra_args={"--fast"}}),
     null_ls.builtins.formatting.isort,
-    null_ls.builtins.diagnostics.flake8,
-    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.diagnostics.flake8.with({
+      condition = function(utils)
+        return utils.root_has_file({"pyproject.toml", ".flake8"})
+      end,
+    }),
+    null_ls.builtins.diagnostics.mypy.with({
+      condition = function(utils)
+        return utils.root_has_file({"pyproject.toml"})
+      end,
+    }),
   }
 })
 

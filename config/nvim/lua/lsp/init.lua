@@ -33,6 +33,9 @@ local config = {
   },
 }
 
+-- TODO set this up when upgrading to Neovim v0.8
+-- local navic = require('nvim-navic')
+
 vim.diagnostic.config(config)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
@@ -72,6 +75,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<leader>]', vim.lsp.buf.formatting, bufopts)
+  -- TODO set this up when upgrading to Neovim v0.8
+  -- navic.attach(client, bufnr)
 end
 
 
