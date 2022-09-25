@@ -6,6 +6,7 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.undofile = true
 --o.colorcolumn = '80'
+vim.opt.scrolloff = 8
 vim.opt.mouse = 'a'
 vim.opt.wildmenu = true
 vim.opt.showmatch = true
@@ -15,6 +16,8 @@ vim.opt.foldmethod = 'indent'
 vim.opt.foldlevelstart = 10
 vim.opt.foldnestmax = 10
 vim.opt.number = true
+vim.opt.signcolumn = "yes"
+vim.opt.numberwidth = 4
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.termguicolors = true
 
