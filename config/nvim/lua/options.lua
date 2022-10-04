@@ -6,7 +6,9 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.undofile = true
 --o.colorcolumn = '80'
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+vim.opt.wrap = false
 vim.opt.mouse = 'a'
 vim.opt.wildmenu = true
 vim.opt.showmatch = true
@@ -20,6 +22,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.numberwidth = 4
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.termguicolors = true
+-- vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+-- vim.o.statusline = "%{%v:lua.require'nvim-navic'.get_location()%}"
+vim.o.statusline="%<%f %{%v:lua.require'nvim-navic'.get_location()%} %h%m%r%=%-14.(%l,%c%V%) %P"
 
 
 vim.cmd('colorscheme base16-classic-dark')
