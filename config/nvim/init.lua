@@ -105,28 +105,6 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 
-local null_ls = require("null-ls")
-
-null_ls.setup({
-  debug = false,
-  sources = {
-    -- (java|type)script
-    null_ls.builtins.formatting.prettier,
-    -- python
-    null_ls.builtins.formatting.black.with({extra_args={"--fast"}}),
-    null_ls.builtins.formatting.isort,
-    null_ls.builtins.diagnostics.flake8.with({
-      condition = function(utils)
-        return utils.root_has_file({".flake8"})
-      end,
-    }),
-    null_ls.builtins.diagnostics.mypy.with({
-      condition = function(utils)
-        return utils.root_has_file({"pyproject.toml"})
-      end,
-    }),
-  }
-})
 
 -- TODO move to seperate autocmd file
 vim.cmd ([[

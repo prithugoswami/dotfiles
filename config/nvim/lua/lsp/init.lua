@@ -34,7 +34,7 @@ local config = {
 }
 
 -- TODO set this up when upgrading to Neovim v0.8
--- local navic = require('nvim-navic')
+local navic = require('nvim-navic')
 
 vim.diagnostic.config(config)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -76,7 +76,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<leader>]', vim.lsp.buf.formatting, bufopts)
   -- TODO set this up when upgrading to Neovim v0.8
-  -- navic.attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+  end
 end
 
 
@@ -96,3 +98,32 @@ lspconfig.gopls.setup{
   capabilities = capabilities,
   on_attach = on_attach
 }
+
+lspconfig.tsserver.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+--
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  debug = false,
+  on_attach = on_attach,
+  sources = {
+    -- (java|type)script
+    null_ls.builtins.formatting.prettierd,
+    -- python
+    null_ls.builtins.formatting.black.with({extra_args={"--fast"}}),
+    null_ls.builtins.formatting.isort.with({extra_args={"--profile", "black"}}),
+    -- null_ls.builtins.diagnostics.flake8.with({
+    --   condition = function(utils)
+    --     return utils.root_has_file({".flake8"})
+    --   end,
+    -- }),
+    -- null_ls.builtins.diagnostics.mypy.with({
+    --   condition = function(utils)
+    --     return utils.root_has_file({"pyproject.toml"})
+    --   end,
+    -- }),
+  },
+})
