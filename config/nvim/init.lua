@@ -16,7 +16,7 @@ require("nvim-tree").setup({
   },
   renderer = {
     indent_markers = {
-      enable = true 
+      enable = false 
     },
     icons = {
       show = {
@@ -91,7 +91,7 @@ require'nvim-treesitter.configs'.setup {
   -- ignore_install = { "javascript" },
   highlight = {
     enable = true,
-    -- disable = { "c", "rust" },
+    disable = { "help"},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
