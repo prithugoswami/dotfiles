@@ -1,5 +1,5 @@
 #!/bin/sh
-ts_dir="$HOME/docs/org/comono/inspera/timesheets"
+ts_dir="$HOME/docs/org/projects/comono/timesheets"
 ts_file="$ts_dir/timesheet-`date +%Y%m`.csv"
 make_timesheet() {
     last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
@@ -27,7 +27,7 @@ ts_summary() {
     hr_spent="$(awk -F';' '{ sum+=$2 } END {print sum}' $ts_file)"
     last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
     days_left="$(expr $last_day - `date +%d`)"
-    hr_left="$(expr 160 - $hr_spent)"
+    hr_left="$(expr 136 - $hr_spent)"
     avg_hrs="$(awk "BEGIN {printf \"%.2f\", $hr_left/$days_left;exit}")"
     echo -e "Hours put in:\t\t$hr_spent"
     echo -e "Days Left:\t\t$days_left"
