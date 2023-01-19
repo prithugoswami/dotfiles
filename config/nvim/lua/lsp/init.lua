@@ -45,7 +45,7 @@ local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
   return
 end
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
@@ -103,6 +103,12 @@ lspconfig.tsserver.setup{
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+-- lspconfig.terraformls.setup{
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- }
+
 --
 local null_ls = require("null-ls")
 
@@ -115,11 +121,11 @@ null_ls.setup({
     -- python
     null_ls.builtins.formatting.black.with({extra_args={"--fast"}}),
     null_ls.builtins.formatting.isort.with({extra_args={"--profile", "black"}}),
-    -- null_ls.builtins.diagnostics.flake8.with({
-    --   condition = function(utils)
-    --     return utils.root_has_file({".flake8"})
-    --   end,
-    -- }),
+    null_ls.builtins.diagnostics.flake8.with({
+      condition = function(utils)
+        return utils.root_has_file({".flake8"})
+      end,
+    }),
     -- null_ls.builtins.diagnostics.mypy.with({
     --   condition = function(utils)
     --     return utils.root_has_file({"pyproject.toml"})
