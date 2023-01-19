@@ -1,14 +1,16 @@
 vim.cmd [[packadd packer.nvim]]
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+
+  use 'junegunn/goyo.vim'
 
   -- themes
   use 'ayu-theme/ayu-vim'
@@ -24,6 +26,7 @@ return require('packer').startup(function(use)
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig"
   }
+  use 'neoclide/vim-jsx-improve'
 
   -- completion
   use 'hrsh7th/nvim-cmp'
@@ -55,7 +58,7 @@ return require('packer').startup(function(use)
 
   use 'simeji/winresizer'
   use 'rstacruz/vim-closer'
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install', cmd = 'MarkdownPreview'}
+  use {'iamcco/markdown-preview.nvim', run = 'cd app && npm install'}
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
