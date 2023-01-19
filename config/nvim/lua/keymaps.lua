@@ -47,6 +47,8 @@ k('n', '<leader>h', ':Telescope help_tags<CR>', options)
 k('n', '<leader>m', ':nohlsearch<CR>', options)
 k('n', '<leader>z', '<C-W>_', options)
 k('n', 'n', 'nzz', options)
+k('n', '<C-d>', '<C-d>zz', options)
+k('n', '<C-u>', '<C-u>zz', options)
 
 -- fugitive
 k('n', '<leader>g', ':G<CR>', options)

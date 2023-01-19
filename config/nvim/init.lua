@@ -84,31 +84,32 @@ require('telescope').setup {
 
 require('telescope').load_extension('fzf')
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "python", "hcl", "json", "go", "lua", "javascript", "typescript", "html", "css", "c", "cpp", "rust" },
-  sync_install = false,
-  auto_install = true,
-  -- ignore_install = { "javascript" },
-  highlight = {
-    enable = true,
-    disable = { "help"},
+-- require'nvim-treesitter.configs'.setup {
+--   ensure_installed = { "python", "hcl", "json", "go", "lua", "javascript", "typescript", "html", "css", "c", "cpp", "rust" },
+--   sync_install = false,
+--   auto_install = true,
+--   -- ignore_install = { "javascript" },
+--   highlight = {
+--     enable = true,
+--     disable = { "help"},
 
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = true,
-  },
-  indent = {
-    enable = false,
-    disable = {"hcl", "python"}
-  }
-}
+--     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+--     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+--     -- Using this option may slow down your editor, and you may see some duplicate highlights.
+--     -- Instead of true it can also be a list of languages
+--     additional_vim_regex_highlighting = true,
+--   },
+--   indent = {
+--     enable = false,
+--     disable = {"hcl", "python"}
+--   }
+-- }
 
 
 -- TODO move to seperate autocmd file
 vim.cmd ([[
   autocmd FileType html,javascript,lua,typescript,yaml setlocal ts=2 sts=2 sw=2
+  autocmd FileType hcl setlocal ts=2 sts=2 sw=2
   autocmd BufRead  *jsx setlocal sw=2
   autocmd BufRead  *tsx setlocal sw=2
 ]])
