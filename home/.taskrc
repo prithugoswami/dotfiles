@@ -32,8 +32,6 @@ include /usr/share/doc/task/rc/dark-gray-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
 
 urgency.user.tag.in.coefficient=-10
-taskd.server=freecinc.com:53589
-taskd.key=\/home\/prithu\/.task\/freecinc_d30ee1c7.key.pem
-taskd.certificate=\/home\/prithu\/.task\/freecinc_d30ee1c7.cert.pem
-taskd.ca=\/home\/prithu\/.task\/freecinc_d30ee1c7.ca.pem
-taskd.credentials=FreeCinc\/freecinc_d30ee1c7\/a0f5bdf3-1496-4928-9f46-e1c533d4de36
+urgency.user.tag.inspera.coefficient=+8
+urgency.user.tag.prevale.coefficient=+4
+news.version=2.6.0

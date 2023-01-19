@@ -2,6 +2,7 @@ log
 passmenu_
 shiori-menu
 otp
+task-list_
 i3lock -c 000000
 note
 chromium

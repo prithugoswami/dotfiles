@@ -1,5 +1,5 @@
-[core]
-    pager = delta
+; [core]
+;     pager = delta
 
 [user]
 	email = pg@prithu.dev
