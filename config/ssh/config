@@ -16,6 +16,11 @@ Host rpi
     Port 24599
     user prithu
     IdentityFile ~/.ssh/id_rsa
+Host rpi-wg
+    HostName rpi-wg
+    Port 24599
+    user prithu
+    IdentityFile ~/.ssh/id_rsa
 Host lmmdev
     HostName lmmvm
     user prithugoswami524
