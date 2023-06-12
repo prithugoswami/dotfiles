@@ -11,6 +11,9 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use 'junegunn/goyo.vim'
+  use 'MunifTanjim/nui.nvim'
+  use 'dpayne/CodeGPT.nvim'
+
 
   -- themes
   use 'ayu-theme/ayu-vim'
