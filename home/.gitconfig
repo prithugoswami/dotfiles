@@ -34,8 +34,8 @@
 [delta]
     navigate = true  # use n and N to move between diff sections
 
-[merge]
-    conflictstyle = diff3
+; [merge]
+;     conflictstyle = diff3
 
 [diff]
     colorMoved = default
