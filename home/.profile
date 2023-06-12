@@ -9,9 +9,9 @@ export NNN_USE_EDITOR=1
 export NNN_OPENER=xdg-open
 export OPENER=xdg-open
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 source $HOME/.config/secrets
 
 export PATH="$HOME/.poetry/bin:$PATH"
+. "$HOME/.cargo/env"
