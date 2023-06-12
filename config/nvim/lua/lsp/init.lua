@@ -74,7 +74,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>]', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<leader>]', "<cmd>lua vim.lsp.buf.format({async = true})<cr>", bufopts)
+
   -- TODO set this up when upgrading to Neovim v0.8
   if client.server_capabilities.documentSymbolProvider then
       navic.attach(client, bufnr)
@@ -103,6 +104,12 @@ lspconfig.tsserver.setup{
   capabilities = capabilities,
   on_attach = on_attach,
 }
+
+lspconfig.jsonls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 
 -- lspconfig.terraformls.setup{
 --   capabilities = capabilities,
