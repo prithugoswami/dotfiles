@@ -96,7 +96,7 @@ alias ch="ping 8.8.8.8"
 alias yv="youtube-viewer"
 alias mkddir="mkdir `date +%d-%m-%Y`"
 alias thot="vim ~/docs/org/thoughts/`date +%s`"
-alias qn="cd ~/docs/org/notes/quick/ && vim `date +%s`.md"
+alias qn="cd ~/docs/org/notes/quick/ && vim ` date +%Y-%m-%d-%H%M`.md"
 alias tt="transmission-remote"
 # alias yw="mpv --ytdl-format=\"best[height<=480]\""
 alias yw="mpv --ytdl-format=\"bestvideo[height<=480]+bestaudio/best[height<=480]\""
@@ -150,3 +150,4 @@ complete -C /usr/bin/terraform terraform
 
 
 source /home/prithu/.config/broot/launcher/bash/br
+. "$HOME/.cargo/env"
