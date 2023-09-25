@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-echo -n | dmenu $DMENU_ARGS -p "Google" | tr ' ' '+' | xargs printf\
-    'https://www.google.com/search?q=%b' | setsid -f xargs xdg-open

@@ -1,2 +1,0 @@
-#!/bin/bash
-playlist-sync 2>&1 | tee "$HOME/.log/playlist-sync/$(date +%s | md5sum | awk '{print $1}')" 
