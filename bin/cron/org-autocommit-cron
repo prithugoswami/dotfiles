@@ -1,5 +1,3 @@
-#!/bin/sh
-
 cd $HOME/docs/org
 cmsg=$(git status -s)
 git pull

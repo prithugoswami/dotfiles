@@ -30,6 +30,7 @@ return require('packer').startup(function(use)
     requires = "neovim/nvim-lspconfig"
   }
   use 'neoclide/vim-jsx-improve'
+  use 'simrat39/symbols-outline.nvim'
 
   -- completion
   use 'hrsh7th/nvim-cmp'
@@ -54,10 +55,10 @@ return require('packer').startup(function(use)
   }
 
   -- treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
+  -- use {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   run = ':TSUpdate'
+  -- }
 
   use 'simeji/winresizer'
   use 'rstacruz/vim-closer'
