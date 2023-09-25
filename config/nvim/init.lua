@@ -85,6 +85,9 @@ require('telescope').setup {
   }
 }
 
+require("symbols-outline").setup()
+
+
 require('telescope').load_extension('fzf')
 
 -- require'nvim-treesitter.configs'.setup {
