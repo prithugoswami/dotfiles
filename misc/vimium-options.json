@@ -1,5 +1,5 @@
 {
-  "settingsVersion": "1.67",
+  "settingsVersion": "1.67.7",
   "exclusionRules": [
     {
       "pattern": "https?://hackertyper.com/*",
@@ -131,6 +131,82 @@
     },
     {
       "pattern": "https?://monkeytype.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://excalidraw.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://usevia.app/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://localhost:8100/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://localhost:8000/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://config.qmk.fm/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://first20hours.github.io/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://gnusenpai.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://scrimba.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://prithugoswami-glorious-zebra-jrwwr5gjx442q5vv.github.dev/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://design.penpot.app/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://app.excalidraw.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.duolingo.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.musicca.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://v6p9d9t4.ssl.hwcdn.net/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.photopea.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://shop.advaitaashrama.org/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://patatap.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.ro.me/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "about:blank*",
       "passKeys": ""
     }
   ],
