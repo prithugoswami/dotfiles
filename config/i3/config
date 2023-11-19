@@ -22,61 +22,61 @@ default_floating_border none
 hide_edge_borders none
 
 # Change border style <normal|pixel <px>|none|toggle>
-bindsym $mod+u border toggle
-bindsym $mod+Shift+u border pixel 4
+# bindsym $mod+u border toggle
+# bindsym $mod+Shift+u border pixel 4
 
 #}}}
 ## Gaps ## {{{
 
-gaps inner 10
-gaps outer -4
+# gaps inner 10
+# gaps outer -4
 
-bindsym $mod+Shift+0 gaps inner current set 0 , gaps outer current set 0
-bindsym $mod+Shift+9 gaps inner current set 10 , gaps outer current set -4
+#bindsym $mod+Shift+0 gaps inner current set 0 , gaps outer current set 0
+#bindsym $mod+Shift+9 gaps inner current set 10 , gaps outer current set -4
 
-#gaps used if only more than one container on the workspace
-smart_gaps on
+##gaps used if only more than one container on the workspace
+#smart_gaps on
 
-# Gaps Mode
-set $mode_gaps Gaps: (o) outer, (i) inner, (r) reset current, (R) reset all, (0) Zero gaps current
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+## Gaps Mode
+#set $mode_gaps Gaps: (o) outer, (i) inner, (r) reset current, (R) reset all, (0) Zero gaps current
+#set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 
-bindsym $mod+Shift+v mode "$mode_gaps"
+#bindsym $mod+Shift+v mode "$mode_gaps"
 
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym r gaps inner current set 10 , gaps outer current set -4 , mode "default"
-        bindsym Shift+r gaps inner all set 10 , gaps outer all set -4 , mode "default"
-        bindsym 0 gaps inner current set 0 , gaps outer current set 0 , mode "default"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+#mode "$mode_gaps" {
+#        bindsym o      mode "$mode_gaps_outer"
+#        bindsym i      mode "$mode_gaps_inner"
+#        bindsym r gaps inner current set 10 , gaps outer current set -4 , mode "default"
+#        bindsym Shift+r gaps inner all set 10 , gaps outer all set -4 , mode "default"
+#        bindsym 0 gaps inner current set 0 , gaps outer current set 0 , mode "default"
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
+#mode "$mode_gaps_inner" {
+#        bindsym plus  gaps inner current plus 5
+#        bindsym minus gaps inner current minus 5
+#        bindsym 0     gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+#        bindsym Shift+plus  gaps inner all plus 5
+#        bindsym Shift+minus gaps inner all minus 5
+#        bindsym Shift+0     gaps inner all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
+#mode "$mode_gaps_outer" {
+#        bindsym plus  gaps outer current plus 5
+#        bindsym minus gaps outer current minus 5
+#        bindsym 0     gaps outer current set 0
 
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
+#        bindsym Shift+plus  gaps outer all plus 5
+#        bindsym Shift+minus gaps outer all minus 5
+#        bindsym Shift+0     gaps outer all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
 
 #}}}
 ## Color Variables ##{{{
@@ -177,13 +177,14 @@ bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+d exec "rofi -show run -lines 3 -padding 25"
 # bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu -nb "#000" -sb "#FFF" -sf "#000" -h 20`
 bindsym $mod+d exec --no-startup-id `cat .config/launcher | dmenu $dmenu_args`
+bindsym $mod+p exec --no-startup-id dmenu_run
 bindsym $mod+i exec --no-startup-id clipmenu $dmenu_args -l 15
 # Desktop application launcher
 # bindsym $mod+Shift+d exec --no-startup-id "rofi -show drun"
-bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu $dmenu_args -l 20 -i'
+# bindsym $mod+Shift+d exec --no-startup-id j4-dmenu-desktop --dmenu='dmenu $dmenu_args -l 20 -i'
 # bindsym $mod+i exec --no-startup-id "qutebrowser"
 # PD
-bindsym $mod+p exec --no-startup-id dmenu_run $dmenu_args -l 20 -i -F
+# bindsym $mod+p exec --no-startup-id dmenu_run $dmenu_args -l 20 -i -F
 # window swticher using rofi
 bindsym $mod+v exec --no-startup-id "pestman"
 bindsym $mod+slash exec --no-startup-id st -e bash -c 'rifle "$(find ~/ -path "/home/prithu/.*" -prune -o -print  -path "/home/prithu/repos" -prune -o -print -type f | fzf -i --reverse)"'

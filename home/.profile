@@ -1,4 +1,4 @@
-export PATH="$PATH:$(du $HOME/bin/ | cut -f2 | tr '\n' ':' | sed 's/:$//')"
+# export PATH="$PATH:$(du $HOME/bin/ | cut -f2 | tr '\n' ':' | sed 's/:$//')"
 export EDITOR="/usr/bin/vim"
 # export BROWSER="/usr/bin/firefox-developer-edition"
 export BROWSER="/usr/bin/chromium"
@@ -7,11 +7,13 @@ export CM_SELECTIONS="clipboard"
 export TERMINAL="/usr/local/bin/st"
 export NNN_USE_EDITOR=1
 export NNN_OPENER=xdg-open
-export OPENER=xdg-open
+# export OPENER=xdg-open
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-source $HOME/.config/secrets
+# source $HOME/.config/secrets
 
 export PATH="$HOME/.poetry/bin:$PATH"
-. "$HOME/.cargo/env"
+export PATH="$HOME/bin/scripts:$PATH"
+# . "$HOME/.cargo/env"
+export LIBVA_DRIVER_NAME=iHD

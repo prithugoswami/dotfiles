@@ -1,6 +1,13 @@
 log
 passmenu_
+rofi -show emoji -no-show-icons
+rofi -show drun -modes "drun,window,filebrowser"
+redshift -l 12.90:77.64 -t 5700:3600 -v
 shiori-menu
+/home/prithu/.config/.screenlayout/default.sh
+/home/prithu/.config/.screenlayout/external.sh
+/home/prithu/.config/.screenlayout/internal.sh
+slugen 10 | tr -d '\n' | xdotool type --clearmodifiers --file -
 otp
 task-list_
 i3lock -c 000000
@@ -11,8 +18,7 @@ newsboat_
 notes_scrot
 st -e bash -c neomutt
 firefox
-rofi -show emoji
-rofi -show drun
 rofi -show calc -modi calc -no-show-match -no-sort -no-history
-mpv --ytdl-format=720p60 https://twitch.tv/rwxrob
 zbarcam -1 --raw | xsel -ib
+xset r rate 250 60 
+setxkbmap -layout 'us,in' -option "grp:shifts_toggle" -option "ctrl:nocaps"
