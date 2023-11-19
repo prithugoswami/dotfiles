@@ -1,0 +1,2 @@
+#!/bin/bash 
+slugen 10 | tr -d '\n' | xdotool type --clearmodifiers --file -
