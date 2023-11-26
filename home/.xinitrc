@@ -21,6 +21,7 @@ fi
 
 xset r rate 250 60
 setxkbmap -layout 'us,in' -option "grp:shifts_toggle" -option "ctrl:nocaps"
+xrandr --dpi 96
 
 #touchpad-conf && toggle_touchpad
 
