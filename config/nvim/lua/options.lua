@@ -7,6 +7,7 @@ vim.opt.autoindent = true
 vim.opt.undofile = true
 --o.colorcolumn = '80'
 vim.opt.scrolloff = 10
+vim.opt.cursorline = true
 vim.opt.sidescrolloff = 10
 vim.opt.wrap = true
 vim.opt.mouse = 'a'

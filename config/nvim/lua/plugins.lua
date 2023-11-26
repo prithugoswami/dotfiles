@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
   use 'junegunn/goyo.vim'
   use 'MunifTanjim/nui.nvim'
   use 'dpayne/CodeGPT.nvim'
+  use 'rktjmp/lush.nvim'
 
 
   -- themes

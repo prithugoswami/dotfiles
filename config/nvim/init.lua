@@ -3,6 +3,7 @@ require 'options'
 require 'keymaps'
 require 'completion'
 require 'lsp'
+require 'highlights'
 
 -- TODO move each plugin setup to own file
 local function nvim_tree_on_attach(bufnr)
@@ -16,14 +17,55 @@ local function nvim_tree_on_attach(bufnr)
 end
 
 
+-- TODO implement min-width option
+local tree_width_ratio = 0.3
+local tree_height_ratio = 0.82014 
+
 require("nvim-tree").setup({
   on_attach = nvim_tree_on_attach,
   sort_by = "case_sensitive",
+  view = {
+    centralize_selection = true,
+    signcolumn = "auto",
+    float = {
+      enable = true,
+      quit_on_focus_loss = true,
+      open_win_config = function()
+        local screen_w = vim.opt.columns:get()
+        local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+        local window_w = screen_w * tree_width_ratio
+        local window_h = screen_h * tree_height_ratio
+        local window_w_int = math.floor(window_w)
+        local window_h_int = math.floor(window_h)
+        local center_x = (screen_w - window_w) / 2
+        local center_y = ((vim.opt.lines:get() - window_h) / 2)
+                         - vim.opt.cmdheight:get()
+        return {
+          border = "rounded",
+          relative = "editor",
+          row = center_y,
+          col = center_x,
+          width = window_w_int,
+          height = window_h_int,
+        }
+        end,
+    },
+    width = function()
+      return math.floor(vim.opt.columns:get() * tree_width_ratio)
+    end,
+  },
   filters = {
     custom = {"__pycache__"}
   },
   diagnostics = {
     enable = true
+  },
+  actions = {
+    open_file = {
+      window_picker = {
+        enable = false
+      },
+    },
   },
   renderer = {
     indent_markers = {
@@ -34,7 +76,7 @@ require("nvim-tree").setup({
         file = false,
         folder = false,
       },
-      git_placement = "after",
+      git_placement = "before",
       glyphs = {
         git = {
           unstaged = "△",
@@ -49,6 +91,7 @@ require("nvim-tree").setup({
     }
   },
 })
+
 
 require('telescope').setup {
   defaults = {
