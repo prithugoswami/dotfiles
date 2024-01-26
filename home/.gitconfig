@@ -1,5 +1,5 @@
-; [core]
-;     pager = delta
+[core]
+    pager = delta
 
 [user]
 	email = pg@prithu.dev
@@ -43,3 +43,5 @@
     colorMoved = default
 [advice]
 	addEmptyPathspec = false
+
+
