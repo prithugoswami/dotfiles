@@ -16,9 +16,13 @@ list(){
     done
 }
 
+slugify(){
+    echo $@ | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A-Z a-z | sed 's/-$//'
+}
+
 create(){
     title="$@"
-    filename="`date +%Y%m%d%H%M`.md"
+    filename="`date +%Y%m%d%H%M`-$(slugify $title).md"
     printf "# %s\n\n\n" "$title" > $ZET_DIR/$filename
     vim +3 $ZET_DIR/$filename
     t=$(cat $ZET_DIR/$filename | head -1)
