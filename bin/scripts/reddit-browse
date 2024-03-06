@@ -9,11 +9,11 @@ while [ 1 ]
 do
     if [ "$2" = "top" ]
     then
-        url="reddit.com/r/$1/top.json?t=all&after=$after"
+        url="old.reddit.com/r/$1/top.json?t=all&after=$after"
     else
-        url="reddit.com/r/$1.json?after=$after"
+        url="old.reddit.com/r/$1.json?after=$after"
     fi
-    wget --quiet -O - "$url" |\
+    curl -s -L -H "User-Agnet: Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0" "$url" |\
         tee /tmp/rtmp.json | jq '.data.children[] |.data.url' |\
         grep -E 'jpg|png"$' | xargs feh -F 2>/dev/null
 
