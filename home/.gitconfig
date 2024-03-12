@@ -24,6 +24,7 @@
     bra = branch -a
     co = checkout
     df = diff
+    bb = !better-git-branch.sh
     ; up = pull --rebase
 [pull]
 	rebase = false
@@ -45,3 +46,9 @@
 	addEmptyPathspec = false
 
 
+[rerere]
+	enabled = true
+[maintenance]
+	repo = /home/prithu/src/ddt
+[branch]
+	sort = -committerdate
