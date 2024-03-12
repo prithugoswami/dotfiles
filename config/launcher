@@ -1,5 +1,6 @@
 log
 passmenu_
+passmenu_ slow
 rofi -show emoji -no-show-icons
 rofi -show drun -modes "drun,window,filebrowser"
 redshift -l 12.90:77.64 -t 5700:3600 -v

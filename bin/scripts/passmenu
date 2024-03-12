@@ -3,9 +3,14 @@
 shopt -s nullglob globstar
 
 typeit=0
+typeitslow=0
 if [[ $1 == "--type" ]]; then
 	typeit=1
 	shift
+fi
+if [[ $1 == "--slow" ]]; then
+    typeitslow=1
+    shift
 fi
 
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
@@ -20,6 +25,11 @@ password=$(printf '%s\n' "${password_files[@]}" | dmenu "$@")
 if [[ $typeit -eq 0 ]]; then
 	pass show -c "$password" 2>/dev/null
 else
-	pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } |
-		xdotool type --clearmodifiers --file -
+    if [[ $typeitslow -eq 0 ]]; then
+        pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } |
+            xdotool type --clearmodifiers --file -
+    else
+        pass show "$password" | { IFS= read -r pass; printf %s "$pass"; } |
+            xdotool type --delay 100 --clearmodifiers --file -
+    fi
 fi
