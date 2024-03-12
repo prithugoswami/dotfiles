@@ -19,3 +19,11 @@ bin/tmp/*
 config/newsboat/unread
 
 config/mpv/watch_later
+
+# bins
+bin/scripts/fetchtitle
+
+# weechat
+
+config/weechat/*
+!config/weechat/weechat.conf
