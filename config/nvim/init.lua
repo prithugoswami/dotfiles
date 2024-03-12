@@ -158,6 +158,9 @@ require('telescope').load_extension('fzf')
 --   }
 -- }
 
+-- Test runner options
+vim.cmd('let test#strategy = "neovim_sticky"')
+vim.cmd('let test#neovim#term_position = "vert botright"')
 
 -- TODO move to seperate autocmd file
 vim.cmd ([[

@@ -15,6 +15,8 @@ return require('packer').startup(function(use)
   use 'dpayne/CodeGPT.nvim'
   use 'rktjmp/lush.nvim'
 
+  use 'vim-test/vim-test'
+
 
   -- themes
   use 'ayu-theme/ayu-vim'

@@ -5,6 +5,10 @@ vim.g.mapleader = ' '
 k('', '<Space>', '<Nop>', options)
 k('i', 'jk', '<esc>', options)
 
+-- vim-test
+k('n', '<leader>t'  , ':TestNearest<CR>' , options)
+k('n', '<leader>T'  , ':TestFile<CR>'    , options)
+
 -- move around visually (when line is wrapped)
 k('n', 'j', 'gj', options)
 k('n', 'k', 'gk', options)
