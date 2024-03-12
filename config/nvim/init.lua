@@ -26,6 +26,9 @@ local tree_height_ratio = 0.82014
 require("nvim-tree").setup({
   on_attach = nvim_tree_on_attach,
   sort_by = "case_sensitive",
+  update_focused_file = {
+    enable = true,
+  },
   view = {
     centralize_selection = true,
     signcolumn = "auto",
@@ -170,4 +173,5 @@ vim.cmd ([[
   autocmd FileType hcl setlocal ts=2 sts=2 sw=2
   autocmd BufRead  *jsx setlocal sw=2
   autocmd BufRead  *tsx setlocal sw=2
+  autocmd FileType markdown setlocal spell
 ]])
