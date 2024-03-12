@@ -60,6 +60,8 @@ return require('packer').startup(function(use)
   --   'nvim-treesitter/nvim-treesitter',
   --   run = ':TSUpdate'
   -- }
+  
+  use 'f-person/git-blame.nvim'
 
   use 'simeji/winresizer'
   use 'rstacruz/vim-closer'

@@ -130,6 +130,10 @@ require('telescope').setup {
 
 require("symbols-outline").setup()
 
+require('gitblame').setup {
+     --Note how the `gitblame_` prefix is omitted in `setup`
+    enabled = false,
+}
 
 require('telescope').load_extension('fzf')
 
