@@ -29,3 +29,11 @@ Host lmmprod
     HostName lmmaws
     user lmm_dev
     IdentityFile ~/.ssh/id_rsa
+Host mine
+    HostName mine
+    user admin
+    IdentityFile ~/.ssh/mine.pem
+Host tide
+    HostName tide
+    User prithu
+    IdentityFile ~/.ssh/id_rsa
