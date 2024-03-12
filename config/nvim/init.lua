@@ -4,6 +4,7 @@ require 'keymaps'
 require 'completion'
 require 'lsp'
 require 'highlights'
+require 'snippets'
 
 -- TODO move each plugin setup to own file
 local function nvim_tree_on_attach(bufnr)
