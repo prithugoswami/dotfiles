@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-    re := regexp.MustCompile(`<title>(.*?)</title>`)
+    re := regexp.MustCompile(`<title>\n*(.*?)\n*</title>`)
     command := os.Args[0]
     urls := os.Args[1:]
 
