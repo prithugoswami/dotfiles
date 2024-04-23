@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sleep 1
+slop=$(slop -f "%x %y %w %h %g %i") || exit 1
+read -r X Y W H G ID <<< $slop
+sleep 2; ffmpeg -f x11grab -video_size "$W"x"$H" -i :0.0+$X,$Y -f alsa -i default ~/videos/rec`date +%s`.mp4
