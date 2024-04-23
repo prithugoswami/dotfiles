@@ -1,0 +1,27 @@
+#!/bin/bash
+set -eo pipefail
+
+TFVDIR=$HOME/.local/share/tfv
+
+if [ -z "$1" ]; then
+    echo "usage: $0 <version>"
+    exit 1
+fi
+
+if [ ! -d $TFVDIR ]; then
+    mkdir -p $TFVDIR
+fi
+
+version=$1
+
+# check if we have a terraform version already in TFVDIR
+if [ -f "$TFVDIR/terraform_$version" ]; then
+    mv "$TFVDIR/terraform_$version" ~/.local/bin
+    echo "Ready to use terraform $version"
+    exit 0
+fi
+
+wget -P "/tmp/tfv" "https://releases.hashicorp.com/terraform/$version/terraform_${version}_linux_amd64.zip"
+unzip "/tmp/tfv/terraform_${version}_linux_amd64.zip" -d "$TFVDIR/terraform_${version}"
+mv $TFVDIR/terraform_${version}/terraform ~/.local/bin
+echo "Ready to use terraform $version"
