@@ -1,4 +1,5 @@
 log
+systemctl suspend
 passmenu_
 passmenu_ slow
 rofi -show emoji -no-show-icons

@@ -53,16 +53,15 @@ return require('packer').startup(function(use)
   -- telescope
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.4',
+    'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- treesitter
   -- use {
   --   'nvim-treesitter/nvim-treesitter',
   --   run = ':TSUpdate'
   -- }
-  
+
   use 'f-person/git-blame.nvim'
 
   use 'simeji/winresizer'

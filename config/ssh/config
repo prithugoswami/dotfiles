@@ -13,12 +13,10 @@ Host reed
     IdentityFile ~/.ssh/id_rsa
 Host rpi
     HostName rpi
-    Port 24599
     user prithu
     IdentityFile ~/.ssh/id_rsa
 Host rpi-wg
     HostName rpi-wg
-    Port 24599
     user prithu
     IdentityFile ~/.ssh/id_rsa
 Host lmmdev
@@ -35,5 +33,9 @@ Host mine
     IdentityFile ~/.ssh/mine.pem
 Host tide
     HostName tide
+    User prithu
+    IdentityFile ~/.ssh/id_rsa
+Host tide-wg
+    HostName tide-wg
     User prithu
     IdentityFile ~/.ssh/id_rsa
