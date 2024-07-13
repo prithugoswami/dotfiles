@@ -105,6 +105,7 @@ alias rl="gpg --quiet -d ~/docs/org/lifelog/ll.gpg | sed 's/\t/ │ /' | less"
 alias tb="nc termbin.com 9999"
 alias tl="curl -s https://api.kraken.com/0/public/Ticker?pair=XBTUSD | jq -r '.result.XXBTZUSD.c[0]' | cut -d. -f1"
 alias tf="terraform"
+alias tg="terragrunt"
 alias tss="timesheetctl s"
 alias tse="timesheetctl e"
 # generate a qrcode from contents of clipboard
@@ -151,3 +152,5 @@ activate_nvm () {
 
 complete -C /usr/bin/terraform terraform
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source /home/prithu/.config/broot/launcher/bash/br
