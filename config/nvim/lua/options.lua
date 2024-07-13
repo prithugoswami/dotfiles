@@ -28,6 +28,7 @@ vim.opt.termguicolors = true
 vim.o.statusline="%<%f %{%v:lua.require'nvim-navic'.get_location()%} %h%m%r%=%-14.(%l,%c%V%) %P"
 
 
+-- base16-material-darker
 vim.cmd('colorscheme base16-classic-dark')
 vim.cmd('filetype plugin indent on')
 

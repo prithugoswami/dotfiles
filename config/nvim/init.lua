@@ -175,3 +175,5 @@ vim.cmd ([[
   autocmd BufRead  *tsx setlocal sw=2
   autocmd FileType markdown setlocal spell
 ]])
+
+vim.cmd('let g:copilot_enabled = 0')

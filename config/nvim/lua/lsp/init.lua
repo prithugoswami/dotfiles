@@ -95,6 +95,11 @@ lspconfig.pyright.setup{
   }
 }
 
+lspconfig.ruff.setup{
+  capabilities=capabilities,
+  on_attach=on_attach
+}
+
 lspconfig.gopls.setup{
   capabilities = capabilities,
   on_attach = on_attach
@@ -147,6 +152,18 @@ lspconfig.lua_ls.setup {
     return true
   end
 }
+
+lspconfig.terraformls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  pattern = {"*.tf", "*.tfvars"},
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 
 -- lspconfig.terraformls.setup{
 --   capabilities = capabilities,

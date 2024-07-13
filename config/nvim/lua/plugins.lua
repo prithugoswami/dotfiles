@@ -44,6 +44,7 @@ return require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
+  use 'github/copilot.vim'
 
   -- tpope deserves his own section. All hail lord tpope!
   use 'tpope/vim-fugitive'
@@ -75,3 +76,4 @@ return require('packer').startup(function(use)
   }
 
 end)
+
