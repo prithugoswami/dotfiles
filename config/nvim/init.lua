@@ -12,6 +12,8 @@ vim.opt.background = 'dark'
 vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 
+vim.g.copilot_enabled = 0
+
 -- vim.opt.clipboard = 'unnamedplus'
 vim.opt.undofile = true
 
@@ -94,6 +96,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
 -- tab navigation
 vim.keymap.set('n', 'H', 'gT')
 vim.keymap.set('n', 'L', 'gt')
@@ -111,6 +116,9 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- Launches
+vim.keymap.set('n', '<leader>g', ':Neogit<cr>')
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -349,6 +357,8 @@ require('lazy').setup {
             'rafamadriz/friendly-snippets',
             config = function()
               require('luasnip.loaders.from_vscode').lazy_load()
+
+              require 'snippets'
             end,
           },
         },
@@ -455,6 +465,7 @@ require('lazy').setup {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'buffer' },
           { name = 'path' },
         },
       }
@@ -492,13 +503,16 @@ require('lazy').setup {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  { 'nyoom-engineering/oxocarbon.nvim', 
-  	config = function() 
-		vim.cmd.colorscheme "oxocarbon"
-	end },
+  {
+    'nyoom-engineering/oxocarbon.nvim',
+    config = function()
+      vim.cmd.colorscheme 'oxocarbon'
+    end,
+  },
   require 'plugins.nvimtree',
   require 'plugins.neogit',
   require 'plugins.lint',
+  { 'github/copilot.vim' },
 }
 
 -- Need to test
