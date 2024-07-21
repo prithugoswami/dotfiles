@@ -16,6 +16,7 @@
     sr  = !"git log --format=%H -n 10 | xargs git show"
     pushall = !"git remote | xargs -L1 git push"
     a = !"git status --short | grep \"^ M\\|^ D\\|^\\?\\?\" | fzf -m | awk '{ print $2 }' | xargs git add"
+    root = "rev-parse --show-toplevel"
     st = status --short
     ci = commit
     ca = commit --amend
