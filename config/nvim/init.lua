@@ -57,6 +57,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Previous [D]iagnos
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+vim.keymap.set('n', '<leader>c', ':ChatGPT<CR>', { desc = 'Open ChatGPT' })
+
 -- Diagnostics config
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
@@ -282,8 +284,7 @@ require('lazy').setup {
         ruff = {},
         gopls = {},
         jsonls = {},
-        terraformls = {},
-        tsserver = {},
+        ts_ls = {},
         -- ccls = {},
         lua_ls = {},
       }
@@ -293,6 +294,7 @@ require('lazy').setup {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        { 'terraformls', version = 'v0.34.2' },
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -304,7 +306,14 @@ require('lazy').setup {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            if server_name == 'terraformls' then
+              local root_pattern = require('lspconfig.util').root_pattern
+              print('Got terraformls', server_name)
+              require('lspconfig')[server_name].setup {}
+              -- require('lspconfig')[server_name].setup { root_dir = root_pattern '.terraformls_root' }
+            else
+              require('lspconfig')[server_name].setup {}
+            end
           end,
         },
       }
@@ -329,7 +338,7 @@ require('lazy').setup {
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = { c = true, cpp = true, go = true }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -337,7 +346,7 @@ require('lazy').setup {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        python = { 'isort', 'ruff_format' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
@@ -512,7 +521,11 @@ require('lazy').setup {
   require 'plugins.nvimtree',
   require 'plugins.neogit',
   require 'plugins.lint',
-  { 'github/copilot.vim' },
+  require 'plugins.avante',
+  require 'plugins.chatgpt',
+  require 'plugins.trouble',
+  require 'plugins.markdown-preview',
+  -- { 'github/copilot.vim' },
 }
 
 -- Need to test
