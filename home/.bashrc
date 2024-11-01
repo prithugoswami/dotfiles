@@ -123,7 +123,24 @@ alias b="buku --suggest"
 # 🡲 (Right arrow shorter)
 # ❯ (angle bracket)
 # › (angle bracket)
-PS1="\e[01;34m[\[\e[1;00m\]\w\[\e[01;34m\]]\[\e[01;00m\]\[\e[01;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's/^/ (/' | sed 's/$/)/') \[\e[01;00m\]\n🞂 "
+_branch() {
+    git rev-parse --abbrev-ref HEAD 2>/dev/null
+}
+_repo(){
+    basename `git rev-parse --show-toplevel 2>/dev/null` 2>/dev/null
+}
+
+_repbra() {
+    r=$(_repo)
+    b=$(_branch)
+    if [ "$r" -a "$b" ]
+    then
+        echo `_repo` • `_branch`
+    fi
+}
+
+
+PS1="\e[01;34m[\[\e[1;00m\]\w\[\e[01;34m\]]\[\e[01;00m\]\[\e[01;32m\] \$(_repbra) \[\e[01;00m\]\n🞂 "
 # PS1="\w\[\033[01;34m\]\[\033[01;00m\]\[\033[01;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2 | sed 's/^/ (/' | sed 's/$/)/') \[\033[01;00m\]› "
 
 # PS1='\[\033[01;32m\]ॐ [\[\033[37m\]\w\[\033[32m\]]\[\033[00m\] '
