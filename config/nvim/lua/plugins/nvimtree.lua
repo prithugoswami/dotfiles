@@ -1,4 +1,4 @@
-local tree_width_ratio = 0.3
+local tree_width_ratio = 0.18
 local tree_height_ratio = 0.82014
 
 return {
@@ -18,10 +18,11 @@ return {
       enable = true,
     },
     view = {
+      preserve_window_proportions = true,
       centralize_selection = true,
       signcolumn = 'auto',
       float = {
-        enable = true,
+        enable = false,
         quit_on_focus_loss = true,
         open_win_config = function()
           local screen_w = vim.opt.columns:get()
@@ -54,14 +55,21 @@ return {
     },
     actions = {
       open_file = {
+        quit_on_open = true,
         window_picker = {
           enable = false,
         },
       },
     },
+    tab = {
+      sync = {
+        open = true,
+        close = true,
+      },
+    },
     renderer = {
       indent_markers = {
-        enable = false,
+        enable = true,
       },
       icons = {
         show = {
