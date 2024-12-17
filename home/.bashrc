@@ -113,6 +113,7 @@ alias qrclip="xsel -ob | qrencode -o - | feh --force-aliasing -Z -"
 alias b="buku --suggest"
 #alias lncli="lncli -n testnet"
 
+alias gr="cd \`git rev-parse --show-toplevel\`"
 
 #alias ls='ls'
 
@@ -154,7 +155,7 @@ HISTCONTROL=ingoreboth
 HISTSIZE=100000000
 HISTFILESIZE=100000000
 PROMPT_COMMAND='history -a'
-HISTIGNORE='ls:bg:fg:history:cd:rm'
+HISTIGNORE='ls:bg:fg:history:cd:rm:gr'
 
 slugen () {
     # generate a slug of alphabets
@@ -171,3 +172,15 @@ complete -C /usr/bin/terraform terraform
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source /home/prithu/.config/broot/launcher/bash/br
+# # Load pyenv automatically by appending
+# # the following to
+# # ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# # and ~/.bashrc (for interactive shells) :
+#
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+#
+# # Restart your shell for the changes to take effect.
+#
+# This thing slows the prompt find out why. is the eval line?
