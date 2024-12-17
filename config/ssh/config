@@ -5,7 +5,7 @@ Host glix
     SetEnv TERM=xterm-color
 Host inty
     HostName inty
-    user ubuntu
+    user prithu
     IdentityFile ~/.ssh/id_rsa
 Host reed
     HostName reed
