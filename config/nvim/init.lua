@@ -24,6 +24,7 @@ vim.opt.signcolumn = 'yes'
 -- by default split to the right/below
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.laststatus = 3
 
 vim.cmd.colorscheme 'habamax'
 
@@ -58,6 +59,11 @@ vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic' 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 vim.keymap.set('n', '<leader>c', ':ChatGPT<CR>', { desc = 'Open ChatGPT' })
+
+vim.api.nvim_create_autocmd({ 'BufRead' }, {
+  pattern = { '*.imba' },
+  command = 'setlocal tabstop=2 noexpandtab sw=0',
+})
 
 -- Diagnostics config
 local signs = {
@@ -225,7 +231,9 @@ require('lazy').setup {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'folke/neodev.nvim', opts = {} },
+      { 'folke/lazydev.nvim', ft = 'lua', opts = { library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      } } },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -285,6 +293,7 @@ require('lazy').setup {
         gopls = {},
         jsonls = {},
         ts_ls = {},
+        eslint = {},
         -- ccls = {},
         lua_ls = {},
       }
@@ -472,6 +481,7 @@ require('lazy').setup {
           end,
         },
         sources = {
+          { name = 'lazydev', group_index = 0 },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'buffer' },
@@ -494,6 +504,7 @@ require('lazy').setup {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      require('mini.pairs').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -527,6 +538,7 @@ require('lazy').setup {
   require 'plugins.markdown-preview',
   -- { 'github/copilot.vim' },
 }
+require 'colors.hl'
 
 -- Need to test
 -- vim.opt.ignorecase = true
