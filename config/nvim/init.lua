@@ -88,7 +88,7 @@ local config = {
   float = {
     focusable = false,
     style = 'minimal',
-    border = 'none',
+    border = 'single',
     -- max_width = 80,
     source = 'always',
     header = '',
@@ -317,7 +317,6 @@ require('lazy').setup {
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             if server_name == 'terraformls' then
               local root_pattern = require('lspconfig.util').root_pattern
-              print('Got terraformls', server_name)
               require('lspconfig')[server_name].setup {}
               -- require('lspconfig')[server_name].setup { root_dir = root_pattern '.terraformls_root' }
             else
@@ -388,6 +387,7 @@ require('lazy').setup {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'andersevenrud/cmp-tmux',
     },
     config = function()
       -- See `:help cmp`
@@ -476,6 +476,7 @@ require('lazy').setup {
               luasnip = '[Snippet]',
               buffer = '[Buffer]',
               path = '[Path]',
+              tmux = '[Tmux]',
             })[entry.source.name]
             return vim_item
           end,
@@ -483,6 +484,7 @@ require('lazy').setup {
         sources = {
           { name = 'lazydev', group_index = 0 },
           { name = 'nvim_lsp' },
+          { name = 'tmux', option = { all_panes = true } },
           { name = 'luasnip' },
           { name = 'buffer' },
           { name = 'path' },
