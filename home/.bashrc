@@ -11,9 +11,9 @@ set -o vi
 
 alias ls='ls --color=auto'
 
-cd() {
-	builtin cd "$@" && ls;
-}
+# cd() {
+# 	builtin cd "$@" && ls;
+# }
 
 [[ -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
