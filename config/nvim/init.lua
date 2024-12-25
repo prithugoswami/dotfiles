@@ -65,6 +65,11 @@ vim.api.nvim_create_autocmd({ 'BufRead' }, {
   command = 'setlocal tabstop=2 noexpandtab sw=0',
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  command = 'setlocal sw=2',
+})
+
 -- Diagnostics config
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
@@ -197,7 +202,9 @@ require('lazy').setup {
     },
     config = function()
       require('telescope').setup {
-        pickers = {},
+        pickers = {
+          buffers = require('telescope.themes').get_ivy { previewer = false, border = false, layout_config = { height = 15 } },
+        },
         defaults = {
           mappings = {
             i = {
@@ -484,7 +491,7 @@ require('lazy').setup {
         sources = {
           { name = 'lazydev', group_index = 0 },
           { name = 'nvim_lsp' },
-          { name = 'tmux', option = { all_panes = true } },
+          { name = 'tmux' },
           { name = 'luasnip' },
           { name = 'buffer' },
           { name = 'path' },
