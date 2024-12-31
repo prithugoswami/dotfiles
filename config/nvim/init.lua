@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd({ 'BufRead' }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json' },
   command = 'setlocal sw=2',
 })
 
@@ -364,7 +364,10 @@ require('lazy').setup {
         python = { 'isort', 'ruff_format' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd', 'prettier' } },
+        typescript = { { 'prettierd', 'prettier' } },
+        typescriptreact = { { 'prettierd', 'prettier' } },
+        javascriptreact = { { 'prettierd', 'prettier' } },
       },
     },
   },
@@ -497,6 +500,12 @@ require('lazy').setup {
           { name = 'path' },
         },
       }
+      cmp.setup.filetype({ 'sql', 'mysql' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+        },
+      })
     end,
   },
   {
@@ -513,7 +522,6 @@ require('lazy').setup {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
-      require('mini.pairs').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -545,6 +553,19 @@ require('lazy').setup {
   require 'plugins.chatgpt',
   require 'plugins.trouble',
   require 'plugins.markdown-preview',
+  require 'plugins.dadbod',
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod', lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
+    },
+  },
+  {
+    'rest-nvim/rest.nvim',
+  },
+  { 'nvim-treesitter/nvim-treesitter' },
+
   -- { 'github/copilot.vim' },
 }
 require 'colors.hl'
