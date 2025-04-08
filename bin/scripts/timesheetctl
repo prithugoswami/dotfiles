@@ -8,7 +8,7 @@ get_file() {
 
 make_timesheet() {
     last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
-    project=${1:-"inspera"}
+    project=${1:-"artifik"}
     file=$(get_file $project)
     if [[ -f $file ]]
     then
@@ -23,7 +23,7 @@ make_timesheet() {
 }
 
 edit_timesheet() {
-    project=${1:-"inspera"}
+    project=${1:-"artifik"}
     file=$(get_file $project)
     if [[ ! -f $file ]]
     then
@@ -33,7 +33,7 @@ edit_timesheet() {
 }
 
 ts_summary() {
-    project=${1:-"inspera"}
+    project=${1:-"artifik"}
     file=$(get_file $project)
     hr_spent="$(awk -F';' '{ sum+=$2 } END {print sum}' $file)"
     last_day="$(cal `date '+%m %Y'` | head -n -1 | tail -1 | awk '{print $NF}')"
