@@ -9,7 +9,7 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.background = 'dark'
 
-vim.opt.relativenumber = true
+vim.opt.number = true
 vim.opt.mouse = 'a'
 
 vim.g.copilot_enabled = 0
@@ -35,6 +35,10 @@ vim.opt.hlsearch = true
 
 vim.opt.list = true
 vim.keymap.set('n', '<leader>m', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader>r', '<cmd>Rest run<CR>')
+vim.keymap.set('n', '<leader>db', '<cmd>DBUIToggle<CR>')
+vim.keymap.set('n', '<leader>cg', '<cmd>Copilot disable<CR>')
+vim.keymap.set('n', '<leader>cG', '<cmd>Copilot enable<CR>')
 
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
@@ -63,6 +67,13 @@ vim.keymap.set('n', '<leader>c', ':ChatGPT<CR>', { desc = 'Open ChatGPT' })
 vim.api.nvim_create_autocmd({ 'BufRead' }, {
   pattern = { '*.imba' },
   command = 'setlocal tabstop=2 noexpandtab sw=0',
+})
+
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = 'mysql',
+  callback = function()
+    vim.bo.commentstring = '-- %s'
+  end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
@@ -145,15 +156,61 @@ require('lazy').setup {
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
+    config = function()
+      require('gitsigns').setup {
+        on_attach = function(bufnr)
+          local gitsigns = require 'gitsigns'
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+          -- Navigation
+          map('n', ']c', function()
+            if vim.wo.diff then
+              vim.cmd.normal { ']c', bang = true }
+            else
+              gitsigns.nav_hunk 'next'
+            end
+          end)
+
+          map('n', '[c', function()
+            if vim.wo.diff then
+              vim.cmd.normal { '[c', bang = true }
+            else
+              gitsigns.nav_hunk 'prev'
+            end
+          end)
+          -- Actions
+          map('n', '<leader>hs', gitsigns.stage_hunk)
+          map('n', '<leader>hr', gitsigns.reset_hunk)
+
+          map('v', '<leader>hs', function()
+            gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end)
+
+          map('v', '<leader>hr', function()
+            gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end)
+          map('n', '<leader>hS', gitsigns.stage_buffer)
+          map('n', '<leader>hR', gitsigns.reset_buffer)
+          map('n', '<leader>hh', gitsigns.preview_hunk)
+          map('n', '<leader>hi', gitsigns.preview_hunk_inline)
+          map('n', '<leader>hb', function()
+            gitsigns.blame_line { full = true }
+          end)
+          map('n', '<leader>hQ', function()
+            gitsigns.setqflist 'all'
+          end)
+          map('n', '<leader>hq', gitsigns.setqflist)
+          map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+          map('n', '<leader>tw', gitsigns.toggle_word_diff)
+          -- Text object
+          map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+        end,
+      }
+    end,
   },
   {
     'folke/which-key.nvim',
@@ -256,7 +313,7 @@ require('lazy').setup {
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
           map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -292,7 +349,7 @@ require('lazy').setup {
         end,
       })
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
         pyright = {},
@@ -303,6 +360,8 @@ require('lazy').setup {
         eslint = {},
         -- ccls = {},
         lua_ls = {},
+        -- find a way to run this only for a specific path pattern
+        -- tailwindcss = {},
       }
       require('mason').setup()
       -- You can add other tools here that you want Mason to install
@@ -310,7 +369,8 @@ require('lazy').setup {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        { 'terraformls', version = 'v0.34.2' },
+        -- { 'terraformls', version = 'v0.34.2' },
+        'terraformls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -355,158 +415,23 @@ require('lazy').setup {
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true, go = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          stop_after_first = true,
         }
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'ruff_format' },
+        python = { 'ruff_format', 'isort' },
+        mysql = { 'sqruff' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { { 'prettierd', 'prettier' } },
-        typescript = { { 'prettierd', 'prettier' } },
-        typescriptreact = { { 'prettierd', 'prettier' } },
-        javascriptreact = { { 'prettierd', 'prettier' } },
+        javascript = { 'prettierd', 'prettier' },
+        typescript = { 'prettierd', 'prettier' },
+        typescriptreact = { 'prettierd', 'prettier' },
+        javascriptreact = { 'prettierd', 'prettier' },
       },
     },
-  },
-  { -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
-        'L3MON4D3/LuaSnip',
-        build = 'make install_jsregexp',
-        dependencies = {
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-
-              require 'snippets'
-            end,
-          },
-        },
-      },
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'andersevenrud/cmp-tmux',
-    },
-    config = function()
-      -- See `:help cmp`
-      local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
-      luasnip.config.setup {}
-      local kind_icons = {
-        Text = '',
-        Method = 'm',
-        Function = '',
-        Constructor = '',
-        Field = '',
-        Variable = '',
-        Class = '',
-        Interface = '',
-        Module = '',
-        Property = '',
-        Unit = '',
-        Value = '',
-        Enum = '',
-        Keyword = '',
-        Snippet = '',
-        Color = '',
-        File = '',
-        Reference = '',
-        Folder = '',
-        EnumMember = '',
-        Constant = '',
-        Struct = '',
-        Event = '',
-        Operator = '',
-        TypeParameter = '',
-      }
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        completion = { completeopt = 'menu,menuone,noinsert' },
-
-        -- For an understanding of why these mappings were
-        -- chosen, you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        mapping = cmp.mapping.preset.insert {
-          ['<C-j>'] = cmp.mapping.select_next_item(),
-          ['<C-k>'] = cmp.mapping.select_prev_item(),
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<CR>'] = cmp.mapping.confirm { select = true },
-          ['<C-Space>'] = cmp.mapping.complete {},
-
-          -- Think of <c-l> as moving to the right of your snippet expansion.
-          --  So if you have a snippet that's like:
-          --  function $name($args)
-          --    $body
-          --  end
-          --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-        },
-        formatting = {
-          fields = { 'kind', 'abbr', 'menu' },
-          expandable_indicator = true,
-          format = function(entry, vim_item)
-            -- Kind icons
-            vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
-            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-            vim_item.menu = ({
-              nvim_lsp = '[LSP]',
-              luasnip = '[Snippet]',
-              buffer = '[Buffer]',
-              path = '[Path]',
-              tmux = '[Tmux]',
-            })[entry.source.name]
-            return vim_item
-          end,
-        },
-        sources = {
-          { name = 'lazydev', group_index = 0 },
-          { name = 'nvim_lsp' },
-          { name = 'tmux' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
-        },
-      }
-      cmp.setup.filetype({ 'sql', 'mysql' }, {
-        sources = {
-          { name = 'vim-dadbod-completion' },
-          { name = 'buffer' },
-        },
-      })
-    end,
   },
   {
     'echasnovski/mini.nvim',
@@ -546,11 +471,10 @@ require('lazy').setup {
       vim.cmd.colorscheme 'oxocarbon'
     end,
   },
+  require 'plugins.cmp',
   require 'plugins.nvimtree',
   require 'plugins.neogit',
   require 'plugins.lint',
-  require 'plugins.avante',
-  require 'plugins.chatgpt',
   require 'plugins.trouble',
   require 'plugins.markdown-preview',
   require 'plugins.dadbod',
@@ -566,8 +490,9 @@ require('lazy').setup {
   },
   { 'nvim-treesitter/nvim-treesitter' },
 
-  -- { 'github/copilot.vim' },
+  { 'github/copilot.vim' },
 }
+
 require 'colors.hl'
 
 -- Need to test
