@@ -7,7 +7,7 @@
 	signingkey = A17AFDEA2EF9A76AA868285DE2AB251EDB8945E5
 
 [alias]
-    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C()%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
     lgh = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ah)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lgs = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -22,6 +22,9 @@
     ca = commit --amend
     caa = commit -a --amend
     br = branch
+    brf = "!git checkout $(git branch --all | fzf | sed 's#remotes/origin/##' | tr -d ' *')"
+    # show unmerged
+    su = "diff --name-status --diff-filter=U"
     bra = branch -a
     co = checkout
     df = diff
@@ -29,6 +32,9 @@
     ; up = pull --rebase
 [pull]
 	rebase = false
+
+[rebase]
+    autoStash = true
 [init]
 	defaultBranch = main
 
@@ -36,7 +42,10 @@
     diffFilter = delta --color-only
 
 [delta]
+    tabs = 4
     navigate = true  # use n and N to move between diff sections
+    true-color = always
+    dark = true
 
 ; [merge]
 ;     conflictstyle = diff3
@@ -50,6 +59,6 @@
 [rerere]
 	enabled = true
 [maintenance]
-	repo = /home/prithu/src/ddt
+	repo = /home/prithu/src/artifik
 [branch]
 	sort = -committerdate
