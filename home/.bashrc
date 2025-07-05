@@ -114,6 +114,7 @@ alias b="buku --suggest"
 #alias lncli="lncli -n testnet"
 
 alias gr="cd \`git rev-parse --show-toplevel\`"
+alias grf="gr;f"
 
 #alias ls='ls'
 
@@ -155,7 +156,7 @@ HISTCONTROL=ingoreboth
 HISTSIZE=100000000
 HISTFILESIZE=100000000
 PROMPT_COMMAND='history -a'
-HISTIGNORE='ls:bg:fg:history:cd:rm:gr'
+HISTIGNORE='ls:bg:fg:history:cd:rm:gr:git br: git brf:git st:llm'
 
 slugen () {
     # generate a slug of alphabets
@@ -168,7 +169,7 @@ activate_nvm () {
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 }
 
-complete -C /usr/bin/terraform terraform
+complete -C $HOME/.local/bin/terraform terraform
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source /home/prithu/.config/broot/launcher/bash/br
@@ -184,3 +185,4 @@ source /home/prithu/.config/broot/launcher/bash/br
 # # Restart your shell for the changes to take effect.
 #
 # This thing slows the prompt find out why. is the eval line?
+eval "$(direnv hook bash)"
