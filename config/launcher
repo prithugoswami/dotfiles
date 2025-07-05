@@ -20,7 +20,7 @@ newsboat_
 notes_scrot
 st -e bash -c neomutt
 firefox
-rofi -show calc -modi calc -no-show-match -no-sort -no-history
+rofi -show calc -modi calc -no-show-match -no-sort -no-show-icons
 zbarcam -1 --raw | xsel -ib
 xset r rate 250 60 
 setxkbmap -layout 'us,in' -option "grp:shifts_toggle" -option "ctrl:nocaps"
