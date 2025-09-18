@@ -31,10 +31,11 @@
     bb = !better-git-branch.sh
     ; up = pull --rebase
 [pull]
-	rebase = false
+	rebase = true
 
 [rebase]
     autoStash = true
+
 [init]
 	defaultBranch = main
 

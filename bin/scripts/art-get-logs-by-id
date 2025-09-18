@@ -1,0 +1,57 @@
+#!/bin/bash
+set -exo pipefail
+
+rel_epoch () {
+    now=$(date +%s)
+    if [[ "$#" -eq 0 ]]; then
+        return 1
+    fi
+    relative_time=$1
+    unit=${relative_time: -1}
+    value=${relative_time:0: -1}
+    # Calculate the offset in seconds based on the unit
+    if [ "$unit" == "h" ]; then
+        offset=$((value * 3600))
+    elif [ "$unit" == "d" ]; then
+        offset=$((value * 86400))
+    else
+        echo "Invalid input. Please provide a relative time in hours (h) or days (d)."
+        exit return 1
+    fi
+    # Calculate the Unix epoch time at the relative time
+    epoch_time=$((now - offset))
+    echo $epoch_time
+}
+
+
+if [[ $# -eq 0 ]]; then
+    exit 1
+fi
+
+rel_time="2h"
+if [[ -n $2 ]]; then
+    rel_time="$2"
+fi
+
+
+LOG_GROUP_NAME="/aws/lambda/dev-Artifik-API"
+query_string="fields @logStream | filter @message like '${1}'"
+
+query_id=$(aws logs start-query --query-language CWLI --log-group-name $LOG_GROUP_NAME --query-string "$query_string" --start-time $(rel_epoch $rel_time) --end-time $(date +%s) | jq -r '.queryId')
+
+query_result=""
+while [[ $query_status != Complete ]];
+do
+    sleep 2
+    query_result=$(aws logs get-query-results --query-id $query_id)
+    query_status=$(echo $query_result | jq -r '.status')
+done
+
+log_stream_name=$(echo $query_result | jq -r '.results[0][0].value')
+
+if [[ $log_stream_name = null ]]; then
+    echo "Not found"
+    exit 1
+else
+    aws logs get-log-events --log-group-name $LOG_GROUP_NAME --log-stream-name $log_stream_name --output text > `date +%y%m%d`-$1.log
+fi

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Set the default S3 bucket and base prefix
+S3_BUCKET="s3://share"
+DEFAULT_PREFIX="ss"
+
+# Check if a file path argument is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <file_path> [optional_prefix] [optional_s3_filename]"
+  echo "Example: $0 image.png"
+  echo "         $0 another_image.jpg proj"
+  echo "         $0 document.pdf reports/final_report.pdf"
+  exit 1
+fi
+
+file_path="$1"
+optional_prefix="$2"
+optional_filename="$3"
+
+# Check if the provided file exists
+if [ ! -f "$file_path" ]; then
+  echo "Error: File not found: $file_path"
+  exit 1
+fi
+
+# Determine the S3 key
+if [ -z "$optional_filename" ]; then
+  timestamp=$(date +%Y-%m-%dT%H:%M:%S)
+  random_chars=$(head /dev/urandom | tr -dc 'a-z' | head -c 4)
+  s3_prefix="${S3_BUCKET}/${optional_prefix:-${DEFAULT_PREFIX}}"
+  s3_key="${s3_prefix}/${timestamp}-${random_chars}.png"
+else
+  s3_key="${S3_BUCKET}/${optional_prefix:-${DEFAULT_PREFIX}}/${optional_filename}"
+  # Check if the S3 key already exists
+  if aws s3 ls "$s3_key" --profile cloudflare > /dev/null 2>&1; then
+    read -p "Warning: $s3_key already exists. Do you want to overwrite? (Y/n) " -n 1 -r
+    echo    # Move to a new line after the input
+    if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
+      echo "Upload cancelled."
+      exit 0
+    fi
+  fi
+fi
+
+# Upload the file to S3
+echo "Uploading $file_path to $s3_key using profile 'cloudflare'..."
+aws s3 cp "$file_path" "$s3_key" --profile cloudflare
+
+if [ $? -eq 0 ]; then
+  echo "Successfully uploaded $file_path to $s3_key"
+  echo "URL: https://m.prithu.dev/${s3_key#s3://share/}"
+else
+  echo "Error during upload."
+fi
+
+exit 0

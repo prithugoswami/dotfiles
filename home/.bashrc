@@ -98,7 +98,7 @@ alias mkddir="mkdir `date +%d-%m-%Y`"
 alias qn="vim ~/docs/org/0-inbox/\$(date +%Y-%m-%d-%H%M).md"
 alias tt="transmission-remote"
 # alias yw="mpv --ytdl-format=\"best[height<=480]\""
-alias yw="mpv --ytdl-format=\"bestvideo[height<=480]+bestaudio/best[height<=480]\""
+alias yw="mpv --ytdl-format=\"bestvideo[height<=1080]+bestaudio\""
 alias yal="mpv --ytdl-format=251"
 alias tmuxl="tmux list-session"
 alias rl="gpg --quiet -d ~/docs/org/lifelog/ll.gpg | sed 's/\t/ │ /' | less"
@@ -186,3 +186,4 @@ source /home/prithu/.config/broot/launcher/bash/br
 #
 # This thing slows the prompt find out why. is the eval line?
 eval "$(direnv hook bash)"
+eval "$(zoxide init bash)"

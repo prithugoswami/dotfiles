@@ -1,0 +1,179 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Parse command line arguments
+LOG_STREAM=""
+LOG_GROUP=""
+SEARCH_STRING=""
+LOG_GROUP_PATTERN=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --log_stream)
+            LOG_STREAM="$2"
+            shift 2
+            ;;
+        --log_group)
+            LOG_GROUP="$2"
+            shift 2
+            ;;
+        *)
+            if [ -z "$SEARCH_STRING" ]; then
+                SEARCH_STRING="$1"
+            else
+                LOG_GROUP_PATTERN="$1"
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Handle log stream mode
+if [ -n "$LOG_STREAM" ]; then
+    if [ -z "$LOG_GROUP" ]; then
+        echo "Error: --log_group is required when using --log_stream"
+        echo "Usage: $0 --log_stream <stream_name> --log_group <group_name>"
+        exit 1
+    fi
+    
+    echo "Fetching log stream: $LOG_STREAM"
+    echo "From log group: $LOG_GROUP"
+    
+    # Create temporary file for results
+    TEMP_FILE=$(mktemp)
+    trap "rm -f $TEMP_FILE" EXIT
+    
+    # Paginate through the log stream
+    NEXT_TOKEN=""
+    PAGE=1
+    
+    while true; do
+        echo "Fetching page $PAGE..."
+        
+        if [ -z "$NEXT_TOKEN" ]; then
+            RESPONSE=$(aws logs get-log-events \
+                --log-group-name "$LOG_GROUP" \
+                --log-stream-name "$LOG_STREAM" \
+                --start-from-head \
+                --output json 2>/dev/null || echo "{}")
+        else
+            RESPONSE=$(aws logs get-log-events \
+                --log-group-name "$LOG_GROUP" \
+                --log-stream-name "$LOG_STREAM" \
+                --next-token "$NEXT_TOKEN" \
+                --start-from-head \
+                --output json 2>/dev/null || echo "{}")
+        fi
+        
+        # Extract events and next token
+        echo "$RESPONSE" | jq -r '.events[] | "[\(.timestamp | . / 1000 | strftime("%Y-%m-%d %H:%M:%S"))] \(.message)"' >> "$TEMP_FILE"
+        
+        NEW_TOKEN=$(echo "$RESPONSE" | jq -r '.nextForwardToken // empty')
+        
+        # Check if we've reached the end
+        if [ -z "$NEW_TOKEN" ] || [ "$NEW_TOKEN" = "$NEXT_TOKEN" ]; then
+            break
+        fi
+        
+        NEXT_TOKEN="$NEW_TOKEN"
+        PAGE=$((PAGE + 1))
+    done
+    
+    # Display results in less
+    if [ -s "$TEMP_FILE" ]; then
+        less -R "$TEMP_FILE"
+    else
+        echo "No log events found"
+    fi
+    
+    exit 0
+fi
+
+# Original search functionality
+if [ -z "$SEARCH_STRING" ]; then
+    echo "Usage: $0 <search_string> [log_group_pattern]"
+    echo "       $0 --log_stream <stream_name> --log_group <group_name>"
+    echo "Example: $0 'ERROR' '/aws/lambda/*'"
+    echo "Example: $0 --log_stream '2025/06/19/[268]aaf01203aa784498a87c2c8ccf381b16' --log_group '/aws/lambda/myfunction'"
+    exit 1
+fi
+
+echo "Searching for: $SEARCH_STRING"
+
+# Get all log groups with proper filtering
+if [ -n "$LOG_GROUP_PATTERN" ]; then
+    echo "Filtering log groups by: $LOG_GROUP_PATTERN"
+    LOG_GROUPS=$(aws logs describe-log-groups --log-group-name-prefix "$LOG_GROUP_PATTERN" --query "logGroups[].logGroupName" --output text 2>/dev/null || \
+                 aws logs describe-log-groups --query "logGroups[?contains(logGroupName, '$LOG_GROUP_PATTERN')].logGroupName" --output text 2>/dev/null)
+else
+    LOG_GROUPS=$(aws logs describe-log-groups --query "logGroups[].logGroupName" --output text 2>/dev/null)
+fi
+
+if [ -z "$LOG_GROUPS" ]; then
+    echo "No log groups found"
+    exit 1
+fi
+
+# Create temporary file for results
+TEMP_FILE=$(mktemp)
+trap "rm -f $TEMP_FILE" EXIT
+
+# Search in each log group
+for LOG_GROUP in $LOG_GROUPS; do
+    echo "Searching in: $LOG_GROUP"
+    
+    # Start query
+    QUERY_ID=$(aws logs start-query \
+        --log-group-name "$LOG_GROUP" \
+        --start-time $(($(date +%s) - 86400)) \
+        --end-time $(date +%s) \
+        --query-string "fields @timestamp, @message | filter @message like /$SEARCH_STRING/ | sort @timestamp desc" \
+        --output text --query 'queryId' 2>/dev/null || echo "")
+    
+    if [ -z "$QUERY_ID" ]; then
+        echo "Failed to start query for $LOG_GROUP"
+        continue
+    fi
+    
+    # Wait for query to complete
+    while true; do
+        STATUS=$(aws logs describe-queries --query-ids "$QUERY_ID" --query 'queries[0].status' --output text 2>/dev/null || echo "Failed")
+        if [ "$STATUS" = "Complete" ] || [ "$STATUS" = "Failed" ] || [ "$STATUS" = "Cancelled" ]; then
+            break
+        fi
+        sleep 1
+    done
+    
+    if [ "$STATUS" = "Complete" ]; then
+        # Get results
+        RESULTS=$(aws logs get-query-results --query-id "$QUERY_ID" --query 'results[].[?field==`@timestamp`].value | [0]' --output text)
+        
+        if [ -n "$RESULTS" ] && [ "$RESULTS" != "None" ]; then
+            echo "Found matches in: $LOG_GROUP" >> "$TEMP_FILE"
+            echo "===========================================" >> "$TEMP_FILE"
+            
+            # Get full logs from this log group
+            aws logs filter-log-events \
+                --log-group-name "$LOG_GROUP" \
+                --start-time $(($(date +%s - 86400) * 1000)) \
+                --end-time $(($(date +%s) * 1000)) \
+                --filter-pattern "\"$SEARCH_STRING\"" \
+                --query 'events[].[timestamp, message]' \
+                --output text | while IFS=$'\t' read -r timestamp message; do
+                    # Convert timestamp to readable format
+                    READABLE_TIME=$(date -d "@$((timestamp/1000))" '+%Y-%m-%d %H:%M:%S')
+                    echo "[$READABLE_TIME] $message" >> "$TEMP_FILE"
+                done
+            
+            echo "" >> "$TEMP_FILE"
+        fi
+    fi
+done
+
+# Display results in less
+if [ -s "$TEMP_FILE" ]; then
+    less -R "$TEMP_FILE"
+else
+    echo "No matches found for '$SEARCH_STRING'"
+fi

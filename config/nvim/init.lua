@@ -39,6 +39,7 @@ vim.keymap.set('n', '<leader>r', '<cmd>Rest run<CR>')
 vim.keymap.set('n', '<leader>db', '<cmd>DBUIToggle<CR>')
 vim.keymap.set('n', '<leader>cg', '<cmd>Copilot disable<CR>')
 vim.keymap.set('n', '<leader>cG', '<cmd>Copilot enable<CR>')
+vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
@@ -423,7 +424,7 @@ require('lazy').setup {
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'ruff_format', 'isort' },
-        mysql = { 'sqruff' },
+        -- mysql = { 'sqruff' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { 'prettierd', 'prettier' },
