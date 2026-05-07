@@ -1,6 +1,7 @@
 log
 passmenu_
 passmenu_ slow
+pkill ffmpeg
 dunstctl set-paused toggle
 rofi -show emoji -no-show-icons
 rofi -show drun -modes "drun,window,filebrowser"
@@ -14,6 +15,7 @@ otp
 task-list_
 i3lock -c 000000
 note
+google-chrome-stable
 chromium
 nautilus
 newsboat_

@@ -35,11 +35,12 @@ vim.opt.hlsearch = true
 
 vim.opt.list = true
 vim.keymap.set('n', '<leader>m', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<leader>r', '<cmd>Rest run<CR>')
+vim.keymap.set('n', '<leader>r', ':w<CR><cmd>Rest run<CR>')
 vim.keymap.set('n', '<leader>db', '<cmd>DBUIToggle<CR>')
 vim.keymap.set('n', '<leader>cg', '<cmd>Copilot disable<CR>')
 vim.keymap.set('n', '<leader>cG', '<cmd>Copilot enable<CR>')
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
+vim.keymap.set('n', '<leader><enter>', ':hor term<CR>')
 
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
@@ -144,6 +145,10 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 -- Launches
 vim.keymap.set('n', '<leader>g', ':Neogit<cr>')
+vim.keymap.set('n', '<leader>hy', function()
+  require('gitstuff.open').copy_line_url(false)
+end, { desc = 'Copy GitHub link to current line' })
+vim.keymap.set('x', '<leader>hy', '<Esc><Cmd>lua require("gitstuff.open").copy_line_url(true)<CR>', { desc = 'Copy GitHub link to selected lines' })
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -259,9 +264,23 @@ require('lazy').setup {
       { 'nvim-tree/nvim-web-devicons' },
     },
     config = function()
+      vim.api.nvim_set_hl(0, 'TelescopePromptCounter', { fg = '#cccccc' })
+      vim.api.nvim_set_hl(0, 'TelescopeResultsNumber', { fg = '#cccccc' })
       require('telescope').setup {
         pickers = {
           buffers = require('telescope.themes').get_ivy { previewer = false, border = false, layout_config = { height = 15 } },
+          find_files = {
+            layout_strategy = 'vertical',
+            layout_config = { preview_cutoff = 0 },
+          },
+          live_grep = {
+            layout_strategy = 'vertical',
+            layout_config = { preview_cutoff = 0 },
+          },
+          grep_string = {
+            layout_strategy = 'vertical',
+            layout_config = { preview_cutoff = 0 },
+          },
         },
         defaults = {
           mappings = {
@@ -280,6 +299,7 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>sm', builtin.man_pages, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
@@ -363,6 +383,7 @@ require('lazy').setup {
         lua_ls = {},
         -- find a way to run this only for a specific path pattern
         -- tailwindcss = {},
+        tinymist = {},
       }
       require('mason').setup()
       -- You can add other tools here that you want Mason to install
@@ -418,7 +439,7 @@ require('lazy').setup {
         return {
           timeout_ms = 1000,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-          stop_after_first = true,
+          stop_after_first = false,
         }
       end,
       formatters_by_ft = {
@@ -491,7 +512,9 @@ require('lazy').setup {
   },
   { 'nvim-treesitter/nvim-treesitter' },
 
-  { 'github/copilot.vim' },
+  -- probably look at this instead
+  -- https://github.com/zbirenbaum/copilot.lua
+  -- { 'github/copilot.vim' },
 }
 
 require 'colors.hl'

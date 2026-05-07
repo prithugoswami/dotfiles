@@ -53,5 +53,5 @@ if [[ $log_stream_name = null ]]; then
     echo "Not found"
     exit 1
 else
-    aws logs get-log-events --log-group-name $LOG_GROUP_NAME --log-stream-name $log_stream_name --output text > `date +%y%m%d`-$1.log
+    aws logs get-log-events --log-group-name $LOG_GROUP_NAME --log-stream-name $log_stream_name --output text > `date +%y%m%d`.cw.log
 fi

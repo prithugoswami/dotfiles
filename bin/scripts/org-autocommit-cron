@@ -2,9 +2,19 @@ cd $HOME/docs/org
 git pull
 git add . && git commit -m "auto commit: $(whoami)@may"
 
+PUSH_TIMEOUT=60  # seconds before alerting
+
+notify_slow_push() {
+    sleep $PUSH_TIMEOUT
+    notify-send -u critical "org-autocommit" "⚠️ git push is taking longer than ${PUSH_TIMEOUT}s — possible large file commit?"
+}
+
 # check for connectivity before pushing
 if nc -dzw1 google.com 443; then
+    notify_slow_push &
+    NOTIFY_PID=$!
     git remote | xargs -L1 git push
+    kill $NOTIFY_PID 2>/dev/null
     cd $HOME
     pass git remote | xargs -I B pass git pull B master
     pass git remote | xargs -L1 pass git push

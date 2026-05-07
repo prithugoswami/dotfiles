@@ -13,6 +13,7 @@ export N_PREFIX="$HOME/.node_versions"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 source $HOME/.config/secrets
 
 export PATH="$HOME/.poetry/bin:$PATH"

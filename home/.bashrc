@@ -10,6 +10,7 @@ set -o vi
 [[ -f ~/.profile ]] && . ~/.profile
 
 alias ls='ls --color=auto'
+alias o="xdg-open"
 
 # cd() {
 # 	builtin cd "$@" && ls;
@@ -114,8 +115,14 @@ alias b="buku --suggest"
 #alias lncli="lncli -n testnet"
 
 alias gr="cd \`git rev-parse --show-toplevel\`"
+alias ft="cd \`git rev-parse --show-toplevel\`/terraform;f"
 alias grf="gr;f"
 
+wtl() {
+  local target
+  target=$(git worktree list | cut -d ' ' -f1 | fzf)
+  [[ -n "$target" ]] && cd "$target"
+}
 #alias ls='ls'
 
 
@@ -150,7 +157,7 @@ PS1="\e[01;34m[\[\e[1;00m\]\w\[\e[01;34m\]]\[\e[01;00m\]\[\e[01;32m\] \$(_repbra
 # PS1='\[\033[01;32m\]🡲 [\[\033[37m\]\w\[\033[32m\]]\[\033[00m\] '
 #PS1='\[\033[01;32m\]● [\[\033[37m\]\w\[\033[32m\]]\[\033[00m\] '
 
-[[ -f ~/bin/bash_prompt.sh ]] && . ~/bin/bash_prompt.sh
+# [[ -f ~/bin/bash_prompt.sh ]] && . ~/bin/bash_prompt.sh
 
 HISTCONTROL=ingoreboth
 HISTSIZE=100000000
@@ -187,3 +194,7 @@ source /home/prithu/.config/broot/launcher/bash/br
 # This thing slows the prompt find out why. is the eval line?
 eval "$(direnv hook bash)"
 eval "$(zoxide init bash)"
+
+newnote() {
+    hugo new -s ~/src/website "notes/$(date -u +%Y-%m-%dT%H:%M:%S)-${1}.md"
+}

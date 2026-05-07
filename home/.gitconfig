@@ -27,7 +27,6 @@
     su = "diff --name-status --diff-filter=U"
     bra = branch -a
     co = checkout
-    df = diff
     bb = !better-git-branch.sh
     ; up = pull --rebase
 [pull]
@@ -48,8 +47,8 @@
     true-color = always
     dark = true
 
-; [merge]
-;     conflictstyle = diff3
+[merge]
+    conflictstyle = diff3
 
 [diff]
     colorMoved = default
